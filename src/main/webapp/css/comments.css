@@ -1,0 +1,58 @@
+/*
+    Document   : comments
+    Created on : 2012-9-3, 17:29:24
+    Author     : rY & fanTasy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@charset "utf-8";
+
+
+select{
+	margin: 0% 2% 2% 2%;
+}
+
+table{
+	border: thin dotted #DDD;
+        table-layout: fixed;
+}
+
+table td{
+        max-width: 200px;
+	font-size: 14px;
+	text-align:left;
+	border-top-width: thin;
+	border-bottom-width: thin;
+	border-top-color: #DDD;
+	border-bottom-color: #DDD;
+}
+table tr{
+    max-width: 200px;
+    max-height: 50px;
+    overflow: hidden;
+}
+#table-head{
+        height: 40px;
+        color: #CCC;
+	background:#333;
+	border:1px dotted #e5e5e5;
+	-moz-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-webkit-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-khtml-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+
+
+#data{
+	font-size: 12px;
+}
+
+
+.foot{
+	width:96%;
+	float: left;
+	overflow: hidden;
+}
+
+

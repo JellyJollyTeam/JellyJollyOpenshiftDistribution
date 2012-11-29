@@ -1,0 +1,49 @@
+/*
+    Document   : userSet
+    Created on : 2012-9-4, 14:29:45
+    Author     : rY & fanTasy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@charset "utf-8";
+
+label{
+	width:15%;
+	float: left;
+	height: 20px;
+	text-align: left;
+	vertical-align: middle;
+        font-size: 14px;
+}
+
+.form-input{
+	background-color: #FFF;
+	border: thin solid #CCC;
+	padding:2px;
+	height: 10%;
+	width: 50%;
+	vertical-align: middle;
+}
+
+.form-input-text{
+	text-align: left;
+	border: thin solid #CCC;
+}
+
+.form-input-pwd{
+	background-color: #FFF;
+	border: thin solid #CCC;
+	padding:2px;
+	height: 10%;
+	width: 30%;
+	vertical-align: middle;
+}
+
+p span{
+	color: #999;
+	margin-left: 2px;
+}
+
+
+
+

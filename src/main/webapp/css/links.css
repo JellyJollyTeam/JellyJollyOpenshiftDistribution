@@ -1,0 +1,100 @@
+/*
+    Document   : links
+    Created on : 2012-9-10, 17:01:25
+    Author     : rY & fanTasy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@charset "utf-8";
+
+div.panel p a,div.panel p a:visited{
+	font-size:14px;
+	color: #CCC;
+	padding:5px;
+	background:#333;
+	border:1px solid #e5e5e5;
+	-moz-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-webkit-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-khtml-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+
+div.panel p a:active,div.panel p a:hover{
+	font-size:14px;
+	color: #666;
+	background-color: #F3F3F3;
+	padding:5px;
+	text-decoration:none;
+}
+
+table{
+	border: thin solid #DDD;
+        -moz-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-webkit-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-khtml-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+         z-index: 1000;
+}
+
+table td{
+	padding-left: 4%;
+	font-size: 14px;
+	margin:2%;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #666;
+         z-index: 1000;
+}
+
+#table-head{
+        height: 40px;
+        color: #CCC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+        background:#333;
+	color: #fff;
+         z-index: 1000;
+}
+
+#add_Links{
+    position: absolute;
+    top: 16%;
+    left: 25%;
+    z-index: 1020;
+    width: 25%;
+    height: 120px;
+    padding:3%;
+    overflow: auto;
+
+}
+table{
+    background: #FFF;
+}
+
+#add_link{
+	font-size:14px;
+	color: #CCC;
+	padding:5px;
+	background:#333;
+	border:1px solid #e5e5e5;
+	-moz-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-webkit-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-khtml-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+#add_link:hover{
+    	font-size:14px;
+	color: #666;
+	background-color: #F3F3F3;
+	padding:5px;
+	text-decoration:none;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+/*
+    Document   : blogs
+    Created on : 2012-9-3, 17:29:15
+    Author     : rY & fanTasy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@charset "utf-8";
+div.panel p a,div.panel p a:visited{
+	font-size:14px;
+	color: #CCC;
+	padding:5px;
+	background:#333;
+	border:1px solid #e5e5e5;
+	-moz-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-webkit-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-khtml-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+
+div.panel p a:active,div.panel p a:hover{
+	font-size:14px;
+	color: #666;
+	background-color: #F3F3F3;
+	padding:5px;
+	text-decoration:none;
+}
+
+
+select{
+	margin: 0% 2% 2% 2%;
+}
+
+table{
+	border: thin solid #DDD;
+        -moz-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-webkit-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-khtml-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+
+table td{
+	padding-left: 4%;
+	font-size: 14px;
+	margin:2%;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #666;
+}
+
+#table-head{
+        height: 40px;
+        color: #CCC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+        background:#333;
+	color: #fff;
+}
+
+#data{
+	font-size: 12px;
+}
+
+
+
+
+

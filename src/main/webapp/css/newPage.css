@@ -1,0 +1,150 @@
+/*
+    Document   : newPage
+    Created on : 2012-9-4, 14:29:33
+    Author     : rY & fanTasy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@charset "utf-8";
+
+
+
+.edit{
+	width:80%;
+	overflow:auto;
+	float:left;
+}
+
+.edit-head{
+    padding:1%;
+    background-color: #333;
+    height: 40px;
+    border: 1px solid #999;
+    -moz-border-radius:3px;
+    -khtml-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    background:#333;
+    border:1px solid #e5e5e5;
+    -moz-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+    -webkit-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+    -khtml-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+    box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+
+label{
+	text-align:left;
+	width:13%;
+	color: #FFF;
+	float: left;
+	font-size: 15px;
+	vertical-align: middle;
+	padding:5px;
+        margin-left: 2%;
+        maring-right:2%;
+}
+
+.form-input{
+	background-color: #FFF;
+	border: thin solid #CCC;
+	padding:5px;
+	width: 45%;
+	vertical-align: middle;
+}
+
+#button-primary{
+        height: 25px;
+        font-family:sans-serif;
+	padding:3px 10px;
+	border:none;
+        border-color: #999;
+	font-size:12px;
+	border-width:0.5px;
+	border-style:solid;
+	-moz-border-radius:11px;
+	-khtml-border-radius:11px;
+	-webkit-border-radius:11px;
+	border-radius:11px;
+	cursor:pointer;
+	text-decoration:none;
+	margin-top:6px;
+        margin-bottom: 20px;
+	float:left;
+        background-color: #333;
+        color:#CCC;
+}
+#button-primary:hover{
+        height: 25px;
+        font-family:sans-serif;
+	padding:3px 10px;
+	border:none;
+        border-color: #999;
+	font-size:12px;
+	border-width:0.5px;
+	border-style:solid;
+	-moz-border-radius:11px;
+	-khtml-border-radius:11px;
+	-webkit-border-radius:11px;
+	border-radius:11px;
+	cursor:pointer;
+	text-decoration:none;
+	margin-top:6px;
+        margin-bottom: 20px;
+	float:left;
+        color:#666;
+        background-color: #F3F3F3;
+}
+
+#editor1{
+        margin-left:8px;
+	font-weight:normal;
+	-moz-border-radius:3px;
+	-khtml-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	background:#fff;
+	border:1px solid #e5e5e5;
+	-moz-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-webkit-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	-khtml-box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+	box-shadow:rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+
+.panel-head{
+	height:20px;
+	background-color: #F0F0F0;
+	font-family: "微软雅黑";
+	font-weight: lighter;
+	padding-top: 3%;
+	padding-left: 3%;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+}
+
+.panel2{
+	width:30%;
+	float:right;
+	margin-right: 2%;
+	border: thin solid #999;
+	margin-bottom: 2%;
+}
+
+
+
+#label-text{
+	margin-top:2%;
+	margin-right: 5%;
+	margin-bottom: 2%;
+	margin-left: 5%;
+	padding-right: 2%;
+	padding-left: 2%;
+}
+
+#label-button{
+	margin:2%;
+}
+
+
+
+

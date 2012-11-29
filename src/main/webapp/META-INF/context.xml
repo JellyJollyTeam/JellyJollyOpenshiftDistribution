@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/jellyjolly">
+  <Resource driverClassName="com.mysql.jdbc.Driver" logAbandoned="true" maxActive="100" maxIdle="50" maxWait="5000" minEvictableIdleTimeMillis="120000" minIdle="100" name="jdbc/jellyjolly_schema" numTestsPerEvictionRun="30" password="root" removeAbandoned="true" removeAbandonedTimeout="180" testWhileIdle="true" textOnBorrow="true" timeBetweenEvictionRunsMillis="300000" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/jellyjolly_schema?characterEncoding=UTF-8" username="root" validationQuery="SELECT 1 FROM jj_blog_info;"/>
+</Context>

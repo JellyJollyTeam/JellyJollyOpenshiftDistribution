@@ -1,0 +1,255 @@
+/*
+    Document   : viewBlog
+    Created on : 2012-9-3, 17:30:49
+    Author     : rY & fanTasy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@charset "utf-8";
+body {
+	margin: 0;
+	padding: 0;
+	color: #000;
+	background-color:#eee;
+}
+
+ul, ol, dl {
+	padding: 0;
+	margin: 0;
+}
+
+
+h1,h2, h3, h4, h5, h6, p {
+	padding-right: 15px;
+	padding-left: 15px;
+	font-family: "微软雅黑";
+	font-weight: normal;
+}
+
+a img {
+	border: none;
+}
+
+a:link {
+	color:#414958;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #4E5869;
+	text-decoration: none;
+}
+a:hover, a:active, a:focus {
+        color: #333;
+	text-decoration: none;
+}
+
+.container{
+	width:60%;
+	max-width:1260px;
+	min-width:780px;
+	background:#fff;
+	margin:0 auto;
+	overflow:hidden;
+}
+
+.header{
+	margin-left:0px;
+}
+
+#blog-name{
+	font-family: "幼圆";
+	margin-top: 4%;
+}
+
+#blog-name2{
+	font-family: "幼圆";
+	color: #666;
+}
+
+
+.centerbar{
+	width: 100%;
+	float: left;
+	background-color: #000;
+}
+
+ul.nav {
+	list-style:none;
+	font-family: "微软雅黑";
+	font-size: 13px;
+}
+ul.nav li {
+	float:left;
+}
+ul.nav a, ul.nav a:visited {
+	padding: 5px 5px 5px 15px;
+	display: block;
+	text-decoration: none;
+	background: #000;
+	color: #fff;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus {
+	background: #FFF;
+	color: #000;
+}
+
+.main{
+	background-color: #FFF;
+        min-height: 350px;
+}
+
+.sort{
+	width: 60%;
+	height: 8%;
+	float: left;
+	margin: 2%;
+}
+
+.next{
+	float: right;
+	width: 30%;
+	height:8%;
+	margin:2%;
+	text-align: center;
+
+}
+
+.text{
+        clear:both;
+	width: 90%;
+	margin: 0 auto;
+
+}
+
+.text h2{
+        padding-top: 5%;
+}
+
+#passage{
+	text-align:left;
+}
+
+.comment-list{
+	width: 80%;
+	margin:auto;
+	margin-top:50px;
+	padding: 2% 0 2% 0;
+	background-color: #E8E8E8;
+}
+#comment-list-head{
+        padding-left: 3%;
+	font-size: 20px;
+
+}
+.comment-list-one{
+        white-space: pre; /* CSS2 */
+	white-space: -moz-pre-wrap; /* Mozilla*/
+	white-space: -o-pre-wrap; /* Opera 7 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
+        margin:2%;
+	border:1px dashed #999;
+	padding:2%;
+	font-size:14px;
+	background-color: #F3F3F3;
+}
+
+
+.comment{
+	width: 80%;
+	background-color: #E8E8E8;
+	padding-top: 5%;
+	margin: auto;
+        margin-top:20px;
+}
+
+#comment-head{
+	padding-left: 6%;
+	font-size: 24px;
+}
+
+#comment-head2{
+	padding-left: 6%;
+	padding-top:2%;
+	font-size:12px;
+}
+
+form{
+	margin: 8%;
+	background-color: #CCC;
+	padding-top: 0%;
+	padding-right: 5%;
+	padding-bottom: 5%;
+	padding-left: 5%;
+}
+
+.form-p{
+	background-color: #CCC;
+}
+
+.form-label{
+	text-align:left;
+	width:18%;
+	color: #000;
+	float: left;
+	font-size: 13px;
+	margin-top: 4%;
+}
+
+.form-input{
+	background-color: #FFF;
+	border: thick solid #CCC;
+	padding:2%;
+	height: 10%;
+	width: 50%;
+        margin-top:4%;
+}
+
+.form-input-text{
+	text-align: left;
+	padding:2%;
+        margin-top:4%;
+}
+.form-submit:hover{
+    color:white;
+    background-color: black;
+    cursor: pointer;
+}
+
+.form-submit{
+	color: black;
+	background-color: #CCC;
+	float: right;
+	height: 8%;
+	width: 18%;
+	text-align: center;
+	margin-top: 0%;
+	margin-right:20%;
+	padding: 2%;
+        border:none;
+        border-color:#CCC;
+        border-style: solid;
+        border-radius: 10px;
+        -moz-border-radius:11px;
+	-khtml-border-radius:11px;
+	-webkit-border-radius:11px;
+
+}
+
+.foot{
+	background-color: #D6D6D6;
+	float:left;
+	width:100%;
+	height: 5%;
+	margin-top: 5%;
+	padding-top: 3%;
+	color: #333;
+	border-top-width: thin;
+	border-top-style: solid;
+	border-top-color: #666;
+}
+
+

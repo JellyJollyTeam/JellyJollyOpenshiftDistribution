@@ -1,0 +1,33 @@
+/*
+    Document   : set
+    Created on : 2012-9-3, 17:31:13
+    Author     : rY & fanTasy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@charset "utf-8";
+
+
+
+.option-label{
+	width:20%;
+	float: left;
+	height: 20px;
+	text-align: left;
+	vertical-align: middle;
+        font-size: 14px;
+}
+
+.form-input{
+	background-color: #FFF;
+	border: thin solid #CCC;
+	padding:2px;
+	height: 10%;
+	width: 50%;
+	vertical-align: middle;
+}
+
+
+
+
