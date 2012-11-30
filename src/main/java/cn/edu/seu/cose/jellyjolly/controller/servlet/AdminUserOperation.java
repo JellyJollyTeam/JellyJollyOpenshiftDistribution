@@ -17,9 +17,7 @@
 package cn.edu.seu.cose.jellyjolly.controller.servlet;
 
 import cn.edu.seu.cose.jellyjolly.dao.AdminUserDataAccess;
-import cn.edu.seu.cose.jellyjolly.dao.CommentDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
-import cn.edu.seu.cose.jellyjolly.dao.DataAccessFactory;
 import cn.edu.seu.cose.jellyjolly.dto.AdminUser;
 import cn.edu.seu.cose.jellyjolly.util.Utils;
 import java.io.IOException;
@@ -29,7 +27,6 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +35,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-@WebServlet(name = "AdminUserOperation", urlPatterns = {"/admin/user"})
 public class AdminUserOperation extends HttpServlet {
 
     private static final String PARAM_OPERATION = "op";

@@ -39,7 +39,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-@WebServlet(name = "AdminCommentOperation", urlPatterns = {"/admin/comment"})
 public class AdminCommentOperation extends HttpServlet
         implements ICommentOperation {
 

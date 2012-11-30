@@ -31,7 +31,6 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +40,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-@WebServlet(name = "BlogPostOperation", urlPatterns = {"/admin/post"})
 public class BlogPostOperation extends HttpServlet {
 
     private static final String PARAM_OPERATION = "op";

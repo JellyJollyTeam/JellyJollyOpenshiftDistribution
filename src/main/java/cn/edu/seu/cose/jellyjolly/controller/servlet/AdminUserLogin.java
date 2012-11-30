@@ -25,7 +25,6 @@ import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +34,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-@WebServlet(name = "AdminUserLogin", urlPatterns = {"/login"})
 public class AdminUserLogin extends HttpServlet {
 
     public static final String SESSION_ATTRI_AUTH = "userAuth";

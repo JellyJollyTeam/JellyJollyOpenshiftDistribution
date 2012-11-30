@@ -204,9 +204,93 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </init-param>
     </servlet>
     <servlet>
+        <servlet-name>AdminCommentOperation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.AdminCommentOperation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUserLogin</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.AdminUserLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUserLogout</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.AdminUserLogout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUserOperation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.AdminUserOperation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogInfoOperation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.BlogInfoOperation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogPageOperation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.BlogPageOperation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogPostOperation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.BlogPostOperation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentOperation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.CommentOperation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Installation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.Installation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LinkListOperation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.LinkListOperation</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>RssServlet</servlet-name>
         <servlet-class>cn.edu.seu.cose.jellyjolly.rss.RssServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VisitorCommentOperation</servlet-name>
+        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.VisitorCommentOperation</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminCommentOperation</servlet-name>
+        <url-pattern>/admin/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserLogin</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserLogout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserOperation</servlet-name>
+        <url-pattern>/admin/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogInfoOperation</servlet-name>
+        <url-pattern>/admin/info</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogPageOperation</servlet-name>
+        <url-pattern>/admin/page</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogPostOperation</servlet-name>
+        <url-pattern>/admin/post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentOperation</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Installation</servlet-name>
+        <url-pattern>/install</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LinkListOperation</servlet-name>
+        <url-pattern>/admin/link</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RestletServlet</servlet-name>
         <url-pattern>/resource/*</url-pattern>
@@ -214,5 +298,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <servlet-mapping>
         <servlet-name>RssServlet</servlet-name>
         <url-pattern>/rss</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VisitorCommentOperation</servlet-name>
+        <url-pattern>/visitor/comment</url-pattern>
     </servlet-mapping>
 </web-app>
