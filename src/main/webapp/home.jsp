@@ -46,7 +46,7 @@ Author     : sceliay & fanTasy
                             <h2 class="passage-name"><a href="post.jsp?postid=<c:out value="${post.postId}"/>"s>
                                     <c:out value="${post.title}"/></a></h2>
                             <h5><fmt:formatDate pattern="yyyy年MM月dd日" value="${post.date}" /></h5>
-                            <h4><c:out value="${post.content}"/></h4>
+                            <h4><c:out value="${post.content}" escapeXml="false" /></h4>
                             <h5>发表在&nbsp;
                                 <a href="?categoryid=<c:out value="${post.category.categoryId}"/>"><c:out value="${post.category.name}"/></a>&nbsp;
                                 |&nbsp;<a href="post.jsp?postid=<c:out value="${post.postId}"/>#comments">发表评论</a></h5>

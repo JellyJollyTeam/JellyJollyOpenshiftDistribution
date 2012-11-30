@@ -40,7 +40,7 @@
                 </div>
                 <div class="text">
                     <h2 ><c:out value="${blogpost.title}"/></h2>
-                    <p id="passage"><c:out value="${blogpost.content}"/></p>
+                    <p id="passage"><c:out value="${blogpost.content}" escapeXml="false" /></p>
                     <h5>此条目是由<c:out value="${blogpost.author.displayName}"/>
                         发表在<a href="./?categoryid=<c:out value="${blogpost.category.categoryId}"/>#home"><c:out value="${blogpost.category.name}"/></a></h5>
                 </div>
