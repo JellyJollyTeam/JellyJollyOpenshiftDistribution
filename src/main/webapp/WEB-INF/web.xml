@@ -137,6 +137,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </filter-mapping>
     <filter-mapping>
         <filter-name>CategoryListBuilder</filter-name>
+        <url-pattern>/page.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CategoryListBuilder</filter-name>
+        <url-pattern>/post.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CategoryListBuilder</filter-name>
         <url-pattern>/admin/admin.jsp</url-pattern>
     </filter-mapping>
     <filter-mapping>
@@ -165,11 +173,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </filter-mapping>
     <filter-mapping>
         <filter-name>LinkListBuilder</filter-name>
+        <url-pattern>/page.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LinkListBuilder</filter-name>
+        <url-pattern>/post.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LinkListBuilder</filter-name>
         <url-pattern>/admin/links.jsp</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>MonthlyArchivedListBuilder</filter-name>
         <url-pattern>/home.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MonthlyArchivedListBuilder</filter-name>
+        <url-pattern>/page.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MonthlyArchivedListBuilder</filter-name>
+        <url-pattern>/post.jsp</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>PageBuilder</filter-name>
