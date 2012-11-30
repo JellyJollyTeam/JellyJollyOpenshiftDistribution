@@ -17,14 +17,14 @@
         <property name="initialSize" value="${initialSize}" />
         <property name="maxActive" value="${maxActive}" />
     </bean>
-    <bean name="dataAccessFactory" class="cn.edu.seu.cose.jellyjolly.dao.jdbc.MysqlDataAccessFactory">
+    <bean name="dataAccessFactory" class="cn.edu.seu.cose.jellyjolly.dao.jdbc.MysqlDataAccessFactory" scope="singleton">
         <constructor-arg ref="dataSource" />
     </bean>
-    <bean name="adminUserDataAccess" factory-bean="dataAccessFactory" factory-method="getAdminUserDataAccess" />
-    <bean name="blogInfoDataAccess" factory-bean="dataAccessFactory" factory-method="getBlogInfoDataAccess" />
-    <bean name="blogPageDataAccess" factory-bean="dataAccessFactory" factory-method="getBlogPageDataAccess" />
-    <bean name="blogPostDataAccess" factory-bean="dataAccessFactory" factory-method="getBlogPostDataAccess" />
-    <bean name="categoryDataAccess" factory-bean="dataAccessFactory" factory-method="getCategoryDataAccess" />
-    <bean name="commentDataAccess" factory-bean="dataAccessFactory" factory-method="getCommentDataAccess" />
-    <bean name="linkDataAccess" factory-bean="dataAccessFactory" factory-method="getLinkDataAccess" />
+    <bean name="adminUserDataAccess" factory-bean="dataAccessFactory" factory-method="getAdminUserDataAccess" scope="singleton" />
+    <bean name="blogInfoDataAccess" factory-bean="dataAccessFactory" factory-method="getBlogInfoDataAccess" scope="singleton" />
+    <bean name="blogPageDataAccess" factory-bean="dataAccessFactory" factory-method="getBlogPageDataAccess" scope="singleton" />
+    <bean name="blogPostDataAccess" factory-bean="dataAccessFactory" factory-method="getBlogPostDataAccess" scope="singleton" />
+    <bean name="categoryDataAccess" factory-bean="dataAccessFactory" factory-method="getCategoryDataAccess" scope="singleton" />
+    <bean name="commentDataAccess" factory-bean="dataAccessFactory" factory-method="getCommentDataAccess" scope="singleton" />
+    <bean name="linkDataAccess" factory-bean="dataAccessFactory" factory-method="getLinkDataAccess" scope="singleton" />
 </beans>
