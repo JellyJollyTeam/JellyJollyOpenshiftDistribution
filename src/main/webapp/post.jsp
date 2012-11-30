@@ -42,7 +42,7 @@
 
                     <div class="entry">
                         <p></p>
-                        <c:out value="${blogpost.content}"/>
+                        <c:out value="${blogpost.content}" escapeXml="false" />
                     </div>
                 </div>
                 <h3 id="comments">评论：</h3>
