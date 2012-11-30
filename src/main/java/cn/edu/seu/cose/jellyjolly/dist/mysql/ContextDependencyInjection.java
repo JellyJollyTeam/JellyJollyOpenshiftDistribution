@@ -16,21 +16,11 @@
  */
 package cn.edu.seu.cose.jellyjolly.dist.mysql;
 
-import cn.edu.seu.cose.jellyjolly.dao.DataAccessFactory;
-import cn.edu.seu.cose.jellyjolly.dao.jdbc.MysqlDataAccessFactory;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.sql.DataSource;
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
