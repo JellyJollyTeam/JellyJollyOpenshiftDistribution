@@ -49,12 +49,12 @@
                 <div class="navigation">
                     <div class="alignleft">
                         <c:if test="${hasPrev}">
-                            <a href="./post.jsp?page=${pageNum - 1}">较新的</a>
+                            <a href="./?page=${pageNum - 1}">较新的</a>
                         </c:if>
                     </div>
                     <div class="alignright">
                         <c:if test="${hasNext}">
-                            <a href="./post.jsp?page=${pageNum + 1}">较旧的</a>
+                            <a href="./?page=${pageNum + 1}">较旧的</a>
                         </c:if>
                     </div>
                 </div>
