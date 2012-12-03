@@ -22,9 +22,7 @@ import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
 import cn.edu.seu.cose.jellyjolly.util.Utils;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.FilterChain;
@@ -42,7 +40,9 @@ public class BlogPostListBuilder extends HttpFilter {
     private static final String INFO_INVALID_INPUT =
             "BlogPostListBuilder: invalid input";
     public static final String ATTRI_POST_LIST = "postList";
-    public static final String ATTRI_POST_COUNT = "postCount";
+    public static final String ATTRI_PAGE_NUM = "pageNum";
+    public static final String ATTRI_HAS_PREV = "hasPrev";
+    public static final String ATTRI_HAS_NEXT = "hasNext";
     private static final String PARAM_MAX_PER_PAGE = "max";
     private static final String PARAM_PAGE_NUM = "page";
     private static final String PARAM_YEAR = "year";
@@ -125,7 +125,7 @@ public class BlogPostListBuilder extends HttpFilter {
                         BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
                 omitContents(postList);
                 long postCount = blogPostDataAccess.getPostNumber(categoryId);
-                buildBeans(request, postList, postCount);
+                buildBeans(request, postList, page, max, postCount);
             }
 
             // get all posts
@@ -136,7 +136,7 @@ public class BlogPostListBuilder extends HttpFilter {
                 omitContents(postList);
                 request.setAttribute(ATTRI_POST_LIST, postList);
                 long postCount = blogPostDataAccess.getPostNumber();
-                buildBeans(request, postList, postCount);
+                buildBeans(request, postList, page, max, postCount);
             }
         } catch (NumberFormatException ex) {
             response.sendError(400, ex.getMessage());
@@ -178,7 +178,7 @@ public class BlogPostListBuilder extends HttpFilter {
                     BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
             omitContents(postList);
             long postCount = blogPostDataAccess.getPostNumber(year, month);
-            buildBeans(request, postList, postCount);
+            buildBeans(request, postList, page, max, postCount);
         } catch (NumberFormatException ex) {
             response.sendError(400, ex.getMessage());
             return;
@@ -213,7 +213,7 @@ public class BlogPostListBuilder extends HttpFilter {
                     limit);
             omitContents(postList);
             long postCount = blogPostDataAccess.getPostNumber(keyword);
-            buildBeans(request, postList, postCount);
+            buildBeans(request, postList, page, max, postCount);
             chain.doFilter(request, response);
         } catch (NumberFormatException ex) {
             response.sendError(400, ex.getMessage());
@@ -225,9 +225,13 @@ public class BlogPostListBuilder extends HttpFilter {
     }
 
     private void buildBeans(HttpServletRequest request,
-            List<BlogPost> postList, long postCount) {
+            List<BlogPost> postList, long page, long max, long postCount) {
         request.setAttribute(ATTRI_POST_LIST, postList);
-        request.setAttribute(ATTRI_POST_COUNT, postCount);
+        request.setAttribute(ATTRI_PAGE_NUM, page);
+        boolean hasPrev = page > 1;
+        boolean hasNext = (page * max) < postCount;
+        request.setAttribute(ATTRI_HAS_PREV, hasPrev);
+        request.setAttribute(ATTRI_HAS_NEXT, hasNext);
     }
 
     private void omitContents(List<BlogPost> posts) {
