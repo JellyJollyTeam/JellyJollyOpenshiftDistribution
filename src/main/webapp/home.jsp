@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0054)http://www.tammyhartdesigns.com/demo/category/general/ -->
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
@@ -36,7 +37,7 @@
                     <div class="post-261 post type-post status-publish format-standard hentry category-general">
 
                         <small class="caps"><fmt:formatDate pattern="yyyy年MM月dd日" value="${post.date}" /></small>
-                        <span class="bubble">0</span>
+                        <span class="bubble"><c:out value="${fn:length(post.comments)}" /></span>
                         <h2 id="post-261"><a href="post.jsp?postid=<c:out value="${post.postId}"/>"><c:out value="${post.title}"/></a></h2>
                         <small><a href="post.jsp?postid=<c:out value="${post.postId}"/>"><c:out value="${post.author.displayName}"/></a>&nbsp;发表在&nbsp;<a href="?categoryid=<c:out value="${post.category.categoryId}"/>" title="View all posts in General" rel="category tag"><c:out value="${post.category.name}"/></a></small>
                         <div class="entry">
