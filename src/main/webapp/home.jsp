@@ -54,7 +54,7 @@
                     </div>
                     <div class="alignright">
                         <c:if test="${hasNext}">
-                            <a href="./?page=${pageNum + 1}">较旧的</a>
+                            <a href="./?page=${pageNum + 1}">较早的</a>
                         </c:if>
                     </div>
                 </div>
