@@ -44,7 +44,7 @@ class BlogPostDataAccessImpl
         extends AbstractDataAccess implements BlogPostDataAccess {
 
     private static final BlogPostOrderStrategy DEFAULT_STRATEGY =
-            BlogPostOrderStrategy.ORDERED_BY_DATE_DESC;
+            BlogPostOrderStrategy.ORDER_BY_DATE_DESC;
     private static final String COLUMN_POST_ID = "blog_post_id";
     private static final String COLUMN_AUTHOR_USER_ID = "author_user_id";
     private static final String COLUMN_CATEGORY_ID = "category_id";
@@ -281,10 +281,10 @@ class BlogPostDataAccessImpl
         try {
             String statement;
             switch (strategy) {
-                case ORDERED_BY_DATE_ASC:
+                case ORDER_BY_DATE_ASC:
                     statement = STMT_GET_POSTS_ORDER_BY_DATE_ASC;
                     break;
-                case ORDERED_BY_DATE_DESC:
+                case ORDER_BY_DATE_DESC:
                     statement = STMT_GET_POSTS_ORDER_BY_DATE_DESC;
                     break;
                 default:
@@ -317,10 +317,10 @@ class BlogPostDataAccessImpl
         try {
             String statement;
             switch (strategy) {
-                case ORDERED_BY_DATE_ASC:
+                case ORDER_BY_DATE_ASC:
                     statement = STMT_GET_POSTS_BY_DATE_ORDER_BY_DATE_ASC;
                     break;
-                case ORDERED_BY_DATE_DESC:
+                case ORDER_BY_DATE_DESC:
                     statement = STMT_GET_PSTS_BY_DATE_ORDER_BY_DATE_DESC;
                     break;
                 default:
@@ -356,10 +356,10 @@ class BlogPostDataAccessImpl
         try {
             String statement;
             switch (strategy) {
-                case ORDERED_BY_DATE_ASC:
+                case ORDER_BY_DATE_ASC:
                     statement = STMT_GET_PSTS_BY_KEYWORD_ORDER_BY_DATE_ASC;
                     break;
-                case ORDERED_BY_DATE_DESC:
+                case ORDER_BY_DATE_DESC:
                     statement = STMT_GET_PSTS_BY_KEYWORD_ORDER_BY_DATE_DESC;
                     break;
                 default:
@@ -395,10 +395,10 @@ class BlogPostDataAccessImpl
         try {
             String statement;
             switch (strategy) {
-                case ORDERED_BY_DATE_ASC:
+                case ORDER_BY_DATE_ASC:
                     statement = STMT_GET_POSTS_BY_USER_ID_ORDER_BY_DATE_ASC;
                     break;
-                case ORDERED_BY_DATE_DESC:
+                case ORDER_BY_DATE_DESC:
                     statement = STMT_GET_POSTS_BY_USER_ID_ORDER_BY_DATE_DESC;
                     break;
                 default:
@@ -434,10 +434,10 @@ class BlogPostDataAccessImpl
         try {
             String statement;
             switch (strategy) {
-                case ORDERED_BY_DATE_ASC:
+                case ORDER_BY_DATE_ASC:
                     statement = STMT_GET_POSTS_BY_CATEGORY_ID_DATE_ASC;
                     break;
-                case ORDERED_BY_DATE_DESC:
+                case ORDER_BY_DATE_DESC:
                     statement = STMT_GET_POSTS_BY_CATEGORY_ID_DATE_DESC;
                     break;
                 default:
@@ -473,10 +473,10 @@ class BlogPostDataAccessImpl
         try {
             String statement;
             switch (strategy) {
-                case ORDERED_BY_DATE_ASC:
+                case ORDER_BY_DATE_ASC:
                     statement = STMT_GET_POSTS_MONTHLY_DATE_ASC;
                     break;
-                case ORDERED_BY_DATE_DESC:
+                case ORDER_BY_DATE_DESC:
                     statement = STMT_GET_POSTS_MONTHLY_DATE_DESC;
                     break;
                 default:

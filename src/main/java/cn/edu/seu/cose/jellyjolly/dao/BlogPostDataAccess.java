@@ -29,7 +29,7 @@ public interface BlogPostDataAccess {
 
     public static enum BlogPostOrderStrategy {
 
-        ORDERED_BY_DATE_ASC, ORDERED_BY_DATE_DESC
+        ORDER_BY_DATE_ASC, ORDER_BY_DATE_DESC
     }
 
     Date getLatestPubDate() throws DataAccessException;

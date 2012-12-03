@@ -148,7 +148,7 @@ public class RssBuilder {
         List<SyndEntry> entries = new LinkedList<SyndEntry>();
 
         List<BlogPost> postList = blogPostDataAccess.getPosts(0, 100,
-                BlogPostOrderStrategy.ORDERED_BY_DATE_DESC);
+                BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
         for (BlogPost post : postList) {
             SyndEntry entry = parsePost(post);
             entries.add(entry);
