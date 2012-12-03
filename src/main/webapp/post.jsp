@@ -78,6 +78,7 @@
                     <h3>发表评论</h3>
 
                     <form action="./comment" method="post" id="commentform">
+                        <input type="hidden" name="postid" value="${blogpost.postId}" />
                         <c:choose>
                             <c:when test="${empty userAuth}">
                                 <p><input type="text" name="authorname" id="author" value="" size="22" tabindex="1" aria-required='true' />
