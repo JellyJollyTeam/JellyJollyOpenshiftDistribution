@@ -17,11 +17,14 @@
 package cn.edu.seu.cose.jellyjolly.controller.filter;
 
 import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
+import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess.BlogPostOrderStrategy;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
 import cn.edu.seu.cose.jellyjolly.util.Utils;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.FilterChain;
@@ -89,7 +92,8 @@ public class BlogPostListBuilder extends HttpFilter {
 
         // get post list by keyword
         if (keyword != null) {
-            doGetSearchResult(request, response, chain, keyword, pageParam, maxParam);
+            doGetSearchResult(request, response, chain, keyword, pageParam,
+                    maxParam);
             return;
         }
 
@@ -103,8 +107,10 @@ public class BlogPostListBuilder extends HttpFilter {
             String pageParam, String maxParam, String categoryIdParam)
             throws IOException, ServletException {
         try {
-            long page = (pageParam == null) ? DEFAULT_PAGE : Long.valueOf(pageParam);
-            long max = (maxParam == null) ? DEFAULT_MAX : Long.valueOf(maxParam);
+            long page = (pageParam == null) ? DEFAULT_PAGE : Long.valueOf(
+                    pageParam);
+            long max = (maxParam == null) ? DEFAULT_MAX : Long.valueOf(
+                    maxParam);
 
             long offset = ((page - 1) < 0)
                     ? DEFAULT_OFFSET
@@ -114,17 +120,20 @@ public class BlogPostListBuilder extends HttpFilter {
             // get posts of a category
             if (categoryIdParam != null) {
                 int categoryId = Integer.valueOf(categoryIdParam);
-                List<BlogPost> postList = blogPostDataAccess.getPostsByCategoryId(categoryId,
-                        offset, limit,
-                        BlogPostDataAccess.BlogPostOrderStrategy.ORDERED_BY_DATE_DESC);
+                List<BlogPost> postList = blogPostDataAccess
+                        .getPostsByCategoryId(categoryId, offset, limit,
+                        BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
+                omitContents(postList);
                 long postCount = blogPostDataAccess.getPostNumber(categoryId);
                 buildBeans(request, postList, postCount);
             }
 
             // get all posts
             if (categoryIdParam == null) {
-                List<BlogPost> postList = blogPostDataAccess.getPosts(offset, limit,
-                        BlogPostDataAccess.BlogPostOrderStrategy.ORDERED_BY_DATE_DESC);
+                List<BlogPost> postList = blogPostDataAccess
+                        .getPosts(offset, limit,
+                        BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
+                omitContents(postList);
                 request.setAttribute(ATTRI_POST_LIST, postList);
                 long postCount = blogPostDataAccess.getPostNumber();
                 buildBeans(request, postList, postCount);
@@ -144,8 +153,8 @@ public class BlogPostListBuilder extends HttpFilter {
 
     private void doMontlyArchive(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain,
-            String yearParam, String monthParam, String pageParam, String maxParam)
-            throws IOException, ServletException {
+            String yearParam, String monthParam, String pageParam,
+            String maxParam) throws IOException, ServletException {
         // invalid user input
         if (yearParam == null || !Utils.isNumeric(yearParam)
                 || monthParam == null || !Utils.isNumeric(monthParam)
@@ -164,9 +173,10 @@ public class BlogPostListBuilder extends HttpFilter {
             long offset = (page - 1) * max;
             long limit = max;
 
-            List<BlogPost> postList = blogPostDataAccess.getPostsByMonthlyArchive(year,
-                    month, offset, limit,
-                    BlogPostDataAccess.BlogPostOrderStrategy.ORDERED_BY_DATE_DESC);
+            List<BlogPost> postList = blogPostDataAccess
+                    .getPostsByMonthlyArchive(year, month, offset, limit,
+                    BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
+            omitContents(postList);
             long postCount = blogPostDataAccess.getPostNumber(year, month);
             buildBeans(request, postList, postCount);
         } catch (NumberFormatException ex) {
@@ -187,15 +197,21 @@ public class BlogPostListBuilder extends HttpFilter {
             String keyword, String pageParam, String maxParam)
             throws IOException, ServletException {
         try {
-            long page = (pageParam == null) ? DEFAULT_PAGE : Long.valueOf(pageParam);
-            long max = (maxParam == null) ? DEFAULT_MAX : Long.valueOf(maxParam);
+            long page = (pageParam == null)
+                    ? DEFAULT_PAGE
+                    : Long.valueOf(pageParam);
+            long max = (maxParam == null)
+                    ? DEFAULT_MAX
+                    : Long.valueOf(maxParam);
 
             long offset = ((page - 1) < 0)
                     ? DEFAULT_OFFSET
                     : (page - 1) * max;
             long limit = max;
             List<BlogPost> postList =
-                    blogPostDataAccess.getPostsByKeyword(keyword, offset, limit);
+                    blogPostDataAccess.getPostsByKeyword(keyword, offset,
+                    limit);
+            omitContents(postList);
             long postCount = blogPostDataAccess.getPostNumber(keyword);
             buildBeans(request, postList, postCount);
             chain.doFilter(request, response);
@@ -208,8 +224,15 @@ public class BlogPostListBuilder extends HttpFilter {
         }
     }
 
-    private void buildBeans(HttpServletRequest request, List<BlogPost> postList, long postCount) {
+    private void buildBeans(HttpServletRequest request,
+            List<BlogPost> postList, long postCount) {
         request.setAttribute(ATTRI_POST_LIST, postList);
         request.setAttribute(ATTRI_POST_COUNT, postCount);
+    }
+
+    private void omitContents(List<BlogPost> posts) {
+        for (BlogPost post : posts) {
+            post.setContent("");
+        }
     }
 }
