@@ -49,7 +49,12 @@ abstract class AbstractDataAccess {
     protected void closeConnection(Connection connection)
             throws JdbcDataAccessException {
         try {
-            connection.close();
+            if (connection.isClosed()) {
+                parentLogger.log(Level.WARNING, "Attempting to close "
+                        + "a connection that is already closed.");
+            } else {
+                connection.close();
+            }
         } catch (SQLException ex) {
             parentLogger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new JdbcDataAccessException(ex);
