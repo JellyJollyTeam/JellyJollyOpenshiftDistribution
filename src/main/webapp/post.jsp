@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <%@taglib prefix="jj" uri="/WEB-INF/tlds/getGravatar.tld" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0054)http://www.tammyhartdesigns.com/demo/category/general/ -->
@@ -35,7 +36,7 @@
             <div id="content">
                 <div class="post-261 post type-post status-publish format-standard hentry category-general" id="post-261">
                     <small class="caps"><fmt:formatDate pattern="yyyy年MM月dd日" value="${blogpost.date}" /></small>
-                    <span class="bubble">0</span>
+                    <span class="bubble"><c:out value="${fn:length(blogpost.comments)}" /></span>
                     <h1><c:out value="${blogpost.title}"/></h1>
 
                     <small><a href=""><c:out value="${blogpost.author.displayName}"/></a> 发表在 <a href="./?categoryid=<c:out value="${blogpost.category.categoryId}"/>"><c:out value="${blogpost.category.name}"/></a></small>
