@@ -31,9 +31,14 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 public class GetGravatarTag extends SimpleTagSupport {
 
     private String email;
+    private int size;
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     @Override
@@ -54,7 +59,8 @@ public class GetGravatarTag extends SimpleTagSupport {
             JspWriter out = getJspContext().getOut();
             out.print("http://www.gravatar.com/avatar/");
             out.print(md5StrBuff.toString());
-            out.print(".jpg?s=40");
+            out.print(".jpg?s=");
+            out.print(size);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(GetGravatarTag.class.getName())
                     .log(Level.SEVERE, null, ex);

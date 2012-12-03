@@ -52,7 +52,7 @@
                         <li class="comment byuser even thread-even depth-1" id="comment-249">
                             <div id="div-comment-249" class="comment-body">
                                 <div class="comment">
-                                    <img src="<jj:getGravatar email="${comment.authorEmail}" />" class="avatar avatar-32 photo" height="32" width="32" />
+                                    <img src="<jj:getGravatar email="${comment.authorEmail}" size="32" />" class="avatar avatar-32 photo" height="32" width="32" />
                                     <cite class="fn"><c:out value="${comment.authorName}"/></cite>
                                     <span class="says">说：</span>
                                 </div>
@@ -93,7 +93,7 @@
                             </c:when>
                             <c:otherwise>
                                 <input type="hidden" name="op" value="add" />
-                                <img src="<jj:getGravatar email="${userAuth.user.email}" />" class="avatar avatar-32 photo" height="32" width="32" />
+                                <img src="<jj:getGravatar email="${userAuth.user.email}" size="32" />" class="avatar avatar-32 photo" height="32" width="32" />
                                 <p><cite class="fn"><c:out value="${userAuth.user.displayName}"/></cite>已经登录 | <a href="./logout">登出</a></p>
                             </c:otherwise>
                         </c:choose>

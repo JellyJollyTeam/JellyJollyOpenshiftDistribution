@@ -12,5 +12,10 @@
           <required>true</required>
           <rtexprvalue>true</rtexprvalue>
       </attribute>
+      <attribute>
+          <name>size</name>
+          <required>true</required>
+          <rtexprvalue>true</rtexprvalue>
+      </attribute>
   </tag>
 </taglib>
