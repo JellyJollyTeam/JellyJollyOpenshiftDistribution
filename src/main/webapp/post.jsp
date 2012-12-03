@@ -92,6 +92,7 @@
                                 </p>
                             </c:when>
                             <c:otherwise>
+                                <input type="hidden" name="op" value="add" />
                                 <img src="<jj:getGravatar email="${userAuth.user.email}" />" class="avatar avatar-32 photo" height="32" width="32" />
                                 <p><cite class="fn"><c:out value="${userAuth.user.displayName}"/></cite>已经登录 | <a href="./logout">登出</a></p>
                             </c:otherwise>
