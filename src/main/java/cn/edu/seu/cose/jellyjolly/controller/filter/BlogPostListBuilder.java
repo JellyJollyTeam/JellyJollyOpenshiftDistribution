@@ -52,6 +52,7 @@ public class BlogPostListBuilder extends HttpFilter {
     private static final long DEFAULT_PAGE = 1;
     private static final long DEFAULT_MAX = 5;
     private static final long DEFAULT_OFFSET = 0;
+    private static final int CONTENT_MAX_LENGTH = 100;
     private BlogPostDataAccess blogPostDataAccess;
 
     @Override
@@ -123,7 +124,7 @@ public class BlogPostListBuilder extends HttpFilter {
                 List<BlogPost> postList = blogPostDataAccess
                         .getPostsByCategoryId(categoryId, offset, limit,
                         BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
-                omitContents(postList);
+                truncateContents(postList);
                 long postCount = blogPostDataAccess.getPostNumber(categoryId);
                 buildBeans(request, postList, page, max, postCount);
             }
@@ -133,7 +134,7 @@ public class BlogPostListBuilder extends HttpFilter {
                 List<BlogPost> postList = blogPostDataAccess
                         .getPosts(offset, limit,
                         BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
-                omitContents(postList);
+                truncateContents(postList);
                 request.setAttribute(ATTRI_POST_LIST, postList);
                 long postCount = blogPostDataAccess.getPostNumber();
                 buildBeans(request, postList, page, max, postCount);
@@ -176,7 +177,7 @@ public class BlogPostListBuilder extends HttpFilter {
             List<BlogPost> postList = blogPostDataAccess
                     .getPostsByMonthlyArchive(year, month, offset, limit,
                     BlogPostOrderStrategy.ORDER_BY_DATE_DESC);
-            omitContents(postList);
+            truncateContents(postList);
             long postCount = blogPostDataAccess.getPostNumber(year, month);
             buildBeans(request, postList, page, max, postCount);
         } catch (NumberFormatException ex) {
@@ -211,7 +212,7 @@ public class BlogPostListBuilder extends HttpFilter {
             List<BlogPost> postList =
                     blogPostDataAccess.getPostsByKeyword(keyword, offset,
                     limit);
-            omitContents(postList);
+            truncateContents(postList);
             long postCount = blogPostDataAccess.getPostNumber(keyword);
             buildBeans(request, postList, page, max, postCount);
             chain.doFilter(request, response);
@@ -234,9 +235,10 @@ public class BlogPostListBuilder extends HttpFilter {
         request.setAttribute(ATTRI_HAS_NEXT, hasNext);
     }
 
-    private void omitContents(List<BlogPost> posts) {
+    private void truncateContents(List<BlogPost> posts) {
         for (BlogPost post : posts) {
-            post.setContent("");
+            String content = post.getContent();
+            post.setContent(Utils.truncateHtml(content, CONTENT_MAX_LENGTH));
         }
     }
 }
