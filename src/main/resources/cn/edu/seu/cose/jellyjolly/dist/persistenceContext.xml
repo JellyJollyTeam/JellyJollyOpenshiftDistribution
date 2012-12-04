@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+          http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/context/spring-context-2.5.xsd/spring-spring-context-2.5.xsd-3.1.3.RELEASE.xsd
+">
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:cn/edu/seu/cose/jellyjolly/dist/dbcp.properties"/>
+    </bean>
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource" scope="singleton">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="${initialSize}"/>
+        <property name="maxActive" value="${maxActive}"/>
+    </bean>
+    <bean name="dataAccessFactory"
+          class="cn.edu.seu.cose.jellyjolly.dao.jdbc.MysqlDataAccessFactory"
+          scope="singleton">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean name="adminUserDataAccess"
+          factory-bean="dataAccessFactory"
+          factory-method="getAdminUserDataAccess"
+          scope="singleton"/>
+    <bean name="blogInfoDataAccess"
+          factory-bean="dataAccessFactory"
+          factory-method="getBlogInfoDataAccess"
+          scope="singleton"/>
+    <bean name="blogPageDataAccess"
+          factory-bean="dataAccessFactory"
+          factory-method="getBlogPageDataAccess"
+          scope="singleton"/>
+    <bean name="blogPostDataAccess"
+          factory-bean="dataAccessFactory"
+          factory-method="getBlogPostDataAccess"
+          scope="singleton"/>
+    <bean name="categoryDataAccess"
+          factory-bean="dataAccessFactory"
+          factory-method="getCategoryDataAccess"
+          scope="singleton"/>
+    <bean name="commentDataAccess"
+          factory-bean="dataAccessFactory"
+          factory-method="getCommentDataAccess"
+          scope="singleton"/>
+    <bean name="linkDataAccess"
+          factory-bean="dataAccessFactory"
+          factory-method="getLinkDataAccess"
+          scope="singleton"/>
+</beans>

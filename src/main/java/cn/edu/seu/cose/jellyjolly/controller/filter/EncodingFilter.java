@@ -31,13 +31,10 @@ import javax.servlet.ServletResponse;
  * @author rAy <predator.ray@gmail.com>
  */
 public class EncodingFilter implements Filter {
-    
+
     private static final String INFO_ENCODING = "encoding=";
-    
     private static final String PARAM_ENCODING = "encoding";
-    
     private static final String DEFAULT_ENCODING = "UTF-8";
-    
     private String encoding;
 
     @Override
@@ -55,7 +52,7 @@ public class EncodingFilter implements Filter {
         response.setCharacterEncoding(encoding);
         chain.doFilter(request, response);
     }
-    
+
     private String getEncodingInfo() {
         StringBuilder builder = new StringBuilder();
         builder.append(INFO_ENCODING).append(encoding);
@@ -63,8 +60,6 @@ public class EncodingFilter implements Filter {
     }
 
     @Override
-    public void destroy() {}
-    
-    
-    
+    public void destroy() {
+    }
 }
