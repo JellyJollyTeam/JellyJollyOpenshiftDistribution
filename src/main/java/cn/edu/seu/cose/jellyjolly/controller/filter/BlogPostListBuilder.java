@@ -52,7 +52,7 @@ public class BlogPostListBuilder extends HttpFilter {
     private static final long DEFAULT_PAGE = 1;
     private static final long DEFAULT_MAX = 5;
     private static final long DEFAULT_OFFSET = 0;
-    private static final int CONTENT_MAX_LENGTH = 100;
+    private static final int CONTENT_MAX_LENGTH = 255;
     private BlogPostDataAccess blogPostDataAccess;
 
     @Override
