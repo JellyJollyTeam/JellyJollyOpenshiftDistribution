@@ -8,10 +8,10 @@ import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
 import java.util.List;
-import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -35,12 +35,12 @@ public class BlogPostListController {
         this.postNumberPerPage = postNumberPerPage;
     }
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getNewestPosts() throws DataAccessException {
         return getPostsByPage(1);
     }
 
-    @RequestMapping("/page/{page}")
+    @RequestMapping(value = "/page/{page}", method = RequestMethod.GET)
     public ModelAndView getPostsByPage(@PathVariable long page)
             throws DataAccessException {
         long offset = (page >= 1) ? (page - 1) * postNumberPerPage : 0;
@@ -53,13 +53,15 @@ public class BlogPostListController {
         return home;
     }
 
-    @RequestMapping("/category/{categoryId}")
+    @RequestMapping(value = "/category/{categoryId}",
+    method = RequestMethod.GET)
     public ModelAndView getPostsByCategory(@PathVariable long categoryId)
             throws DataAccessException {
         return getPostsByCategory(categoryId, 1);
     }
 
-    @RequestMapping("/category/{categoryId}/page/{page}")
+    @RequestMapping(value = "/category/{categoryId}/page/{page}",
+    method = RequestMethod.GET)
     public ModelAndView getPostsByCategory(@PathVariable long categoryId,
             @PathVariable long page) throws DataAccessException {
         long offset = (page >= 1) ? (page - 1) * postNumberPerPage : 0;
@@ -72,13 +74,15 @@ public class BlogPostListController {
         return home;
     }
 
-    @RequestMapping("/archive/{year}/{month}")
+    @RequestMapping(value = "/archive/{year}/{month}",
+    method = RequestMethod.GET)
     public ModelAndView getArchive(@PathVariable int year,
             @PathVariable int month) throws DataAccessException {
         return getArchive(year, month, 1);
     }
 
-    @RequestMapping("/archive/{year}/{month}/page/{page}")
+    @RequestMapping(value = "/archive/{year}/{month}/page/{page}",
+    method = RequestMethod.GET)
     public ModelAndView getArchive(@PathVariable int year,
             @PathVariable int month, @PathVariable long page)
             throws DataAccessException {

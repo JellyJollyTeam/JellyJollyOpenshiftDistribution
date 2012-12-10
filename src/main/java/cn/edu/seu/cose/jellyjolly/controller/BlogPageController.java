@@ -8,9 +8,11 @@ import cn.edu.seu.cose.jellyjolly.dao.BlogPageDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPage;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -28,13 +30,60 @@ public class BlogPageController {
         this.frameBuilder = frameBuilder;
     }
 
-    @RequestMapping("/page/{pageId}")
-    public ModelAndView getPageById(@PathVariable int pageId)
+    @RequestMapping(value = "/page/{pageId}", method = RequestMethod.GET)
+    public String getPageById(@PathVariable int pageId, Model model)
             throws DataAccessException {
         BlogPage page = blogPageDataAccess.getPage(pageId);
-        ModelAndView pageMnV = new ModelAndView("page");
-        pageMnV.addObject("page", page);
-        pageMnV.addAllObjects(frameBuilder.getFrameObjects());
-        return pageMnV;
+        model.addAttribute("page", page);
+        model.addAllAttributes(frameBuilder.getFrameObjects());
+        return "page";
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.POST)
+    public String createNewPage(@RequestParam String title,
+            @RequestParam String content, @RequestParam String redirect)
+            throws DataAccessException {
+        int pageId = blogPageDataAccess.addNewPage(title, content);
+        return (redirect == null)
+                ? "redirect:/page/" + pageId
+                : "redirect:" + redirect;
+    }
+
+    @RequestMapping(value = "/page/{pageId}", method = RequestMethod.DELETE)
+    public String deletePage(@PathVariable int pageId,
+            @RequestParam String redirect) throws DataAccessException {
+        blogPageDataAccess.deletePage(pageId);
+        return "redirect:";
+    }
+
+    @RequestMapping(value = "/page/{pageId}", method = RequestMethod.PUT)
+    public String changePage(@PathVariable int pageId,
+            @RequestParam String title, @RequestParam String content,
+            @RequestParam String redirect) throws DataAccessException {
+        if (title != null) {
+            blogPageDataAccess.changeTitle(pageId, title);
+        }
+        if (content != null) {
+            blogPageDataAccess.changeContent(pageId, content);
+        }
+        return "redirect:" + redirect;
+    }
+
+    @RequestMapping(value = "/page/{pageId}/title",
+    method = RequestMethod.PUT)
+    public String changePageTitle(@PathVariable int pageId,
+            @RequestParam String title, @RequestParam String redirect)
+            throws DataAccessException {
+        blogPageDataAccess.changeTitle(pageId, title);
+        return "redirect:" + redirect;
+    }
+
+    @RequestMapping(value = "/page/{pageId}/content",
+    method = RequestMethod.PUT)
+    public String changePageContent(@PathVariable int pageId,
+            @RequestParam String content, @RequestParam String redirect)
+            throws DataAccessException {
+        blogPageDataAccess.changeContent(pageId, content);
+        return "redirect:" + redirect;
     }
 }
