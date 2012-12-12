@@ -60,6 +60,16 @@ public class AdminUserController {
         return "redirect:/admin";
     }
 
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    public String logOut(@RequestParam String redirect,
+            HttpServletRequest request) {
+        HttpSession currentSession = request.getSession();
+        currentSession.setAttribute(SESSION_ATTRI_AUTH, null);
+        return (redirect == null)
+                ? "redirect:/"
+                : "redirect:" + redirect;
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.PUT)
     public String addNewAdminUser(@RequestParam String username,
             @RequestParam String password, @RequestParam String email,
