@@ -24,7 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AdminUserController {
 
-    public static final String SESSION_ATTRI_AUTH = "userAuth";
+    public static final String SESSION_ATTRI_AUTH =
+            "cn.edu.seu.cose.jellyjolly.userAuth";
     private static final long THIRTY_MINUTES_MILLIS = 1000 * 60 * 30;
     private AdminUserDataAccess adminUserDataAccess;
     private long expireDelta = THIRTY_MINUTES_MILLIS;

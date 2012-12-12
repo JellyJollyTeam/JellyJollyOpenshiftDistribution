@@ -4,7 +4,6 @@
  */
 package cn.edu.seu.cose.jellyjolly.controller;
 
-import cn.edu.seu.cose.jellyjolly.controller.servlet.AdminUserLogin;
 import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
@@ -51,7 +50,7 @@ public class BlogPostController {
             throws DataAccessException {
         HttpSession currentSession = request.getSession();
         UserAuthorization userAuth = (UserAuthorization) currentSession
-                .getAttribute(AdminUserLogin.SESSION_ATTRI_AUTH);
+                .getAttribute(AdminUserController.SESSION_ATTRI_AUTH);
         long authorUserId = userAuth.getUser().getUserId();
         Date currentTime = new Date();
         blogPostDataAccess.createNewPost(authorUserId, categoryId, currentTime,
