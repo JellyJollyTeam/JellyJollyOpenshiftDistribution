@@ -88,13 +88,18 @@ public class AdminUserController {
     @RequestMapping(value = "/admin/{userId}/password",
     method = RequestMethod.PUT)
     public String changePassword(@PathVariable long userId,
-            @RequestParam String oldPassword, @RequestParam String newPassword)
-            throws DataAccessException {
+            @RequestParam String oldPassword, @RequestParam String newPassword,
+            @RequestParam String confirmPassword) throws DataAccessException {
         AdminUser userToBeConfirmed = adminUserDataAccess.getUser(userId);
         String username = userToBeConfirmed.getUsername();
         boolean confirmed = adminUserDataAccess.confirm(username, oldPassword);
         if (!confirmed) {
+            // indicate not authorized
             return "redirect:/admin/admins/" + userId + "?err=1";
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            // indicate passwords not same
+            return "redirect:/admin/admins/" + userId + "?err=2";
         }
         adminUserDataAccess.changePassword(userId, newPassword);
         return "redirect:/admin/admins" + userId;

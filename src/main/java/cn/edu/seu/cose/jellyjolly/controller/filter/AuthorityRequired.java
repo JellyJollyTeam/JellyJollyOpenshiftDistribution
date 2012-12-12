@@ -16,7 +16,7 @@
  */
 package cn.edu.seu.cose.jellyjolly.controller.filter;
 
-import cn.edu.seu.cose.jellyjolly.controller.servlet.AdminUserLogin;
+import cn.edu.seu.cose.jellyjolly.controller.AdminUserController;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -39,7 +39,7 @@ public class AuthorityRequired extends HttpFilter {
             throws IOException, ServletException {
         HttpSession session = request.getSession();
         UserAuthorization userAuth = (UserAuthorization)
-                session.getAttribute(AdminUserLogin.SESSION_ATTRI_AUTH);
+                session.getAttribute(AdminUserController.SESSION_ATTRI_AUTH);
         if (!isValid(userAuth)) {
             response.sendRedirect(LOGIN_PAGE_URL);
             return;
