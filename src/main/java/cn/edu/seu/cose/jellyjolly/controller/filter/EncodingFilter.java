@@ -41,7 +41,7 @@ public class EncodingFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         String encodingParam = filterConfig.getInitParameter(PARAM_ENCODING);
         encoding = (encodingParam == null) ? DEFAULT_ENCODING : encodingParam;
-        Logger.getLogger(CommentListBuilder.class.getName())
+        Logger.getLogger(EncodingFilter.class.getName())
                 .log(Level.INFO, getEncodingInfo());
     }
 
