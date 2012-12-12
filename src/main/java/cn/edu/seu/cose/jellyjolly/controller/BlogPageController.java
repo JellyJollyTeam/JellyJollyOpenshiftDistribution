@@ -39,7 +39,7 @@ public class BlogPageController {
         return "page";
     }
 
-    @RequestMapping(value = "/page", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/page", method = RequestMethod.POST)
     public String createNewPage(@RequestParam String title,
             @RequestParam String content, @RequestParam String redirect)
             throws DataAccessException {
@@ -49,14 +49,15 @@ public class BlogPageController {
                 : "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/page/{pageId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/page/{pageId}",
+    method = RequestMethod.DELETE)
     public String deletePage(@PathVariable int pageId,
             @RequestParam String redirect) throws DataAccessException {
         blogPageDataAccess.deletePage(pageId);
         return "redirect:";
     }
 
-    @RequestMapping(value = "/page/{pageId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/page/{pageId}", method = RequestMethod.PUT)
     public String changePage(@PathVariable int pageId,
             @RequestParam String title, @RequestParam String content,
             @RequestParam String redirect) throws DataAccessException {
@@ -69,7 +70,7 @@ public class BlogPageController {
         return "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/page/{pageId}/title",
+    @RequestMapping(value = "/admin/page/{pageId}/title",
     method = RequestMethod.PUT)
     public String changePageTitle(@PathVariable int pageId,
             @RequestParam String title, @RequestParam String redirect)
@@ -78,7 +79,7 @@ public class BlogPageController {
         return "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/page/{pageId}/content",
+    @RequestMapping(value = "/admin/page/{pageId}/content",
     method = RequestMethod.PUT)
     public String changePageContent(@PathVariable int pageId,
             @RequestParam String content, @RequestParam String redirect)

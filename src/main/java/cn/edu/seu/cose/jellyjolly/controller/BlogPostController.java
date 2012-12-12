@@ -44,7 +44,7 @@ public class BlogPostController {
         return "post";
     }
 
-    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/post", method = RequestMethod.POST)
     public String createNewPost(@RequestParam int categoryId,
             @RequestParam String title, @RequestParam String content,
             @RequestParam String redirect, HttpServletRequest request)
@@ -59,14 +59,14 @@ public class BlogPostController {
         return "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/post/{postId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/post/{postId}", method = RequestMethod.DELETE)
     public String deletePost(@PathVariable int postId,
             @RequestParam String redirect) throws DataAccessException {
         blogPostDataAccess.deletePost(postId);
         return "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/post/{postId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/post/{postId}", method = RequestMethod.PUT)
     public String changePost(@PathVariable long postId,
             @RequestParam String title, @RequestParam String content,
             @RequestParam int categoryId, @RequestParam long userId,
@@ -77,7 +77,8 @@ public class BlogPostController {
         return "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/post/{postId}/title", method = RequestMethod.PUT)
+    @RequestMapping(value = "/admin/post/{postId}/title",
+    method = RequestMethod.PUT)
     public String changePostTitle(@PathVariable long postId,
             @RequestParam String title, @RequestParam String redirect)
             throws DataAccessException {
@@ -85,7 +86,7 @@ public class BlogPostController {
         return "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/post/{postId}/content",
+    @RequestMapping(value = "/admin/post/{postId}/content",
     method = RequestMethod.PUT)
     public String changePostContent(@PathVariable long postId,
             @RequestParam String content, @RequestParam String redirect)
@@ -94,7 +95,7 @@ public class BlogPostController {
         return "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/post/{postId}/category",
+    @RequestMapping(value = "/admin/post/{postId}/category",
     method = RequestMethod.PUT)
     public String changePostCategory(@PathVariable long postId,
             @RequestParam int category, @RequestParam String redirect)
