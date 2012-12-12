@@ -31,31 +31,28 @@ import javax.servlet.http.HttpSession;
  */
 public class AuthorityRequired extends HttpFilter {
 
-    private static final String LOGIN_PAGE_URL = "../login.jsp";
+    private static final String LOGIN_PAGE_URL = "/login";
 
     @Override
     public void doHttpFilter(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpSession session = request.getSession();
-        UserAuthorization userAuth = (UserAuthorization)
-                session.getAttribute(AdminUserController.SESSION_ATTRI_AUTH);
-        if (!isValid(userAuth)) {
+        UserAuthorization userAuth = (UserAuthorization) session
+                .getAttribute(AdminUserController.SESSION_ATTRI_AUTH);
+        if (userAuth == null) {
+            response.sendRedirect(LOGIN_PAGE_URL);
+            return;
+        }
+
+        long expiredTime = userAuth.getExpireTime();
+        long currentTime = System.currentTimeMillis();
+        if (expiredTime > currentTime) {
+            session.setAttribute(AdminUserController.SESSION_ATTRI_AUTH, null);
             response.sendRedirect(LOGIN_PAGE_URL);
             return;
         }
 
         chain.doFilter(request, response);
     }
-
-    private boolean isValid(UserAuthorization userAuth) {
-        if (userAuth == null) {
-            return false;
-        }
-
-        long expiredTime = userAuth.getExpireTime();
-        long currentTime = System.currentTimeMillis();
-        return expiredTime > currentTime;
-    }
-
 }
