@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><c:out value="${blogInfo.blogTitle}"/></title>
 
-        <link rel="stylesheet" href="./style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="./static/style.css" type="text/css" media="screen" />
 
         <meta name="robots" content="noindex,nofollow" />
         <meta name="generator" content="WordPress 3.4.2" />
