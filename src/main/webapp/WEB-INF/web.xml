@@ -16,13 +16,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <welcome-file-list>
-        <welcome-file>home.jsp</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
-    <listener>
-        <listener-class>cn.edu.seu.cose.jellyjolly.dist.mysql.ContextDependencyInjection</listener-class>
-    </listener>
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:cn/edu/seu/cose/jellyjolly/dist/applicationContext.xml</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.EncodingFilter</filter-class>
@@ -34,58 +40,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <filter>
         <filter-name>ResourceAuthenticationFilter</filter-name>
         <filter-class>cn.edu.seu.cose.jellyjolly.rest.auth.ResourceAuthenticationFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>AdminUserInstanceBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.AdminUserInstanceBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>AdminUserListBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.AdminUserListBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>BlogInfoBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.BlogInfoBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>BlogPostInstanceBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.BlogPostInstanceBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>BlogPostListBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.BlogPostListBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>BlogStatisticsBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.BlogStatisticsBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>CategoryListBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.CategoryListBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>CommentListBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.CommentListBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>LinkListBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.LinkListBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>MonthlyArchivedListBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.MonthlyArchivedListBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>PageBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.PageBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>PageListBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.PageListBuilder</filter-class>
-    </filter>
-    <filter>
-        <filter-name>RecentCommentListBuilder</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.RecentCommentListBuilder</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
@@ -99,126 +53,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <filter-name>ResourceAuthenticationFilter</filter-name>
         <url-pattern>/resource/*</url-pattern>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>AdminUserInstanceBuilder</filter-name>
-        <url-pattern>/admin/userOptions.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>AdminUserListBuilder</filter-name>
-        <url-pattern>/admin/users.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>BlogInfoBuilder</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>BlogPostInstanceBuilder</filter-name>
-        <url-pattern>/post.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>BlogPostInstanceBuilder</filter-name>
-        <url-pattern>/admin/editBlog.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>BlogStatisticsBuilder</filter-name>
-        <url-pattern>/admin/admin.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>BlogPostListBuilder</filter-name>
-        <url-pattern>/home.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>BlogPostListBuilder</filter-name>
-        <url-pattern>/admin/blogs.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CategoryListBuilder</filter-name>
-        <url-pattern>/home.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CategoryListBuilder</filter-name>
-        <url-pattern>/page.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CategoryListBuilder</filter-name>
-        <url-pattern>/post.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CategoryListBuilder</filter-name>
-        <url-pattern>/admin/admin.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CategoryListBuilder</filter-name>
-        <url-pattern>/admin/writeBlog.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CategoryListBuilder</filter-name>
-        <url-pattern>/admin/editBlog.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CategoryListBuilder</filter-name>
-        <url-pattern>/admin/blogs.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CommentListBuilder</filter-name>
-        <url-pattern>/post.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>CommentListBuilder</filter-name>
-        <url-pattern>/admin/comments.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LinkListBuilder</filter-name>
-        <url-pattern>/home.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LinkListBuilder</filter-name>
-        <url-pattern>/page.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LinkListBuilder</filter-name>
-        <url-pattern>/post.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LinkListBuilder</filter-name>
-        <url-pattern>/admin/links.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>MonthlyArchivedListBuilder</filter-name>
-        <url-pattern>/home.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>MonthlyArchivedListBuilder</filter-name>
-        <url-pattern>/page.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>MonthlyArchivedListBuilder</filter-name>
-        <url-pattern>/post.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>PageBuilder</filter-name>
-        <url-pattern>/page.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>PageListBuilder</filter-name>
-        <url-pattern>/home.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>PageListBuilder</filter-name>
-        <url-pattern>/page.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>PageListBuilder</filter-name>
-        <url-pattern>/post.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>PageListBuilder</filter-name>
-        <url-pattern>/admin/pages.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>RecentCommentListBuilder</filter-name>
-        <url-pattern>/admin/admin.jsp</url-pattern>
-    </filter-mapping>
     <servlet>
         <servlet-name>RestletServlet</servlet-name>
         <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
@@ -228,93 +62,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>AdminCommentOperation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.AdminCommentOperation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminUserLogin</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.AdminUserLogin</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminUserLogout</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.AdminUserLogout</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminUserOperation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.AdminUserOperation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogInfoOperation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.BlogInfoOperation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogPageOperation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.BlogPageOperation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogPostOperation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.BlogPostOperation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CommentOperation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.CommentOperation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Installation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.Installation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LinkListOperation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.LinkListOperation</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RssServlet</servlet-name>
         <servlet-class>cn.edu.seu.cose.jellyjolly.rss.RssServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>VisitorCommentOperation</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.controller.servlet.VisitorCommentOperation</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminCommentOperation</servlet-name>
-        <url-pattern>/admin/comment</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminUserLogin</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminUserLogout</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminUserOperation</servlet-name>
-        <url-pattern>/admin/user</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogInfoOperation</servlet-name>
-        <url-pattern>/admin/info</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogPageOperation</servlet-name>
-        <url-pattern>/admin/page</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogPostOperation</servlet-name>
-        <url-pattern>/admin/post</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CommentOperation</servlet-name>
-        <url-pattern>/comment</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Installation</servlet-name>
-        <url-pattern>/install</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LinkListOperation</servlet-name>
-        <url-pattern>/admin/link</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>RestletServlet</servlet-name>
         <url-pattern>/resource/*</url-pattern>
@@ -322,9 +73,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <servlet-mapping>
         <servlet-name>RssServlet</servlet-name>
         <url-pattern>/rss</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>VisitorCommentOperation</servlet-name>
-        <url-pattern>/visitor/comment</url-pattern>
     </servlet-mapping>
 </web-app>
