@@ -34,7 +34,7 @@ public class BlogPageController {
     public String getPageById(@PathVariable int pageId, Model model)
             throws DataAccessException {
         BlogPage page = blogPageDataAccess.getPage(pageId);
-        model.addAttribute("page", page);
+        model.addAttribute("blogpage", page);
         model.addAllAttributes(frameBuilder.getFrameObjects());
         return "page";
     }

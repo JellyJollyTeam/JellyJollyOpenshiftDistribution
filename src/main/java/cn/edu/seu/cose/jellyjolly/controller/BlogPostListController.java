@@ -9,10 +9,10 @@ import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
 import java.util.List;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -35,64 +35,70 @@ public class BlogPostListController {
         this.postNumberPerPage = postNumberPerPage;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getNewestPosts() throws DataAccessException {
-        return getPostsByPage(1);
+    @RequestMapping(value = {"/", "/posts"}, method = RequestMethod.GET)
+    public String getNewestPosts(Model model) throws DataAccessException {
+        return getPostsByPage(1, model);
     }
 
-    @RequestMapping(value = "/page/{page}", method = RequestMethod.GET)
-    public ModelAndView getPostsByPage(@PathVariable long page)
+    @RequestMapping(value = "/posts/page/{page}", method = RequestMethod.GET)
+    public String getPostsByPage(@PathVariable long page, Model model)
             throws DataAccessException {
         long offset = (page >= 1) ? (page - 1) * postNumberPerPage : 0;
         long limit = postNumberPerPage;
         List<BlogPost> postList =
                 blogPostDataAccess.getPosts(offset, limit);
-        ModelAndView home = new ModelAndView("home");
-        home.addObject("postList", postList);
-        home.addAllObjects(frameBuilder.getFrameObjects());
-        return home;
+        if (postList == null || postList.size() <= 0) {
+            return "redirect:/404";
+        }
+        model.addAttribute("postList", postList);
+        model.addAllAttributes(frameBuilder.getFrameObjects());
+        return "home";
     }
 
     @RequestMapping(value = "/category/{categoryId}",
     method = RequestMethod.GET)
-    public ModelAndView getPostsByCategory(@PathVariable long categoryId)
-            throws DataAccessException {
-        return getPostsByCategory(categoryId, 1);
+    public String getPostsByCategory(@PathVariable int categoryId,
+            Model model) throws DataAccessException {
+        return getPostsByCategory(categoryId, 1, model);
     }
 
     @RequestMapping(value = "/category/{categoryId}/page/{page}",
     method = RequestMethod.GET)
-    public ModelAndView getPostsByCategory(@PathVariable long categoryId,
-            @PathVariable long page) throws DataAccessException {
+    public String getPostsByCategory(@PathVariable int categoryId,
+            @PathVariable long page, Model model) throws DataAccessException {
         long offset = (page >= 1) ? (page - 1) * postNumberPerPage : 0;
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByCategoryId(
-                postNumberPerPage, offset, limit);
-        ModelAndView home = new ModelAndView("home");
-        home.addObject("postList", postList);
-        home.addAllObjects(frameBuilder.getFrameObjects());
-        return home;
+                categoryId, offset, limit);
+        if (postList == null || postList.size() <= 0) {
+            return "redirect:/404";
+        }
+        model.addAttribute("postList", postList);
+        model.addAllAttributes(frameBuilder.getFrameObjects());
+        return "home";
     }
 
     @RequestMapping(value = "/archive/{year}/{month}",
     method = RequestMethod.GET)
-    public ModelAndView getArchive(@PathVariable int year,
-            @PathVariable int month) throws DataAccessException {
-        return getArchive(year, month, 1);
+    public String getArchive(@PathVariable int year,
+            @PathVariable int month, Model model) throws DataAccessException {
+        return getArchive(year, month, 1, model);
     }
 
     @RequestMapping(value = "/archive/{year}/{month}/page/{page}",
     method = RequestMethod.GET)
-    public ModelAndView getArchive(@PathVariable int year,
-            @PathVariable int month, @PathVariable long page)
+    public String getArchive(@PathVariable int year,
+            @PathVariable int month, @PathVariable long page, Model model)
             throws DataAccessException {
         long offset = (page >= 1) ? (page - 1) * postNumberPerPage : 0;
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByMonthlyArchive(
                 year, month, offset, limit);
-        ModelAndView home = new ModelAndView("home");
-        home.addObject("postList", postList);
-        home.addAllObjects(frameBuilder.getFrameObjects());
-        return home;
+        if (postList == null || postList.size() <= 0) {
+            return "redirect:/404";
+        }
+        model.addAttribute("postList", postList);
+        model.addAllAttributes(frameBuilder.getFrameObjects());
+        return "home";
     }
 }

@@ -38,7 +38,10 @@ public class BlogPostController {
     public String getPostById(@PathVariable long postId, Model model)
             throws DataAccessException {
         BlogPost post = blogPostDataAccess.getPostById(postId);
-        model.addAttribute("post", post);
+        if (post == null) {
+            return "redirect:/404";
+        }
+        model.addAttribute("blogpost", post);
         model.addAllAttributes(frameBuilder.getFrameObjects());
         return "post";
     }
