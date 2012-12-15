@@ -50,7 +50,7 @@ public class AdminUserController {
         AdminUser userConfirmed =
                 adminUserDataAccess.getUserIfConfirmed(username, password);
         if (userConfirmed == null) {
-            return "redirect:/login";
+            return "redirect:/login?error=1";
         }
         HttpSession currentSession = request.getSession();
         long currentTimeMillis = System.currentTimeMillis();
@@ -59,6 +59,11 @@ public class AdminUserController {
                 currentTimeMillis, expireTime);
         currentSession.setAttribute(SESSION_ATTRI_AUTH, userAuth);
         return "redirect:/admin";
+    }
+
+    @RequestMapping(value = "/admin")
+    public String getControlPanel() {
+        return "admin/admin";
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.POST)

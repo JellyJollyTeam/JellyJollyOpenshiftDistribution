@@ -21,11 +21,11 @@
         <div id="page">
 
             <div id="header">
-                <a href="/" id="sitename" title="<c:out value="${blogInfo.blogSubTitle}"/>"><c:out value="${blogInfo.blogTitle}"/></a>
+                <a href="/" id="sitename" title="${blogInfo.blogSubTitle}"><c:out value="${blogInfo.blogTitle}"/></a>
 
                 <ul id="nav">
                     <c:forEach items="${pageList}" var="page" >
-                        <li class="page_item"><a href="/page/<c:out value="${page.blogPageId}" />"><c:out value="${page.pageTitle}"/></a></li>
+                        <li class="page_item"><a href="/page/${page.blogPageId}"><c:out value="${page.pageTitle}"/></a></li>
                     </c:forEach>
                 </ul>
 

@@ -38,37 +38,28 @@
                         <ul>
                             <c:choose>
                                 <c:when test="${empty userAuth}">
-                                    <li><a href="login.jsp">登录</a></li>
+                                    <li><a href="/login">登录</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="./admin/admin.jsp">控制板</a></li>
-                                    <li><a href="./logout">登出</a></li>
+                                    <li><a href="/admin/admin.jsp">控制板</a></li>
+                                    <li><a href="/logout">登出</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </ul>
                     </li>
-
                 </ul>
             </div>
 
-
             <div class="clear"></div>
-
             <div id="footer">
-
                 <div class="alignright">
                     <a href="#page" class="top">Top</a>
-                    <a href="./rss" class="rss">RSS</a>
-                    <a href="./" class="home">Home</a>
+                    <a href="/rss" class="rss">RSS</a>
+                    <a href="/" class="home">Home</a>
                 </div>
-
                 <a href="http://www.tammyhartdesigns.com/fifty-fifth-street">Fifty Fifth Street</a> theme by <a href="http://www.tammyhartdesigns.com/">Tammy Hart Designs</a><br>
                     Powered by <a href="https://github.com/JellyJollyTeam">JellyJolly</a>
             </div>
-
         </div>
-
-
-
     </body>
 </html>

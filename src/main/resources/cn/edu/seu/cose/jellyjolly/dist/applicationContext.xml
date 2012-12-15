@@ -18,6 +18,9 @@
         <constructor-arg ref="categoryDataAccess" />
         <constructor-arg ref="linkDataAccess" />
     </bean>
+    <bean id="adminUserController" class="cn.edu.seu.cose.jellyjolly.controller.AdminUserController">
+        <constructor-arg ref="adminUserDataAccess" />
+    </bean>
     <bean id="blogPageController" class="cn.edu.seu.cose.jellyjolly.controller.BlogPageController">
         <constructor-arg ref="blogPageDataAccess" />
         <constructor-arg ref="frameBuilder" />
