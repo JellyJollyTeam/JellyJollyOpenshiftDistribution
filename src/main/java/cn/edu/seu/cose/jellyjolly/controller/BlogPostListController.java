@@ -43,16 +43,10 @@ public class BlogPostListController {
     @RequestMapping(value = "/posts/page/{page}", method = RequestMethod.GET)
     public String getPostsByPage(@PathVariable long page, Model model)
             throws DataAccessException {
-        long offset = (page >= 1) ? (page - 1) * postNumberPerPage : 0;
+        long offset = getOffset(page);
         long limit = postNumberPerPage;
-        List<BlogPost> postList =
-                blogPostDataAccess.getPosts(offset, limit);
-        if (postList == null || postList.size() <= 0) {
-            return "redirect:/404";
-        }
-        model.addAttribute("postList", postList);
-        model.addAllAttributes(frameBuilder.getFrameObjects());
-        return "home";
+        List<BlogPost> postList = blogPostDataAccess.getPosts(offset, limit);
+        return getPostListView(postList, model);
     }
 
     @RequestMapping(value = "/category/{categoryId}",
@@ -66,16 +60,11 @@ public class BlogPostListController {
     method = RequestMethod.GET)
     public String getPostsByCategory(@PathVariable int categoryId,
             @PathVariable long page, Model model) throws DataAccessException {
-        long offset = (page >= 1) ? (page - 1) * postNumberPerPage : 0;
+        long offset = getOffset(page);
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByCategoryId(
                 categoryId, offset, limit);
-        if (postList == null || postList.size() <= 0) {
-            return "redirect:/404";
-        }
-        model.addAttribute("postList", postList);
-        model.addAllAttributes(frameBuilder.getFrameObjects());
-        return "home";
+        return getPostListView(postList, model);
     }
 
     @RequestMapping(value = "/archive/{year}/{month}",
@@ -90,15 +79,41 @@ public class BlogPostListController {
     public String getArchive(@PathVariable int year,
             @PathVariable int month, @PathVariable long page, Model model)
             throws DataAccessException {
-        long offset = (page >= 1) ? (page - 1) * postNumberPerPage : 0;
+        long offset = getOffset(page);
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByMonthlyArchive(
                 year, month, offset, limit);
+        return getPostListView(postList, model);
+    }
+
+    @RequestMapping(value = "/search/{keyword}", method = RequestMethod.GET)
+    public String search(@PathVariable String keyword, Model model)
+            throws DataAccessException {
+        return search(keyword, 1, model);
+    }
+
+    @RequestMapping(value = "/search/{keyword}/page/{page}",
+    method = RequestMethod.GET)
+    public String search(@PathVariable String keyword, @PathVariable long page,
+            Model model) throws DataAccessException {
+        long offset = getOffset(page);
+        long limit = postNumberPerPage;
+        List<BlogPost> postList = blogPostDataAccess.getPostsByKeyword(keyword,
+                offset, limit);
+        return getPostListView(postList, model);
+    }
+
+    private String getPostListView(List<BlogPost> postList, Model model)
+            throws DataAccessException {
         if (postList == null || postList.size() <= 0) {
             return "redirect:/404";
         }
         model.addAttribute("postList", postList);
         model.addAllAttributes(frameBuilder.getFrameObjects());
         return "home";
+    }
+
+    private long getOffset(long page) {
+        return (page >= 1) ? (page - 1) * postNumberPerPage : 0;
     }
 }
