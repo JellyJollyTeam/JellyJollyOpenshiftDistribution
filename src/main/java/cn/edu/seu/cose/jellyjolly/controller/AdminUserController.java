@@ -66,7 +66,8 @@ public class AdminUserController {
         return "admin/admin";
     }
 
-    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    @RequestMapping(value = "logout", method = {
+        RequestMethod.GET, RequestMethod.POST})
     public String logOut(@RequestParam String redirect,
             HttpServletRequest request) {
         HttpSession currentSession = request.getSession();

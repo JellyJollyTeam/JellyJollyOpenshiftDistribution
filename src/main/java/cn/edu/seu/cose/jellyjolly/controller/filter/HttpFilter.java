@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package cn.edu.seu.cose.jellyjolly.controller.filter;
 
 import java.io.IOException;
@@ -32,23 +31,18 @@ import javax.servlet.http.HttpServletResponse;
  * @author rAy <predator.ray@gmail.com>
  */
 public abstract class HttpFilter implements Filter {
-    
+
     private static final String METHOD_DELETE = "DELETE";
-    
     private static final String METHOD_HEAD = "HEAD";
-    
     private static final String METHOD_GET = "GET";
-    
     private static final String METHOD_OPTIONS = "OPTIONS";
-    
     private static final String METHOD_POST = "POST";
-    
     private static final String METHOD_PUT = "PUT";
-    
     private static final String METHOD_TRACE = "TRACE";
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -59,92 +53,92 @@ public abstract class HttpFilter implements Filter {
                 || !(response instanceof HttpServletResponse)) {
             chain.doFilter(request, response);
         }
-        
+
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         doHttpFilter(httpRequest, httpResponse, chain);
     }
-    
+
     private boolean isHttpProtocol(String protocol) {
         return "HTTP/1.0".equals(protocol) || "HTTP/1.1".equals(protocol);
     }
-    
+
     public void doHttpFilter(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         final String method = request.getMethod();
-        
+
         if (METHOD_DELETE.equals(method)) {
             doDelete(request, response, chain);
             return;
         }
-        
+
         if (METHOD_HEAD.equals(method)) {
             doHead(request, response, chain);
             return;
         }
-        
+
         if (METHOD_GET.equals(method)) {
             doGet(request, response, chain);
             return;
         }
-        
+
         if (METHOD_OPTIONS.equals(method)) {
             doOptions(request, response, chain);
             return;
         }
-        
+
         if (METHOD_POST.equals(method)) {
             doPost(request, response, chain);
             return;
         }
-        
+
         if (METHOD_PUT.equals(method)) {
             doPut(request, response, chain);
             return;
         }
-        
+
         if (METHOD_TRACE.equals(method)) {
             doTrace(request, response, chain);
         }
     }
-    
+
     public void doGet(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         chain.doFilter(request, response);
     }
-    
+
     public void doPost(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         chain.doFilter(request, response);
     }
-    
+
     public void doPut(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         chain.doFilter(request, response);
     }
-    
+
     public void doDelete(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         chain.doFilter(request, response);
     }
-    
+
     public void doHead(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         chain.doFilter(request, response);
     }
-    
+
     public void doOptions(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         chain.doFilter(request, response);
     }
-    
+
     public void doTrace(HttpServletRequest request,
             HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -152,6 +146,6 @@ public abstract class HttpFilter implements Filter {
     }
 
     @Override
-    public void destroy() {}
-
+    public void destroy() {
+    }
 }

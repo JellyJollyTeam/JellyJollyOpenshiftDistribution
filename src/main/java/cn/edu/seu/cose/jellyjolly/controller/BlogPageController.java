@@ -7,6 +7,7 @@ package cn.edu.seu.cose.jellyjolly.controller;
 import cn.edu.seu.cose.jellyjolly.dao.BlogPageDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPage;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,11 +32,11 @@ public class BlogPageController {
     }
 
     @RequestMapping(value = "/page/{pageId}", method = RequestMethod.GET)
-    public String getPageById(@PathVariable int pageId, Model model)
-            throws DataAccessException {
+    public String getPageById(@PathVariable int pageId, Model model,
+            HttpServletRequest request) throws DataAccessException {
         BlogPage page = blogPageDataAccess.getPage(pageId);
         model.addAttribute("blogpage", page);
-        model.addAllAttributes(frameBuilder.getFrameObjects());
+        model.addAllAttributes(frameBuilder.getFrameObjects(request));
         return "page";
     }
 

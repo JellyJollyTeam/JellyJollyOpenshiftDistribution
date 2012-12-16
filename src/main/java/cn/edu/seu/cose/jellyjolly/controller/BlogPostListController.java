@@ -8,6 +8,7 @@ import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,80 +37,85 @@ public class BlogPostListController {
     }
 
     @RequestMapping(value = {"/", "/posts"}, method = RequestMethod.GET)
-    public String getNewestPosts(Model model) throws DataAccessException {
-        return getPostsByPage(1, model);
+    public String getNewestPosts(Model model, HttpServletRequest request)
+            throws DataAccessException {
+        return getPostsByPage(1, model, request);
     }
 
     @RequestMapping(value = "/posts/page/{page}", method = RequestMethod.GET)
-    public String getPostsByPage(@PathVariable long page, Model model)
-            throws DataAccessException {
+    public String getPostsByPage(@PathVariable long page, Model model,
+            HttpServletRequest request) throws DataAccessException {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPosts(offset, limit);
-        return getPostListView(postList, model);
+        return getPostListView(postList, model, request);
     }
 
     @RequestMapping(value = "/category/{categoryId}",
     method = RequestMethod.GET)
     public String getPostsByCategory(@PathVariable int categoryId,
-            Model model) throws DataAccessException {
-        return getPostsByCategory(categoryId, 1, model);
+            Model model, HttpServletRequest request)
+            throws DataAccessException {
+        return getPostsByCategory(categoryId, 1, model, request);
     }
 
     @RequestMapping(value = "/category/{categoryId}/page/{page}",
     method = RequestMethod.GET)
     public String getPostsByCategory(@PathVariable int categoryId,
-            @PathVariable long page, Model model) throws DataAccessException {
+            @PathVariable long page, Model model, HttpServletRequest request)
+            throws DataAccessException {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByCategoryId(
                 categoryId, offset, limit);
-        return getPostListView(postList, model);
+        return getPostListView(postList, model, request);
     }
 
     @RequestMapping(value = "/archive/{year}/{month}",
     method = RequestMethod.GET)
     public String getArchive(@PathVariable int year,
-            @PathVariable int month, Model model) throws DataAccessException {
-        return getArchive(year, month, 1, model);
+            @PathVariable int month, Model model, HttpServletRequest request)
+            throws DataAccessException {
+        return getArchive(year, month, 1, model, request);
     }
 
     @RequestMapping(value = "/archive/{year}/{month}/page/{page}",
     method = RequestMethod.GET)
     public String getArchive(@PathVariable int year,
-            @PathVariable int month, @PathVariable long page, Model model)
-            throws DataAccessException {
+            @PathVariable int month, @PathVariable long page, Model model,
+            HttpServletRequest request) throws DataAccessException {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByMonthlyArchive(
                 year, month, offset, limit);
-        return getPostListView(postList, model);
+        return getPostListView(postList, model, request);
     }
 
     @RequestMapping(value = "/search/{keyword}", method = RequestMethod.GET)
-    public String search(@PathVariable String keyword, Model model)
-            throws DataAccessException {
-        return search(keyword, 1, model);
+    public String search(@PathVariable String keyword, Model model,
+            HttpServletRequest request) throws DataAccessException {
+        return search(keyword, 1, model, request);
     }
 
     @RequestMapping(value = "/search/{keyword}/page/{page}",
     method = RequestMethod.GET)
     public String search(@PathVariable String keyword, @PathVariable long page,
-            Model model) throws DataAccessException {
+            Model model, HttpServletRequest request)
+            throws DataAccessException {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByKeyword(keyword,
                 offset, limit);
-        return getPostListView(postList, model);
+        return getPostListView(postList, model, request);
     }
 
-    private String getPostListView(List<BlogPost> postList, Model model)
-            throws DataAccessException {
+    private String getPostListView(List<BlogPost> postList, Model model,
+            HttpServletRequest request) throws DataAccessException {
         if (postList == null || postList.size() <= 0) {
             return "redirect:/404";
         }
         model.addAttribute("postList", postList);
-        model.addAllAttributes(frameBuilder.getFrameObjects());
+        model.addAllAttributes(frameBuilder.getFrameObjects(request));
         return "home";
     }
 

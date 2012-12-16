@@ -18,6 +18,7 @@ import cn.edu.seu.cose.jellyjolly.dto.MonthArchive;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -43,18 +44,22 @@ public class FrameBuilder {
         this.linkDataAccess = linkDataAccess;
     }
 
-    public Map<String, ?> getFrameObjects() throws DataAccessException {
+    public Map<String, ?> getFrameObjects(HttpServletRequest request)
+            throws DataAccessException {
         BlogInfo blogInfo = blogInfoDataAccess.getBlogInfoInstance();
         List<BlogPageBar> pageList = blogPageDataAccess.getPageBarList();
         List<Category> categoryList = categoryDataAccess.getAllCategories();
         List<MonthArchive> archiveList = blogPostDataAccess.getMonthlyArchiveList();
         List<Link> linkList = linkDataAccess.getAllLinks();
         Map<String, Object> frameObjs = new HashMap<String, Object>();
+        Object userAuth = request.getSession().getAttribute(
+                AdminUserController.SESSION_ATTRI_AUTH);
         frameObjs.put("blogInfo", blogInfo);
         frameObjs.put("pageList", pageList);
         frameObjs.put("categoryList", categoryList);
         frameObjs.put("archivelist", archiveList);
         frameObjs.put("linkList", linkList);
+        frameObjs.put("userAuth", userAuth);
         return frameObjs;
     }
 }

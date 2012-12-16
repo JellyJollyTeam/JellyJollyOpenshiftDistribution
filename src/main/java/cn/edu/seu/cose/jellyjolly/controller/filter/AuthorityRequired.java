@@ -47,7 +47,7 @@ public class AuthorityRequired extends HttpFilter {
 
         long expiredTime = userAuth.getExpireTime();
         long currentTime = System.currentTimeMillis();
-        if (expiredTime > currentTime) {
+        if (expiredTime < currentTime) {
             session.setAttribute(AdminUserController.SESSION_ATTRI_AUTH, null);
             response.sendRedirect(LOGIN_PAGE_URL);
             return;

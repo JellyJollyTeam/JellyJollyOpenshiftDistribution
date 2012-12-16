@@ -35,14 +35,14 @@ public class BlogPostController {
     }
 
     @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
-    public String getPostById(@PathVariable long postId, Model model)
-            throws DataAccessException {
+    public String getPostById(@PathVariable long postId, Model model,
+            HttpServletRequest request) throws DataAccessException {
         BlogPost post = blogPostDataAccess.getPostById(postId);
         if (post == null) {
             return "redirect:/404";
         }
         model.addAttribute("blogpost", post);
-        model.addAllAttributes(frameBuilder.getFrameObjects());
+        model.addAllAttributes(frameBuilder.getFrameObjects(request));
         return "post";
     }
 
@@ -61,7 +61,8 @@ public class BlogPostController {
         return "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/admin/post/{postId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/post/{postId}",
+    method = RequestMethod.DELETE)
     public String deletePost(@PathVariable int postId,
             @RequestParam String redirect) throws DataAccessException {
         blogPostDataAccess.deletePost(postId);

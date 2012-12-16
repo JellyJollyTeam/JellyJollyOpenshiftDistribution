@@ -5,6 +5,7 @@
 package cn.edu.seu.cose.jellyjolly.controller;
 
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,9 @@ public class NotFoundController {
     }
 
     @RequestMapping(value = "/404", method = RequestMethod.GET)
-    public String getNotFoundPage(Model model) throws DataAccessException {
-        model.addAllAttributes(frameBuilder.getFrameObjects());
+    public String getNotFoundPage(Model model, HttpServletRequest request)
+            throws DataAccessException {
+        model.addAllAttributes(frameBuilder.getFrameObjects(request));
         return "404";
     }
 }
