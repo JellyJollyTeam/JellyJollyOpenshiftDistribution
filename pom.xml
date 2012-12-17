@@ -6,6 +6,10 @@
     <packaging>war</packaging>
     <version>1.0</version>
     <name>Jelly Jolly Openshift Distribution</name>
+    <organization>
+        <name>College of Software Engineering, Southeast University</name>
+        <url>http://cose.seu.edu.cn/</url>
+    </organization>
     <repositories>
         <repository>
             <id>eap</id>
@@ -39,6 +43,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
+        <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
     <dependencies>
         <dependency>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Colleage of Software Engineering, Southeast University
+ * Copyright (C) 2012 College of Software Engineering, Southeast University
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,22 +22,22 @@ package cn.edu.seu.cose.jellyjolly.config;
  * @author rAy <predator.ray@gmail.com>
  */
 public class PluginManager {
-    
+
     private static PluginManager instance;
-    
+
     public PluginManager getInstance() {
         if (instance == null) {
             instance = new PluginManager();
         }
         return instance;
     }
-    
+
     protected PluginManager() {
-        
+
     }
-    
+
     public void readPlugin() {
-        
+
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Colleage of Software Engineering, Southeast University
+ * Copyright (C) 2012 College of Software Engineering, Southeast University
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "plugins")
 public class PluginDescription {
-    
+
     @XmlElement(name = "plugin")
     private List<Plugin> plugins;
 

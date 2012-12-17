@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Colleage of Software Engineering, Southeast University
+ * Copyright (C) 2012 College of Software Engineering, Southeast University
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

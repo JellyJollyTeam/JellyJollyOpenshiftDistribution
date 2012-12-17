@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jellyjolly-openshift-dist:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="jellyjolly-openshift-dist-1.0.war">
+      <element id="artifact" artifact-name="jellyjolly-openshift-dist:war exploded" />
+    </root>
+  </artifact>
+</component>
