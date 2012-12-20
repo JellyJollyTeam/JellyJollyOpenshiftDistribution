@@ -48,7 +48,7 @@ public class BlogPostListController {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPosts(offset, limit);
-        return getPostListView(postList, model, request);
+        return getPostListView(postList, (offset == 0), model, request);
     }
 
     @RequestMapping(value = "/category/{categoryId}",
@@ -68,7 +68,7 @@ public class BlogPostListController {
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByCategoryId(
                 categoryId, offset, limit);
-        return getPostListView(postList, model, request);
+        return getPostListView(postList, (offset == 0), model, request);
     }
 
     @RequestMapping(value = "/archive/{year}/{month}",
@@ -88,7 +88,7 @@ public class BlogPostListController {
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByMonthlyArchive(
                 year, month, offset, limit);
-        return getPostListView(postList, model, request);
+        return getPostListView(postList, (offset == 0), model, request);
     }
 
     @RequestMapping(value = "/search/{keyword}", method = RequestMethod.GET)
@@ -106,12 +106,13 @@ public class BlogPostListController {
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByKeyword(keyword,
                 offset, limit);
-        return getPostListView(postList, model, request);
+        return getPostListView(postList, (offset == 0), model, request);
     }
 
-    private String getPostListView(List<BlogPost> postList, Model model,
-            HttpServletRequest request) throws DataAccessException {
-        if (postList == null || postList.size() <= 0) {
+    private String getPostListView(List<BlogPost> postList, boolean firstPage,
+                                   Model model, HttpServletRequest request)
+            throws DataAccessException {
+        if (!firstPage && (postList == null || postList.size() <= 0)) {
             return "redirect:/404";
         }
         model.addAttribute("postList", postList);
