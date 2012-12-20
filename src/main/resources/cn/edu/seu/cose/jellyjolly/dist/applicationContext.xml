@@ -36,4 +36,16 @@
     <bean id="notFoundController" class="cn.edu.seu.cose.jellyjolly.controller.NotFoundController">
         <constructor-arg ref="frameBuilder" />
     </bean>
+    <bean name="adminFrameBuilder" class="cn.edu.seu.cose.jellyjolly.controller.AdminFrameBuilder">
+        <constructor-arg ref="blogInfoDataAccess" />
+        <constructor-arg ref="blogPageDataAccess" />
+    </bean>
+    <bean id="adminUserControlPanelController" class="cn.edu.seu.cose.jellyjolly.controller.AdminControlPanelController">
+        <constructor-arg ref="adminFrameBuilder" />
+        <constructor-arg ref="adminUserDataAccess" />
+        <constructor-arg ref="blogPageDataAccess" />
+        <constructor-arg ref="blogPostDataAccess" />
+        <constructor-arg ref="commentDataAccess" />
+        <constructor-arg ref="linkDataAccess" />
+    </bean>
 </beans>

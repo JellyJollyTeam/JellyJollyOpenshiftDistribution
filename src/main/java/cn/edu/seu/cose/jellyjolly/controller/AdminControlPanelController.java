@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cn.edu.seu.cose.jellyjolly.controller.tag;
+package cn.edu.seu.cose.jellyjolly.controller;
 
 import cn.edu.seu.cose.jellyjolly.dao.*;
 import cn.edu.seu.cose.jellyjolly.dto.*;
@@ -23,7 +23,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,21 +39,23 @@ public class AdminControlPanelController {
     private BlogPostDataAccess blogPostDataAccess;
     private CommentDataAccess commentDataAccess;
     private LinkDataAccess linkDataAccess;
+    private AdminFrameBuilder adminFrameBuilder;
     private long postPerPage = 10;
     private long commentPerPage = 10;
-    private long userPerPage = 10;
 
     public AdminControlPanelController(
             AdminUserDataAccess adminUserDataAccess,
             BlogPageDataAccess blogPageDataAccess,
             BlogPostDataAccess blogPostDataAccess,
             CommentDataAccess commentDataAccess,
-            LinkDataAccess linkDataAccess) {
+            LinkDataAccess linkDataAccess,
+            AdminFrameBuilder adminFrameBuilder) {
         this.adminUserDataAccess = adminUserDataAccess;
         this.blogPageDataAccess = blogPageDataAccess;
         this.blogPostDataAccess = blogPostDataAccess;
         this.commentDataAccess = commentDataAccess;
         this.linkDataAccess = linkDataAccess;
+        this.adminFrameBuilder = adminFrameBuilder;
     }
 
     public void setPostPerPage(long postPerPage) {
@@ -62,17 +66,15 @@ public class AdminControlPanelController {
         this.commentPerPage = commentPerPage;
     }
 
-    public void setUserPerPage(long userPerPage) {
-        this.userPerPage = userPerPage;
-    }
-
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String getPanelMainPage() {
+    public String getPanelMainPage(Model model) throws DataAccessException {
+        addFrameModels(model);
         return "admin/admin";
     }
 
     @RequestMapping(value = "/admin/settings", method = RequestMethod.GET)
-    public String getSettings() {
+    public String getSettings(Model model) throws DataAccessException {
+        addFrameModels(model);
         return "admin/settings";
     }
 
@@ -89,11 +91,13 @@ public class AdminControlPanelController {
         long limit = postPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPosts(offset, limit);
         model.addAttribute("postList", postList);
+        addFrameModels(model);
         return "admin/posts";
     }
 
     @RequestMapping(value = "/admin/posts/new", method = RequestMethod.GET)
-    public String createNewPostPage() {
+    public String createNewPostPage(Model model) throws DataAccessException {
+        addFrameModels(model);
         return "admin/postEditor";
     }
 
@@ -102,18 +106,24 @@ public class AdminControlPanelController {
             throws DataAccessException {
         BlogPost post = blogPostDataAccess.getPostById(postId);
         model.addAttribute("blogPost", post);
-        return (post == null) ? "redirect:/404" : "admin/postEditor";
+        if (post == null) {
+            return "redirect:/404";
+        }
+        addFrameModels(model);
+        return "admin/postEditor";
     }
 
     @RequestMapping(value = "/admin/pages", method = RequestMethod.GET)
     public String getPages(Model model) throws DataAccessException {
         List<BlogPage> pageList = blogPageDataAccess.getAllPages();
         model.addAttribute("pageList", pageList);
+        addFrameModels(model);
         return "admin/pages";
     }
 
     @RequestMapping(value = "/admin/pages/new", method = RequestMethod.GET)
-    public String createNewPage() {
+    public String createNewPage(Model model) throws DataAccessException {
+        addFrameModels(model);
         return "admin/pageEditor";
     }
 
@@ -122,6 +132,7 @@ public class AdminControlPanelController {
             throws DataAccessException {
         BlogPage page = blogPageDataAccess.getPage(pageId);
         model.addAttribute("blogPage", page);
+        addFrameModels(model);
         return "admin/pageEditor";
     }
 
@@ -137,6 +148,7 @@ public class AdminControlPanelController {
         List<Comment> commentList = commentDataAccess.getComments(offset,
                 limit);
         model.addAttribute("commentList", commentList);
+        addFrameModels(model);
         return "admin/comments";
     }
 
@@ -144,11 +156,13 @@ public class AdminControlPanelController {
     public String getAdminUsers(Model model) throws DataAccessException {
         List<AdminUser> adminUserList = adminUserDataAccess.getAllUsers();
         model.addAttribute("adminUserList", adminUserList);
+        addFrameModels(model);
         return "admin/users";
     }
 
     @RequestMapping(value = "/admin/users/new", method = RequestMethod.GET)
-    public String addNewAdminUsers() {
+    public String addNewAdminUsers(Model model) throws DataAccessException {
+        addFrameModels(model);
         return "admin/userEditor";
     }
 
@@ -157,6 +171,7 @@ public class AdminControlPanelController {
             throws DataAccessException {
         AdminUser adminUser = adminUserDataAccess.getUser(userId);
         model.addAttribute("adminUser", adminUser);
+        addFrameModels(model);
         return "admin/userEditor";
     }
 
@@ -164,11 +179,13 @@ public class AdminControlPanelController {
     public String getLinks(Model model) throws DataAccessException {
         List<Link> linkList = linkDataAccess.getAllLinks();
         model.addAttribute("linkList", linkList);
+        addFrameModels(model);
         return "admin/links";
     }
 
     @RequestMapping(value = "/admin/links/new", method = RequestMethod.GET)
-    public String addNewLink() {
+    public String addNewLink(Model model) throws DataAccessException {
+        addFrameModels(model);
         return "admin/linkEditor";
     }
 
@@ -177,7 +194,87 @@ public class AdminControlPanelController {
             throws DataAccessException {
         Link link = linkDataAccess.getLinkById(linkId);
         model.addAttribute("link", link);
+        addFrameModels(model);
         return "admin/linkEditor";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.PUT)
+    public String addNewAdminUser(@RequestParam String username,
+                                  @RequestParam String password, @RequestParam String email,
+                                  @RequestParam String homePage) throws DataAccessException {
+        Date currentDate = new Date();
+        adminUserDataAccess.addNewUser(username, password, email, username,
+                homePage, currentDate);
+        return "redirect:/admin/admins";
+    }
+
+    @RequestMapping(value = "/admin/{userId}", method = RequestMethod.DELETE)
+    public String deleteAdminUser(@PathVariable long userId)
+            throws DataAccessException {
+        adminUserDataAccess.deleteUser(userId);
+        return "redirect:/admin/admins";
+    }
+
+    @RequestMapping(value = "/admin/{userId}/username",
+            method = RequestMethod.PUT)
+    public String changeUsername(@PathVariable long userId,
+                                 @RequestParam String username) throws DataAccessException {
+        adminUserDataAccess.changeUserName(userId, username);
+        return "redirect:/admin/admins";
+    }
+
+    @RequestMapping(value = "/admin/{userId}/password",
+            method = RequestMethod.PUT)
+    public String changePassword(@PathVariable long userId,
+                                 @RequestParam String oldPassword, @RequestParam String newPassword,
+                                 @RequestParam String confirmPassword) throws DataAccessException {
+        AdminUser userToBeConfirmed = adminUserDataAccess.getUser(userId);
+        String username = userToBeConfirmed.getUsername();
+        boolean confirmed = adminUserDataAccess.confirm(username, oldPassword);
+        if (!confirmed) {
+            // indicate not authorized
+            return "redirect:/admin/admins/" + userId + "?err=1";
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            // indicate passwords not same
+            return "redirect:/admin/admins/" + userId + "?err=2";
+        }
+        adminUserDataAccess.changePassword(userId, newPassword);
+        return "redirect:/admin/admins" + userId;
+    }
+
+    @RequestMapping(value = "/admin/{userId}/displayName",
+            method = RequestMethod.PUT)
+    public String changeDisplayName(@PathVariable long userId,
+                                    @RequestParam String displayName) throws DataAccessException {
+        AdminUser userToBeUpdated = adminUserDataAccess.getUser(userId);
+        userToBeUpdated.setDisplayName(displayName);
+        adminUserDataAccess.updateUser(userToBeUpdated);
+        return "redirect:/admin/admins" + userId;
+    }
+
+    @RequestMapping(value = "/admin/{userId}/email",
+            method = RequestMethod.PUT)
+    public String changeEmail(@PathVariable long userId,
+                              @RequestParam String email) throws DataAccessException {
+        AdminUser userToBeUpdated = adminUserDataAccess.getUser(userId);
+        userToBeUpdated.setEmail(email);
+        adminUserDataAccess.updateUser(userToBeUpdated);
+        return "redirect:/admin/admins" + userId;
+    }
+
+    @RequestMapping(value = "/admin/{userId}/homePage",
+            method = RequestMethod.PUT)
+    public String changeHomePage(@PathVariable long userId,
+                                 @RequestParam String homePage) throws DataAccessException {
+        AdminUser userToBeUpdated = adminUserDataAccess.getUser(userId);
+        userToBeUpdated.setHomePageUrl(homePage);
+        adminUserDataAccess.updateUser(userToBeUpdated);
+        return "redirect:/admin/admins" + userId;
+    }
+
+    private void addFrameModels(Model model) throws DataAccessException {
+        model.addAllAttributes(adminFrameBuilder.getFrameObjects());
     }
 
     private long getOffset(long page) {

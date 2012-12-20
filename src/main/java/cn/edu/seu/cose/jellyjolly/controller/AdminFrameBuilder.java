@@ -41,13 +41,12 @@ public class AdminFrameBuilder {
         this.blogPageDataAccess = blogPageDataAccess;
     }
 
-    public Map<String, ?> getFrameObjects(HttpServletRequest request)
-            throws DataAccessException {
+    public Map<String, ?> getFrameObjects() throws DataAccessException {
         BlogInfo blogInfo = blogInfoDataAccess.getBlogInfoInstance();
         List<BlogPageBar> pageList = blogPageDataAccess.getPageBarList();
         Map<String, Object> frameObjs = new HashMap<String, Object>();
         frameObjs.put("blogInfo", blogInfo);
         frameObjs.put("pageList", pageList);
-        return null;
+        return frameObjs;
     }
 }
