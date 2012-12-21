@@ -20,11 +20,9 @@ import cn.edu.seu.cose.jellyjolly.dao.AdminUserDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.AdminUser;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,7 +71,13 @@ public class AdminUserController {
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "logout", method = {
+    @RequestMapping(value = "/logout", method = {
+        RequestMethod.GET, RequestMethod.POST})
+    public String logOut(HttpServletRequest request) {
+        return logOut(null);
+    }
+
+    @RequestMapping(value = "/logout", method = {
         RequestMethod.GET, RequestMethod.POST})
     public String logOut(@RequestParam String redirect,
             HttpServletRequest request) {

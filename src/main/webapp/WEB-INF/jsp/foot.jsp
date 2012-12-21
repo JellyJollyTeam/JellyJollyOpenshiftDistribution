@@ -41,7 +41,7 @@
                                     <li><a href="/login">登录</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="/admin/admin.jsp">控制板</a></li>
+                                    <li><a href="/admin">控制板</a></li>
                                     <li><a href="/logout?redirect">登出</a></li>
                                 </c:otherwise>
                             </c:choose>
