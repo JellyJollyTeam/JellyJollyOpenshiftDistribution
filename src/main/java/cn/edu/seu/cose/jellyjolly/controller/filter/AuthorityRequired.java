@@ -53,6 +53,9 @@ public class AuthorityRequired extends HttpFilter {
             return;
         }
 
+        long authorizedTime = userAuth.getAuthorizedTime();
+        long delta = expiredTime - authorizedTime;
+        userAuth.setExpireTime(currentTime + delta);
         chain.doFilter(request, response);
     }
 }
