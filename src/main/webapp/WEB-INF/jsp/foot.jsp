@@ -53,9 +53,9 @@
             <div class="clear"></div>
             <div id="footer">
                 <div class="alignright">
-                    <a href="#page" class="top">Top</a>
-                    <a href="/rss" class="rss">RSS</a>
-                    <a href="/" class="home">Home</a>
+                    <a href="#page" class="top">顶部</a>
+                    <a href="/rss" class="rss">订阅</a>
+                    <a href="/" class="home">主页</a>
                 </div>
                 <a href="http://www.tammyhartdesigns.com/fifty-fifth-street">Fifty Fifth Street</a> theme by <a href="http://www.tammyhartdesigns.com/">Tammy Hart Designs</a><br>
                     Powered by <a href="https://github.com/JellyJollyTeam">JellyJolly</a>

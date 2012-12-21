@@ -71,11 +71,8 @@
 
             <p><textarea name="content" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
 
-            <p><input name="submit" type="submit" id="submit" tabindex="5" value="发表" />
-                <input type='hidden' name='comment_post_ID' value='20' id='comment_post_ID' />
-                <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
-            </p>
-            <p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="758eb52958" /></p>
+            <p><input name="submit" type="submit" id="submit" tabindex="5" value="发表" /></p>
+            <p style="display: none;"></p>
         </form>
     </div>
 <%@include file="foot.jsp" %>

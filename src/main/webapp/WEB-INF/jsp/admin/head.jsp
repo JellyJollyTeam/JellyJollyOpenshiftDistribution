@@ -15,6 +15,23 @@
 
         <meta name="robots" content="noindex,nofollow" />
         <meta name="generator" content="WordPress 3.4.2" />
+        <script type="text/javascript">
+            //<![CDATA[
+            function search() {
+                var keyword = document.getElementById('s').value;
+                if (keyword != '') {
+                    var encodedKw = encodeURIComponent(keyword);
+                    window.location.href = "/search/" + encodedKw;
+                }
+            }
+
+            function searchIfPressEnter() {
+                if (event.keyCode == 13) {
+                    search();
+                }
+            }
+            //]]>
+        </script>
     </head>
 
     <body class="archive category category-general category-1">
@@ -29,9 +46,7 @@
                     </c:forEach>
                 </ul>
 
-                <form method="get" id="searchform" action="#">
-                    <input type="text" value="" name="keyword" id="s" />
-                    <input type="image" id="searchsubmit" src="/static/images/search.gif" />
-                </form>
+                <input type="text" value="" name="keyword" id="s" onkeydown="javascript: searchIfPressEnter();" />
+                <input type="image" id="searchsubmit" src="/static/images/search.gif" onclick="javascript: search();" />
             </div>
             <div id="content">
