@@ -53,4 +53,16 @@
         cursor:pointer;
         padding:2px 0 3px;" />
 </form>
+<div class="navigation">
+    <div class="alignleft">
+        <c:if test="${hasPrev}">
+            <a href="/admin/posts/page/${pageNum - 1}">较新的</a>
+        </c:if>
+    </div>
+    <div class="alignright">
+        <c:if test="${hasNext}">
+            <a href="/admin/posts/page/${pageNum + 1}">较早的</a>
+        </c:if>
+    </div>
+</div>
 <%@include file="foot.jsp" %>

@@ -92,6 +92,8 @@ public class AdminControlPanelController {
         List<BlogPost> postList = blogPostDataAccess.getPosts(offset, limit);
         model.addAttribute("postList", postList);
         addFrameModels(model);
+        long maxPostNumber = blogPostDataAccess.getPostNumber();
+        buildPageCounterModel(page, maxPostNumber, postPerPage, model);
         return "admin/posts";
     }
 
@@ -141,14 +143,18 @@ public class AdminControlPanelController {
         return getComments(1, model);
     }
 
-    public String getComments(long page, Model model)
+    @RequestMapping(value = "/admin/comments/page/{page}",
+            method = RequestMethod.GET)
+    public String getComments(@PathVariable long page, Model model)
             throws DataAccessException {
         long offset = getOffset(page);
         long limit = commentPerPage;
         List<Comment> commentList = commentDataAccess.getComments(offset,
                 limit);
+        long maxCommentNumber = commentDataAccess.getCommentNumber();
         model.addAttribute("commentList", commentList);
         addFrameModels(model);
+        buildPageCounterModel(page, maxCommentNumber, commentPerPage, model);
         return "admin/comments";
     }
 
@@ -275,6 +281,16 @@ public class AdminControlPanelController {
 
     private void addFrameModels(Model model) throws DataAccessException {
         model.addAllAttributes(adminFrameBuilder.getFrameObjects());
+    }
+
+    private void buildPageCounterModel(long page, long maxNumber,
+            long numberPerPage, Model model) {
+        long maxPage = (maxNumber - 1) / numberPerPage + 1;
+        boolean hasPrev = (page > 1);
+        boolean hasNext = (page < maxPage);
+        model.addAttribute("hasPrev", hasPrev);
+        model.addAttribute("hasNext", hasNext);
+        model.addAttribute("pageNum", page);
     }
 
     private long getOffset(long page) {
