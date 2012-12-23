@@ -47,7 +47,7 @@
                 </p>
             </form>
             <p id="nav">
-                <a href="*" title="找回密码">忘记密码</a>
+                <a href="/" title="回到主页" style="text-decoration: none;">&lt;&lt;&nbsp;回到主页</a>
             </p>
         </div>
     </body>

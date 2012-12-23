@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="head.jsp"%>
 <h2>全部文章</h2>
 <form action="#" method="POST">
@@ -29,22 +30,16 @@
                 <td style="padding-top: 2px; padding-left: 10px" width="10%">分类目录</td>
                 <td style="padding-top: 2px; padding-left: 10px" width="17%">日期</td>
             </tr>
+            <c:forEach var="post" items="${postList}">
             <tr>
                 <td><input type="checkbox" name="choice"></td>
-                <td style="padding-top: 2px; padding-left: 10px" width="30%" height="60px">
-                <a href="editBlog.jsp?postid=10">互联网时代的社会语言学：基于SNS的文本数据挖掘</td>
-                <td style="padding-top: 2px; padding-left: 10px"><a href="#">季文昊</a></td>
-                <td style="padding-top: 2px; padding-left: 10px"><a href="?categoryid=1">默认</a></td>
-                <td style="padding-top: 2px; padding-left: 10px" id="data">2012年12月03日</td>
+                <td style="padding-top: 2px; padding-left: 10px" height="60px">
+                    <a href="editBlog.jsp?postid=10"><c:out value="${post.title}" /></td>
+                <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="#"><c:out value="${post.author.displayName}" /></a></td>
+                <td style="padding-top: 2px; padding-left: 10px" height="60px"><c:out value="${post.category.name}" /></td>
+                <td style="padding-top: 2px; padding-left: 10px" height="60px"><fmt:formatDate value="${post.date}" pattern="yyyy年MM月dd日" /></td>
             </tr>
-            <tr>
-                <td><input type="checkbox" name="choice"></td>
-                <td style="padding-top: 2px; padding-left: 10px" width="30%" height="60px">
-                <a href="editBlog.jsp?postid=10">互联网时代的社会语言学：基于SNS的文本数据挖掘</a></td>
-                <td style="padding-top: 2px; padding-left: 10px"><a href="#">季文昊</a></td>
-                <td style="padding-top: 2px; padding-left: 10px"><a href="?categoryid=1">默认</a></td>
-                <td style="padding-top: 2px; padding-left: 10px" id="data">2012年12月03日</td>
-            </tr>
+            </c:forEach>
         </tbody>
     </table>
     <input type="submit" value="删除" style="
