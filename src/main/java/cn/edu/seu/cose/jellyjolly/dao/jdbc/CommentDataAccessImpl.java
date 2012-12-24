@@ -100,9 +100,10 @@ class CommentDataAccessImpl
             + "FROM jj_users WHERE user_id=?;";
     private static final String STATEMENT_ADD_CMMT_BY_USER_ID_WITHOUT_PARENT =
             "INSERT INTO jj_blog_comments("
-            + "parent_comment_id, blog_post_id, comment_author_name, "
-            + "comment_author_email, comment_author_home_page_url, "
-            + "comment_date, comment_content) SELECT 0, ?, "
+            + "parent_comment_id, blog_post_id, comment_user_author_id, "
+            + "comment_author_name, comment_author_email, "
+            + "comment_author_home_page_url, "
+            + "comment_date, comment_content) SELECT 0, ?, ?, "
             + "display_name as comment_author_name, "
             + "user_email as comment_author_email, "
             + "user_home_page_url as comment_author_home_page_url, ?, ? "
@@ -390,11 +391,12 @@ class CommentDataAccessImpl
                     STATEMENT_ADD_CMMT_BY_USER_ID_WITHOUT_PARENT,
                     Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, postId);
-            ps.setTimestamp(2, (date != null)
+            ps.setLong(2, userId);
+            ps.setTimestamp(3, (date != null)
                     ? new Timestamp(date.getTime())
                     : null);
-            ps.setString(3, content);
-            ps.setLong(4, userId);
+            ps.setString(4, content);
+            ps.setLong(5, userId);
             int rowCount = ps.executeUpdate();
             if (rowCount <= 0) {
                 return 0;

@@ -6,7 +6,10 @@ package cn.edu.seu.cose.jellyjolly.controller;
 
 import cn.edu.seu.cose.jellyjolly.dao.CommentDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
+import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +42,13 @@ public class CommentController {
 
     @RequestMapping(value = "/admin/comment", method = RequestMethod.POST)
     public String addComment(@RequestParam long postId,
-            @RequestParam long userId, @RequestParam String content)
+            @RequestParam String content, HttpServletRequest request)
             throws DataAccessException {
         Date now = new Date();
+        HttpSession currentSession = request.getSession();
+        UserAuthorization userAuth = (UserAuthorization) currentSession
+                .getAttribute(AdminUserController.SESSION_ATTRI_AUTH);
+        long userId = userAuth.getUser().getUserId();
         commentDataAccess.addNewComment(postId, userId, content, now);
         return "redirect:/post/" + postId;
     }

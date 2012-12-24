@@ -20,7 +20,14 @@
 
     <ol class="commentlist">
         <c:forEach items="${blogpost.comments}" var="comment">
-            <li class="comment byuser even thread-even depth-1" id="comment-249">
+            <c:choose>
+                <c:when test="${comment.authorUserId == 0}">
+            <li class="comment depth-1" id="comment-249">
+                </c:when>
+                <c:otherwise>
+            <li class="comment byuser depth-1" id="comment-249">
+                </c:otherwise>
+            </c:choose>
                 <div id="div-comment-249" class="comment-body">
                     <div class="comment">
                         <img src="<jj:getGravatar email="${comment.authorEmail}" size="32" />" class="avatar avatar-32 photo" height="32" width="32" />
@@ -48,22 +55,29 @@
 
         <h3>发表评论</h3>
 
-        <form action="<c:url value="/comment" />" method="post" id="commentform">
-            <input type="hidden" name="postid" value="${blogpost.postId}" />
+        <c:choose>
+            <c:when test="${empty userAuth}">
+                <c:url var="commentAction" value="/comment" />
+            </c:when>
+            <c:otherwise>
+                <c:url var="commentAction" value="/admin/comment" />
+            </c:otherwise>
+        </c:choose>
+        <form action="<c:out value="${commentAction}" />" method="post" id="commentform">
+            <input type="hidden" name="postId" value="${blogpost.postId}" />
             <c:choose>
                 <c:when test="${empty userAuth}">
-                    <p><input type="text" name="authorname" id="author" value="" size="22" tabindex="1" aria-required='true' />
+                    <p><input type="text" name="authorName" id="author" value="" size="22" tabindex="1" aria-required='true' />
                         <label for="author"><small>姓名 *</small></label></p>
 
                     <p><input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
                         <label for="email"><small>电子邮箱 *</small></label></p>
 
-                    <p><input type="text" name="homepage" id="url" value="" size="22" tabindex="3" />
+                    <p><input type="text" name="homePage" id="url" value="" size="22" tabindex="3" />
                         <label for="url"><small>主页</small></label>
                     </p>
                 </c:when>
                 <c:otherwise>
-                    <input type="hidden" name="op" value="add" />
                     <img src="<jj:getGravatar email="${userAuth.user.email}" size="32" />" class="avatar avatar-32 photo" height="32" width="32" />
                     <p><cite class="fn"><c:out value="${userAuth.user.displayName}"/></cite>已经登录 | <a href="<c:url value="/logout" />">登出</a></p>
                 </c:otherwise>

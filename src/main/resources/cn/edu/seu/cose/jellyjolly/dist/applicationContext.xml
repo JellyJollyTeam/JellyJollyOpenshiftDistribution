@@ -33,6 +33,9 @@
         <constructor-arg ref="blogPostDataAccess" />
         <constructor-arg ref="frameBuilder" />
     </bean>
+    <bean id="commentController" class="cn.edu.seu.cose.jellyjolly.controller.CommentController">
+        <constructor-arg ref="commentDataAccess" />
+    </bean>
     <bean id="notFoundController" class="cn.edu.seu.cose.jellyjolly.controller.NotFoundController">
         <constructor-arg ref="frameBuilder" />
     </bean>

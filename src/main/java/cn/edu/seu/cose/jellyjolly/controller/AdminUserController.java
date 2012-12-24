@@ -74,7 +74,7 @@ public class AdminUserController {
     @RequestMapping(value = "/logout", method = {
         RequestMethod.GET, RequestMethod.POST})
     public String logOut(HttpServletRequest request) {
-        return logOut(null);
+        return logOut(null, request);
     }
 
     @RequestMapping(value = "/logout", method = {
