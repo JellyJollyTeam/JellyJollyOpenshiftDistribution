@@ -1,8 +1,3 @@
-<%--
-    Document   : head
-    Created on : 2012-12-15, 14:57:01
-    Author     : rAy <predator.ray@gmail.com>
---%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -38,7 +33,7 @@
         <div id="page">
 
             <div id="header">
-                <a href="/" id="sitename" title="${blogInfo.blogSubTitle}"><c:out value="${blogInfo.blogTitle}"/></a>
+                <a href="<c:url value="/" />" id="sitename" title="${blogInfo.blogSubTitle}"><c:out value="${blogInfo.blogTitle}"/></a>
 
                 <ul id="nav">
                     <c:forEach items="${pageList}" var="page" >

@@ -38,7 +38,7 @@
         <div id="page">
 
             <div id="header">
-                <a href="/" id="sitename" title="${blogInfo.blogSubTitle}"><c:out value="${blogInfo.blogTitle}"/></a>
+                <a href="<c:url value="/" />" id="sitename" title="${blogInfo.blogSubTitle}"><c:out value="${blogInfo.blogTitle}"/></a>
 
                 <ul id="nav">
                     <c:forEach items="${pageList}" var="page" >
