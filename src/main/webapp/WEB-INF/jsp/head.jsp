@@ -21,7 +21,7 @@
                 var keyword = document.getElementById('s').value;
                 if (keyword != '') {
                     var encodedKw = encodeURIComponent(keyword);
-                    window.location.href = "/search/" + encodedKw;
+                    window.location.href = "<c:url value="/search/" />" + encodedKw;
                 }
             }
 
@@ -42,7 +42,7 @@
 
                 <ul id="nav">
                     <c:forEach items="${pageList}" var="page" >
-                        <li class="page_item"><a href="/page/${page.blogPageId}"><c:out value="${page.pageTitle}"/></a></li>
+                        <li class="page_item"><a href="<c:url value="/page/${page.blogPageId}" />"><c:out value="${page.pageTitle}"/></a></li>
                     </c:forEach>
                 </ul>
 

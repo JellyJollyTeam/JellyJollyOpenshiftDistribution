@@ -56,12 +56,12 @@
 <div class="navigation">
     <div class="alignleft">
         <c:if test="${hasPrev}">
-            <a href="/admin/posts/page/${pageNum - 1}">较新的</a>
+            <a href="<c:url value="/admin/posts/page/${pageNum - 1}" />">较新的</a>
         </c:if>
     </div>
     <div class="alignright">
         <c:if test="${hasNext}">
-            <a href="/admin/posts/page/${pageNum + 1}">较早的</a>
+            <a href="<c:url value="/admin/posts/page/${pageNum + 1}" />">较早的</a>
         </c:if>
     </div>
 </div>

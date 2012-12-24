@@ -23,7 +23,7 @@
             <tr>
                 <td><input type="checkbox" name="choice"></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px">
-                    <a href="editBlog.jsp?postid=10"><c:out value="${page.pageTitle}" /></td>
+                    <a href="#"><c:out value="${page.pageTitle}" /></td>
             </tr>
             </c:forEach>
         </tbody>

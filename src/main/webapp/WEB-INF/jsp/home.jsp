@@ -7,8 +7,11 @@
     <div class="post-261 post type-post status-publish format-standard hentry category-general">
         <small class="caps"><fmt:formatDate pattern="yyyy年MM月dd日" value="${post.date}" /></small>
         <span class="bubble"><c:out value="${fn:length(post.comments)}" /></span>
-        <h2 id="post-261"><a href="/post/<c:out value="${post.postId}"/>"><c:out value="${post.title}"/></a></h2>
-        <small><a href="/post/<c:out value="${post.postId}"/>"><c:out value="${post.author.displayName}"/></a>&nbsp;发表在&nbsp;<a href="/category/<c:out value="${post.category.categoryId}"/>"><c:out value="${post.category.name}"/></a></small>
+        <h2 id="post-261"><a href="<c:url value="/post/${post.postId}"/>"><c:out value="${post.title}"/></a></h2>
+        <small><a href="<c:url value="/post/${post.postId}" />">
+                <c:out value="${post.author.displayName}"/></a>&nbsp;发表在&nbsp;
+                <a href="<c:url value="/category/${post.category.categoryId}" />">
+                    <c:out value="${post.category.name}"/></a></small>
         <div class="entry">
             <p><c:out value="${post.content}" escapeXml="false" /></p>
         </div>
@@ -16,12 +19,12 @@
     <div class="navigation">
         <div class="alignleft">
             <c:if test="${hasPrev}">
-                <a href="/posts/page/${pageNum - 1}">较新的</a>
+                <a href="<c:url value="/posts/page/${pageNum - 1}" />">较新的</a>
             </c:if>
         </div>
         <div class="alignright">
             <c:if test="${hasNext}">
-                <a href="/posts/page/${pageNum + 1}">较早的</a>
+                <a href="<c:url value="/posts/page/${pageNum + 1}" />">较早的</a>
             </c:if>
         </div>
     </div>

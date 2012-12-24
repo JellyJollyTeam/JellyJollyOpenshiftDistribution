@@ -10,12 +10,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>登录您的Jelly-Jolly账户</title>
-        <link href="/static/css/login.css" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/static/css/login.css" />" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div id="login">
             <h1>
-                <a href="#" title="欢迎使用Jelly-Jolly"></a>
+                <a href="#" title="欢迎使用JellyJolly"></a>
             </h1>
             <c:if test="${param.error==1}">
                 <p style="margin-left:10px; color:red;">
@@ -47,7 +47,7 @@
                 </p>
             </form>
             <p id="nav">
-                <a href="/" title="回到主页" style="text-decoration: none;">&lt;&lt;&nbsp;回到主页</a>
+                <a href="<c:url value="/" />" title="回到主页" style="text-decoration: none;">&lt;&lt;&nbsp;回到主页</a>
             </p>
         </div>
     </body>

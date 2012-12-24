@@ -29,8 +29,8 @@
             <tr>
                 <td><input type="checkbox" name="choice"></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px">
-                    <a href="/post/<c:out value="${comment.postId}" />"><c:out value="${comment.content}" /></td>
-                    <td><a href="/post/<c:out value="${comment.postId}" />"><jj:getPostTitle postId="${comment.postId}" /></a></td>
+                    <a href="<c:url value="/post/${comment.postId}" />"><c:out value="${comment.content}" /></td>
+                    <td><a href="<c:url value="/post/<c:out value=${comment.postId}" />"><jj:getPostTitle postId="${comment.postId}" /></a></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><c:out value="${comment.authorName}" /></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="<c:out value="${comment.authorHomePageUrl}" default="javascipt:void(0);" />">
                         <c:choose>
@@ -57,12 +57,12 @@
 <div class="navigation">
     <div class="alignleft">
         <c:if test="${hasPrev}">
-            <a href="/admin/comments/page/${pageNum - 1}">较新的</a>
+            <a href="<c:url value="/admin/comments/page/${pageNum - 1}" />">较新的</a>
         </c:if>
     </div>
     <div class="alignright">
         <c:if test="${hasNext}">
-            <a href="/admin/comments/page/${pageNum + 1}">较早的</a>
+            <a href="<c:url value="/admin/comments/page/${pageNum + 1}" />">较早的</a>
         </c:if>
     </div>
 </div>

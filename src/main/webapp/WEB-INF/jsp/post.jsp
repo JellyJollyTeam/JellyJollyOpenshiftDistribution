@@ -9,7 +9,7 @@
         <span class="bubble"><c:out value="${fn:length(blogpost.comments)}" /></span>
         <h1><c:out value="${blogpost.title}"/></h1>
 
-        <small><a href=""><c:out value="${blogpost.author.displayName}"/></a> 发表在 <a href="/category/<c:out value="${blogpost.category.categoryId}"/>"><c:out value="${blogpost.category.name}"/></a></small>
+        <small><a href=""><c:out value="${blogpost.author.displayName}"/></a> 发表在 <a href="<c:url value="/category/${blogpost.category.categoryId}"/>"><c:out value="${blogpost.category.name}"/></a></small>
 
         <div class="entry">
             <p></p>
@@ -48,7 +48,7 @@
 
         <h3>发表评论</h3>
 
-        <form action="./comment" method="post" id="commentform">
+        <form action="<c:url value="/comment" />" method="post" id="commentform">
             <input type="hidden" name="postid" value="${blogpost.postId}" />
             <c:choose>
                 <c:when test="${empty userAuth}">
@@ -65,7 +65,7 @@
                 <c:otherwise>
                     <input type="hidden" name="op" value="add" />
                     <img src="<jj:getGravatar email="${userAuth.user.email}" size="32" />" class="avatar avatar-32 photo" height="32" width="32" />
-                    <p><cite class="fn"><c:out value="${userAuth.user.displayName}"/></cite>已经登录 | <a href="./logout">登出</a></p>
+                    <p><cite class="fn"><c:out value="${userAuth.user.displayName}"/></cite>已经登录 | <a href="<c:url value="/logout" />">登出</a></p>
                 </c:otherwise>
             </c:choose>
 
