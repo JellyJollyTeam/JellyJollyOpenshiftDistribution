@@ -3,7 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="jj" uri="/WEB-INF/tlds/getPostTitle.tld" %>
 <%@include file="head.jsp"%>
-<h2>全部文章</h2>
+<h2>全部评论</h2>
 <form action="#" method="POST">
     <input type="submit" value="删除" style="
         width:80px;
