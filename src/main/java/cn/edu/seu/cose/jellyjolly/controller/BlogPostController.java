@@ -112,12 +112,11 @@ public class BlogPostController {
     @RequestMapping(value = "/admin/post/{postId}", method = RequestMethod.PUT)
     public String changePost(@PathVariable long postId,
             @RequestParam String title, @RequestParam String content,
-            @RequestParam int categoryId, @RequestParam long userId,
-            @RequestParam String redirect) throws DataAccessException {
+            @RequestParam int categoryId) throws DataAccessException {
         blogPostDataAccess.updatePostCategory(postId, categoryId);
         blogPostDataAccess.updatePostContent(postId, content);
         blogPostDataAccess.updatePostTitle(postId, title);
-        return "redirect:" + redirect;
+        return "redirect:/post/" + postId;
     }
 
     @RequestMapping(value = "/admin/post/{postId}/title",

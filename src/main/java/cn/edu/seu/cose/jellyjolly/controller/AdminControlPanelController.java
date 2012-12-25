@@ -132,15 +132,20 @@ public class AdminControlPanelController {
 
     @RequestMapping(value = "/admin/posts/new", method = RequestMethod.GET)
     public String createNewPostPage(Model model) throws DataAccessException {
+        List<Category> categoryList = categoryDataAccess.getAllCategories();
+        model.addAttribute("categoryList", categoryList);
         addFrameModels(model);
         return "admin/postEditor";
     }
 
-    @RequestMapping(value = "/admin/posts/{postId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/posts/{postId}/editor",
+            method = RequestMethod.GET)
     public String editPost(@PathVariable long postId, Model model)
             throws DataAccessException {
         BlogPost post = blogPostDataAccess.getPostById(postId);
-        model.addAttribute("blogPost", post);
+        List<Category> categoryList = categoryDataAccess.getAllCategories();
+        model.addAttribute("blogpost", post);
+        model.addAttribute("categoryList", categoryList);
         if (post == null) {
             return "redirect:/404";
         }
@@ -162,11 +167,12 @@ public class AdminControlPanelController {
         return "admin/pageEditor";
     }
 
-    @RequestMapping(value = "/admin/pages/{pageId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/pages/{pageId}/editor",
+            method = RequestMethod.GET)
     public String editPage(@PathVariable int pageId, Model model)
             throws DataAccessException {
         BlogPage page = blogPageDataAccess.getPage(pageId);
-        model.addAttribute("blogPage", page);
+        model.addAttribute("blogpage", page);
         addFrameModels(model);
         return "admin/pageEditor";
     }
