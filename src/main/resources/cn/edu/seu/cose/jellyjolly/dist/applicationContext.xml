@@ -27,6 +27,7 @@
     </bean>
     <bean id="blogPostController" class="cn.edu.seu.cose.jellyjolly.controller.BlogPostController">
         <constructor-arg ref="blogPostDataAccess" />
+        <constructor-arg ref="categoryDataAccess" />
         <constructor-arg ref="frameBuilder" />
     </bean>
     <bean id="blogPostListController" class="cn.edu.seu.cose.jellyjolly.controller.BlogPostListController">

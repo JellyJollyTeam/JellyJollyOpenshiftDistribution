@@ -9,8 +9,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>登录您的Jelly-Jolly账户</title>
+        <title>登录您的JellyJolly账户</title>
         <link href="<c:url value="/static/css/login.css" />" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript">
+            window.onload = function() {
+                document.getElementById('user_login').focus();
+            }
+        </script>
     </head>
     <body>
         <div id="login">

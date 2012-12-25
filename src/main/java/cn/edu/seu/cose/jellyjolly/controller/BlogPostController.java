@@ -17,10 +17,13 @@
 package cn.edu.seu.cose.jellyjolly.controller;
 
 import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
+import cn.edu.seu.cose.jellyjolly.dao.CategoryDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
+import cn.edu.seu.cose.jellyjolly.dto.Category;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -38,11 +41,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BlogPostController {
 
     private BlogPostDataAccess blogPostDataAccess;
+    private CategoryDataAccess categoryDataAccess;
     private FrameBuilder frameBuilder;
 
     public BlogPostController(BlogPostDataAccess blogPostDataAccess,
-            FrameBuilder frameBuilder) {
+            CategoryDataAccess categoryDataAccess, FrameBuilder frameBuilder) {
         this.blogPostDataAccess = blogPostDataAccess;
+        this.categoryDataAccess = categoryDataAccess;
         this.frameBuilder = frameBuilder;
     }
 
@@ -58,18 +63,41 @@ public class BlogPostController {
         return "post";
     }
 
-    @RequestMapping(value = "/admin/post", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/post/simple", method = RequestMethod.POST)
     public String createNewPost(@RequestParam int categoryId,
             @RequestParam String title, @RequestParam String content,
-            @RequestParam String redirect, HttpServletRequest request)
+            HttpServletRequest request) throws DataAccessException {
+        return createNewPost(categoryId, null, title, content, request);
+    }
+
+    @RequestMapping(value = "/admin/post", method = RequestMethod.POST)
+    public String createNewPost(@RequestParam int categoryId,
+            @RequestParam String newCategoryName, @RequestParam String title,
+            @RequestParam String content, HttpServletRequest request)
             throws DataAccessException {
+        boolean createNewCategory = (newCategoryName != null) &&
+                (!"".equals(newCategoryName));
+        int categoryIdToBePost = createNewCategory
+                ? categoryDataAccess.createNewCategory(newCategoryName)
+                .getCategoryId()
+                : categoryId;
         HttpSession currentSession = request.getSession();
         UserAuthorization userAuth = (UserAuthorization) currentSession
                 .getAttribute(AdminUserController.SESSION_ATTRI_AUTH);
         long authorUserId = userAuth.getUser().getUserId();
         Date currentTime = new Date();
-        blogPostDataAccess.createNewPost(authorUserId, categoryId, currentTime,
-                title, content);
+        long postId = blogPostDataAccess.createNewPost(authorUserId,
+                categoryIdToBePost, currentTime, title, content);
+        return "redirect:/post/" + postId;
+    }
+
+    @RequestMapping(value = "/admin/post",
+    method = RequestMethod.DELETE)
+    public String deletePost(@RequestParam List<Integer> postIds,
+            @RequestParam String redirect) throws DataAccessException {
+        for (int postId : postIds) {
+            blogPostDataAccess.deletePost(postId);
+        }
         return "redirect:" + redirect;
     }
 

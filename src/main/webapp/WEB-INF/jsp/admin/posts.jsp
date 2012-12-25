@@ -3,12 +3,14 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="head.jsp"%>
 <h2>全部文章</h2>
-<form action="#" method="POST">
+<form action="<c:url value="/admin/post" />" method="POST">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="hidden" name="redirect" value="/admin/posts" />
     <p><span style="float: left; width: 40px;">分类</span>
     <select style="width: 100px;">
-        <option>全部</option>
-        <option>默认</option>
-        <option>日记</option>
+        <c:forEach var="category" items="${categoryList}">
+            <option value="${category.categoryId}">${category.name}</option>
+        </c:forEach>
     </select>
     </p>
     <input type="submit" value="删除" style="
@@ -32,7 +34,7 @@
             </tr>
             <c:forEach var="post" items="${postList}">
             <tr>
-                <td><input type="checkbox" name="choice"></td>
+                <td><input type="checkbox" name="postIds" value="${post.postId}"></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px">
                     <a href="editBlog.jsp?postid=10"><c:out value="${post.title}" /></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="#"><c:out value="${post.author.displayName}" /></a></td>

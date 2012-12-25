@@ -121,7 +121,9 @@ public class AdminControlPanelController {
         long offset = getOffset(page);
         long limit = postPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPosts(offset, limit);
+        List<Category> categoryList = categoryDataAccess.getAllCategories();
         model.addAttribute("postList", postList);
+        model.addAttribute("categoryList", categoryList);
         addFrameModels(model);
         long maxPostNumber = blogPostDataAccess.getPostNumber();
         buildPageCounterModel(page, maxPostNumber, postPerPage, model);

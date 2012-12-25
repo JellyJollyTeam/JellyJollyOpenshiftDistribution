@@ -21,7 +21,7 @@
     </c:forEach>
 </ul>
 <h3 style="margin-bottom: 10px;">快速发表</h3>
-<form action="<c:url value="/admin/post" />" method="post" id="commentform">
+<form action="<c:url value="/admin/post/simple" />" method="post" id="commentform">
     <input type="hidden" name="redirect" value="/" />
     <p>标题<br /><input type="text" name="title" /></p>
     <p>分类<br />
