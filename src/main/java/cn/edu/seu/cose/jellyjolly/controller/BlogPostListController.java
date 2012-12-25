@@ -67,7 +67,8 @@ public class BlogPostListController {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPosts(offset, limit);
-        return getPostListView(postList, (offset == 0), model, request);
+        long maxNumber = blogPostDataAccess.getPostNumber();
+        return getPostListView(postList, page, maxNumber, model, request);
     }
 
     @RequestMapping(value = "/category/{categoryId}",
@@ -87,7 +88,8 @@ public class BlogPostListController {
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByCategoryId(
                 categoryId, offset, limit);
-        return getPostListView(postList, (offset == 0), model, request);
+        long maxNumber = blogPostDataAccess.getPostNumber(categoryId);
+        return getPostListView(postList, page, maxNumber, model, request);
     }
 
     @RequestMapping(value = "/archive/{year}/{month}",
@@ -107,7 +109,8 @@ public class BlogPostListController {
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByMonthlyArchive(
                 year, month, offset, limit);
-        return getPostListView(postList, (offset == 0), model, request);
+        long maxNumber = blogPostDataAccess.getPostNumber(year, month);
+        return getPostListView(postList, page, maxNumber, model, request);
     }
 
     @RequestMapping(value = "/search/{keyword}", method = RequestMethod.GET)
@@ -125,15 +128,18 @@ public class BlogPostListController {
         long limit = postNumberPerPage;
         List<BlogPost> postList = blogPostDataAccess.getPostsByKeyword(keyword,
                 offset, limit);
-        return getPostListView(postList, (offset == 0), model, request);
+        long maxNumber = blogPostDataAccess.getPostNumber(keyword);
+        return getPostListView(postList, page, maxNumber, model, request);
     }
 
-    private String getPostListView(List<BlogPost> postList, boolean firstPage,
-                                   Model model, HttpServletRequest request)
+    private String getPostListView(List<BlogPost> postList, long page,
+            long maxNumber, Model model, HttpServletRequest request)
             throws DataAccessException {
+        boolean firstPage = page == 1;
         if (!firstPage && (postList == null || postList.size() <= 0)) {
             return "redirect:/404";
         }
+        buildPageCounterModel(page, maxNumber, postNumberPerPage, model);
         truncatePosts(postList);
         model.addAttribute("postList", postList);
         model.addAllAttributes(frameBuilder.getFrameObjects(request));
@@ -142,6 +148,16 @@ public class BlogPostListController {
 
     private long getOffset(long page) {
         return (page >= 1) ? (page - 1) * postNumberPerPage : 0;
+    }
+
+    private void buildPageCounterModel(long page, long maxNumber,
+            long numberPerPage, Model model) {
+        long maxPage = (maxNumber - 1) / numberPerPage + 1;
+        boolean hasPrev = (page > 1);
+        boolean hasNext = (page < maxPage);
+        model.addAttribute("hasPrev", hasPrev);
+        model.addAttribute("hasNext", hasNext);
+        model.addAttribute("pageNum", page);
     }
 
     private void truncatePosts(Collection<BlogPost> posts) {
