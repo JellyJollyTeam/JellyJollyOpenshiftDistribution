@@ -63,6 +63,13 @@ public class BlogPostController {
         return "post";
     }
 
+    @RequestMapping(value = "/admin/post/simple", method = RequestMethod.POST)
+    public String createNewPost(@RequestParam int categoryId,
+            @RequestParam String title, @RequestParam String content,
+            HttpServletRequest request) throws DataAccessException {
+        return createNewPost(categoryId, null, title, content, request);
+    }
+
     @RequestMapping(value = "/admin/post", method = RequestMethod.POST)
     public String createNewPost(@RequestParam int categoryId,
             @RequestParam String newCategoryName, @RequestParam String title,
