@@ -35,24 +35,31 @@ import java.util.List;
 public class AdminControlPanelController {
 
     private AdminUserDataAccess adminUserDataAccess;
+    private BlogInfoDataAccess blogInfoDataAccess;
     private BlogPageDataAccess blogPageDataAccess;
     private BlogPostDataAccess blogPostDataAccess;
+    private CategoryDataAccess categoryDataAccess;
     private CommentDataAccess commentDataAccess;
     private LinkDataAccess linkDataAccess;
     private AdminFrameBuilder adminFrameBuilder;
     private long postPerPage = 10;
     private long commentPerPage = 10;
+    private long recentCommentNumber = 5;
 
     public AdminControlPanelController(
             AdminUserDataAccess adminUserDataAccess,
+            BlogInfoDataAccess blogInfoDataAccess,
             BlogPageDataAccess blogPageDataAccess,
             BlogPostDataAccess blogPostDataAccess,
+            CategoryDataAccess categoryDataAccess,
             CommentDataAccess commentDataAccess,
             LinkDataAccess linkDataAccess,
             AdminFrameBuilder adminFrameBuilder) {
         this.adminUserDataAccess = adminUserDataAccess;
+        this.blogInfoDataAccess = blogInfoDataAccess;
         this.blogPageDataAccess = blogPageDataAccess;
         this.blogPostDataAccess = blogPostDataAccess;
+        this.categoryDataAccess = categoryDataAccess;
         this.commentDataAccess = commentDataAccess;
         this.linkDataAccess = linkDataAccess;
         this.adminFrameBuilder = adminFrameBuilder;
@@ -66,16 +73,41 @@ public class AdminControlPanelController {
         this.commentPerPage = commentPerPage;
     }
 
+    public void setRecentCommentNumber(long recentCommentNumber) {
+        this.recentCommentNumber = recentCommentNumber;
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String getPanelMainPage(Model model) throws DataAccessException {
+        long postNumber = blogPostDataAccess.getPostNumber();
+        long commentNumber = commentDataAccess.getCommentNumber();
+        long pageNumber = blogPageDataAccess.getPageCount();
+        List<Comment> recentComments = commentDataAccess.getRecentComments(
+                recentCommentNumber);
+        List<Category> categoryList = categoryDataAccess.getAllCategories();
+        model.addAttribute("postNumber", postNumber);
+        model.addAttribute("commentNumber", commentNumber);
+        model.addAttribute("pageNumber", pageNumber);
+        model.addAttribute("recentComments", recentComments);
+        model.addAttribute("categoryList", categoryList);
         addFrameModels(model);
         return "admin/admin";
     }
 
     @RequestMapping(value = "/admin/settings", method = RequestMethod.GET)
     public String getSettings(Model model) throws DataAccessException {
+        BlogInfo blogInfo = blogInfoDataAccess.getBlogInfoInstance();
+        model.addAttribute("blogInfo", blogInfo);
         addFrameModels(model);
         return "admin/settings";
+    }
+
+    @RequestMapping(value = "/admin/settings", method = RequestMethod.POST)
+    public String editSettings(@RequestParam String title,
+            @RequestParam String subtitle) throws DataAccessException {
+        blogInfoDataAccess.setBlogTitle(title);
+        blogInfoDataAccess.setBlogSubTitle(subtitle);
+        return "redirect:/admin/settings";
     }
 
     @RequestMapping(value = "/admin/posts", method = RequestMethod.GET)
@@ -224,7 +256,7 @@ public class AdminControlPanelController {
     @RequestMapping(value = "/admin/{userId}/username",
             method = RequestMethod.PUT)
     public String changeUsername(@PathVariable long userId,
-                                 @RequestParam String username) throws DataAccessException {
+            @RequestParam String username) throws DataAccessException {
         adminUserDataAccess.changeUserName(userId, username);
         return "redirect:/admin/admins";
     }

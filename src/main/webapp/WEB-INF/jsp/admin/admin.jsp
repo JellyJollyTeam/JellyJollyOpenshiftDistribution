@@ -10,23 +10,25 @@
 <h2 style="margin-bottom: 10px;">面板主页</h2>
 <h3 style="margin-bottom: 10px;">概况</h3>
 <ul style="margin-bottom: 35px;">
-    <li><a href="#">文章 (11)</a></li>
-    <li><a href="#">评论 (39)</a></li>
-    <li><a href="#">页面 (5)</a></li>
+    <li><a href="<c:url value="/admin/posts" />">文章 (${postNumber})</a></li>
+    <li><a href="<c:url value="/admin/comments" />">评论 (${commentNumber})</a></li>
+    <li><a href="<c:url value="/admin/pages" />">页面 (${pageNumber})</a></li>
 </ul>
 <h3 style="margin-bottom: 10px;">最近评论</h3>
 <ul style="margin-bottom: 35px;">
-    <li>张三 评论了《<a href="#">我的第一篇博客</a>》</li>
-    <li>张三 评论了《<a href="#">我的第一篇博客</a>》</li>
-    <li>张三 评论了《<a href="#">我的第一篇博客</a>》</li>
+    <c:forEach var="comment" items="${recentComments}">
+        <li>${comment.authorName} 评论了《<a href="<c:url value="/post/${comment.postId}" />"><jj:getPostTitle postId="${comment.postId}" /></a>》</li>
+    </c:forEach>
 </ul>
 <h3 style="margin-bottom: 10px;">快速发表</h3>
-<form action="#" method="post" id="commentform">
+<form action="<c:url value="/admin/post" />" method="post" id="commentform">
+    <input type="hidden" name="redirect" value="/" />
     <p>标题<br /><input type="text" name="title" /></p>
     <p>分类<br />
-        <select style="width: 100px;">
-            <option>默认</option>
-            <option>日记</option>
+        <select name="categoryId" style="width: 100px;">
+            <c:forEach var="category" items="${categoryList}">
+                <option value="${category.categoryId}">${category.name}</option>
+            </c:forEach>
         </select>
     </p>
     <p>正文<br />

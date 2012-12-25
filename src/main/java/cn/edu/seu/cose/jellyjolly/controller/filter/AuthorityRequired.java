@@ -41,7 +41,7 @@ public class AuthorityRequired extends HttpFilter {
         UserAuthorization userAuth = (UserAuthorization) session
                 .getAttribute(AdminUserController.SESSION_ATTRI_AUTH);
         if (userAuth == null) {
-            response.sendRedirect(LOGIN_PAGE_URL);
+            response.sendRedirect(request.getContextPath() + LOGIN_PAGE_URL);
             return;
         }
 

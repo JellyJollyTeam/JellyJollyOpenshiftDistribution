@@ -46,8 +46,10 @@
     <bean id="adminUserControlPanelController" class="cn.edu.seu.cose.jellyjolly.controller.AdminControlPanelController">
         <constructor-arg ref="adminFrameBuilder" />
         <constructor-arg ref="adminUserDataAccess" />
+        <constructor-arg ref="blogInfoDataAccess" />
         <constructor-arg ref="blogPageDataAccess" />
         <constructor-arg ref="blogPostDataAccess" />
+        <constructor-arg ref="categoryDataAccess" />
         <constructor-arg ref="commentDataAccess" />
         <constructor-arg ref="linkDataAccess" />
     </bean>

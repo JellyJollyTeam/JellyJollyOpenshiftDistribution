@@ -36,12 +36,6 @@
                     <input type="password" name="password" id="user_login" class="input" size="20"/>
                 </p>
                 <p>
-                    <label>
-                        <input name="rememberMe" type="checkbox" id="rememberMe" value="true" tabindex="90"/>
-                        记住我的信息
-                    </label>
-                </p>
-                <p>
                     <input style="float: right;" type="submit" name="login" value="登录" class="button-primary" tabindex="100"/>
                     <input type="hidden" name="redirect" value="#"/>
                 </p>

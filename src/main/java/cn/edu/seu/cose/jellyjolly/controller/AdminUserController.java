@@ -20,6 +20,7 @@ import cn.edu.seu.cose.jellyjolly.dao.AdminUserDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.AdminUser;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -62,6 +63,11 @@ public class AdminUserController {
         if (userConfirmed == null) {
             return "redirect:/login?error=1";
         }
+        // update the last login time
+        Date now = new Date();
+        adminUserDataAccess.setLastLoginTime(userConfirmed.getUserId(), now);
+
+        // register the login info in the session
         HttpSession currentSession = request.getSession();
         long currentTimeMillis = System.currentTimeMillis();
         long expireTime = currentTimeMillis + expireDelta;
@@ -69,12 +75,6 @@ public class AdminUserController {
                 currentTimeMillis, expireTime);
         currentSession.setAttribute(SESSION_ATTRI_AUTH, userAuth);
         return "redirect:/admin";
-    }
-
-    @RequestMapping(value = "/logout", method = {
-        RequestMethod.GET, RequestMethod.POST})
-    public String logOut(HttpServletRequest request) {
-        return logOut(null, request);
     }
 
     @RequestMapping(value = "/logout", method = {

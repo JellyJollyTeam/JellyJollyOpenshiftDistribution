@@ -44,7 +44,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li><a href="<c:url value="/admin" />">控制板</a></li>
-                                    <li><a href="<c:url value="/logout?redirect" />">登出</a></li>
+                                    <li><a href="<c:url value="/logout?redirect=%2F" />">登出</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </ul>
