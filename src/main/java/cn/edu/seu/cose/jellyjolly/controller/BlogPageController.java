@@ -54,12 +54,9 @@ public class BlogPageController {
 
     @RequestMapping(value = "/admin/page", method = RequestMethod.POST)
     public String createNewPage(@RequestParam String title,
-            @RequestParam String content, @RequestParam String redirect)
-            throws DataAccessException {
+            @RequestParam String content) throws DataAccessException {
         int pageId = blogPageDataAccess.addNewPage(title, content);
-        return (redirect == null)
-                ? "redirect:/page/" + pageId
-                : "redirect:" + redirect;
+        return "redirect:/page/" + pageId;
     }
 
     @RequestMapping(value = "/admin/page/{pageId}",
@@ -72,15 +69,15 @@ public class BlogPageController {
 
     @RequestMapping(value = "/admin/page/{pageId}", method = RequestMethod.PUT)
     public String changePage(@PathVariable int pageId,
-            @RequestParam String title, @RequestParam String content,
-            @RequestParam String redirect) throws DataAccessException {
+            @RequestParam String title, @RequestParam String content)
+            throws DataAccessException {
         if (title != null) {
             blogPageDataAccess.changeTitle(pageId, title);
         }
         if (content != null) {
             blogPageDataAccess.changeContent(pageId, content);
         }
-        return "redirect:" + redirect;
+        return "redirect:/page/" + pageId;
     }
 
     @RequestMapping(value = "/admin/page/{pageId}/title",
