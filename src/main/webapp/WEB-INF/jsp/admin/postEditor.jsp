@@ -15,7 +15,35 @@
     </c:if>
     <p>标题<br /><input type="text" name="title" value="<c:out value="${blogpost.title}" default="" />" /></p>
     <p>分类<br />
-        <select name="categoryId" style="width: 100px;">
+        <script type="text/javascript">
+            function showNewCategoryInput() {
+                var newCategorySpan = document.getElementById('newCategorySpan');
+                newCategorySpan.removeAttribute('hidden');
+                var newCategoryInput = document.getElementById('newCategoryInput');
+                newCategoryInput.focus();
+            }
+            function hideNewCategoryInput() {
+                var newCategorySpan = document.getElementById('newCategorySpan');
+                newCategorySpan.setAttribute('hidden', 'hidden');
+                var newCategoryInput = document.getElementById('newCategoryInput');
+                newCategoryInput.setAttribute('value', '');
+            }
+            function handleCategorySelect() {
+                var categorySelect = document.getElementById('categorySelect');
+                var id = categorySelect.options[categorySelect.selectedIndex].id;
+                // create new category
+                if (id == 'newCategory') {
+                    showNewCategoryInput();
+                // select an existing category
+                } else {
+                    hideNewCategoryInput();
+                }
+            }
+            window.onload = function() {
+                handleCategorySelect();
+            }
+        </script>
+        <select id="categorySelect" style="width: 100px;" name="categoryId" onchange="handleCategorySelect()">
             <c:forEach var="category" items="${categoryList}">
                 <c:choose>
                     <c:when test="${empty blogpost}">
@@ -32,9 +60,12 @@
                         </c:choose>
                     </c:otherwise>
                 </c:choose>
+                <option id="newCategory" value="-1">+ 新建分类</option>
             </c:forEach>
         </select>
-    </p>
+        <span hidden="true" id="newCategorySpan">
+            <input type="text" name="newCategoryName" id="newCategoryInput" />
+        </span>
     <script src="<c:url value="/static/ckeditor/ckeditor.js" />"></script>
     <p>正文<br />
         <textarea name="content" id="editor1"><c:out value="${blogpost.content}" default="" /></textarea>
