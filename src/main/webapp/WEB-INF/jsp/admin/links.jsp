@@ -24,9 +24,9 @@
             <tr>
                 <td><input type="checkbox" name="choice"></td>
                 <td style="padding-top: 2px; padding-left: 10px" width="30%" height="60px">
-                    <c:out value="${link.title}" /></td>
+                    ${link.title}</td>
                 <td style="padding-top: 2px; padding-left: 10px" width="30%" height="60px">
-                    <c:out value="${page.url}" /></td>
+                    <a href="${link.url}">${link.url}</a></td>
             </tr>
             </c:forEach>
         </tbody>

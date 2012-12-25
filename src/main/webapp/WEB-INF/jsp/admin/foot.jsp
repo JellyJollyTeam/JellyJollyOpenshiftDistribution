@@ -9,6 +9,7 @@
                         <ul>
                             <li><a href="<c:url value="/admin" />">面板主页</a></li>
                             <li><a href="<c:url value="/admin/settings" />">基本设置</a></li>
+                            <li><a href="<c:url value="/logout?redirect=%2F" />">登出</a></li>
                         </ul>
                     </li>
                     <li>
