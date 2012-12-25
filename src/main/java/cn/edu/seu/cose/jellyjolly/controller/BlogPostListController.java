@@ -7,6 +7,8 @@ package cn.edu.seu.cose.jellyjolly.controller;
 import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
+import cn.edu.seu.cose.jellyjolly.util.Utils;
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ public class BlogPostListController {
     private BlogPostDataAccess blogPostDataAccess;
     private FrameBuilder frameBuilder;
     private int postNumberPerPage = 5;
+    private int postContentMaxLength = 300;
 
     public BlogPostListController(BlogPostDataAccess blogPostDataAccess,
             FrameBuilder frameBuilder) {
@@ -34,6 +37,10 @@ public class BlogPostListController {
 
     public void setPostNumberPerPage(int postNumberPerPage) {
         this.postNumberPerPage = postNumberPerPage;
+    }
+
+    public void setPostContentMaxLength(int postContentMaxLength) {
+        this.postContentMaxLength = postContentMaxLength;
     }
 
     @RequestMapping(value = {"/", "/posts"}, method = RequestMethod.GET)
@@ -115,6 +122,7 @@ public class BlogPostListController {
         if (!firstPage && (postList == null || postList.size() <= 0)) {
             return "redirect:/404";
         }
+        truncatePosts(postList);
         model.addAttribute("postList", postList);
         model.addAllAttributes(frameBuilder.getFrameObjects(request));
         return "home";
@@ -122,5 +130,12 @@ public class BlogPostListController {
 
     private long getOffset(long page) {
         return (page >= 1) ? (page - 1) * postNumberPerPage : 0;
+    }
+
+    private void truncatePosts(Collection<BlogPost> posts) {
+        for (BlogPost post : posts) {
+            String content = post.getContent();
+            Utils.truncateHtml(content, postContentMaxLength);
+        }
     }
 }
