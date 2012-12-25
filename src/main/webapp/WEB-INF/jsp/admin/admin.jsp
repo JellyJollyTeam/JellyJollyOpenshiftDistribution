@@ -35,6 +35,8 @@
         <textarea name="content" id="comment" cols="100%" rows="10" tabindex="2"></textarea>
     </p>
     <p><input name="submit" type="submit" id="submit" tabindex="5" value="发表" />
+        <input type='hidden' name='comment_post_ID' value='20' id='comment_post_ID' />
+        <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
     </p>
     <p style="display: none;"></p>
 </form>

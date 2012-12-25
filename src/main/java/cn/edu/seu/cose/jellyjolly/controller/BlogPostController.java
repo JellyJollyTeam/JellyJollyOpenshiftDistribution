@@ -61,15 +61,16 @@ public class BlogPostController {
     @RequestMapping(value = "/admin/post", method = RequestMethod.POST)
     public String createNewPost(@RequestParam int categoryId,
             @RequestParam String title, @RequestParam String content,
-            HttpServletRequest request) throws DataAccessException {
+            @RequestParam String redirect, HttpServletRequest request)
+            throws DataAccessException {
         HttpSession currentSession = request.getSession();
         UserAuthorization userAuth = (UserAuthorization) currentSession
                 .getAttribute(AdminUserController.SESSION_ATTRI_AUTH);
         long authorUserId = userAuth.getUser().getUserId();
         Date currentTime = new Date();
-        long postId = blogPostDataAccess.createNewPost(authorUserId, categoryId,
-                currentTime, title, content);
-        return "redirect:/post/" + postId;
+        blogPostDataAccess.createNewPost(authorUserId, categoryId, currentTime,
+                title, content);
+        return "redirect:" + redirect;
     }
 
     @RequestMapping(value = "/admin/post/{postId}",
@@ -83,11 +84,12 @@ public class BlogPostController {
     @RequestMapping(value = "/admin/post/{postId}", method = RequestMethod.PUT)
     public String changePost(@PathVariable long postId,
             @RequestParam String title, @RequestParam String content,
-            @RequestParam int categoryId) throws DataAccessException {
+            @RequestParam int categoryId, @RequestParam long userId,
+            @RequestParam String redirect) throws DataAccessException {
         blogPostDataAccess.updatePostCategory(postId, categoryId);
         blogPostDataAccess.updatePostContent(postId, content);
         blogPostDataAccess.updatePostTitle(postId, title);
-        return "redirect:/post/" + postId;
+        return "redirect:" + redirect;
     }
 
     @RequestMapping(value = "/admin/post/{postId}/title",

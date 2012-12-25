@@ -34,7 +34,7 @@
             <tr>
                 <td><input type="checkbox" name="choice"></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px">
-                    <a href="<c:url value="/admin/posts/${post.postId}/editor" />"><c:out value="${post.title}" /></td>
+                    <a href="editBlog.jsp?postid=10"><c:out value="${post.title}" /></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="#"><c:out value="${post.author.displayName}" /></a></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><c:out value="${post.category.name}" /></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><fmt:formatDate value="${post.date}" pattern="yyyy年MM月dd日" /></td>
