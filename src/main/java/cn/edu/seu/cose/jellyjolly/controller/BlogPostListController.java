@@ -135,7 +135,8 @@ public class BlogPostListController {
     private void truncatePosts(Collection<BlogPost> posts) {
         for (BlogPost post : posts) {
             String content = post.getContent();
-            Utils.truncateHtml(content, postContentMaxLength);
+            String truncated = Utils.truncateHtml(content, postContentMaxLength);
+            post.setContent(truncated);
         }
     }
 }
