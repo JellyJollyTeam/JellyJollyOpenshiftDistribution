@@ -155,6 +155,7 @@ public class AdminUserController {
     @RequestMapping(value = "/admin/user",
             method = RequestMethod.DELETE)
     public String deleteAdminUser(@RequestParam List<Long> userIds,
+            @RequestParam String redirect,
             HttpServletRequest request) throws DataAccessException {
         HttpSession currentSession = request.getSession();
         UserAuthorization userAuth = (UserAuthorization) currentSession
@@ -168,6 +169,6 @@ public class AdminUserController {
             }
             adminUserDataAccess.deleteUser(userId);
         }
-        return "redirect:/admin/users";
+        return "redirect:" + redirect;
     }
 }

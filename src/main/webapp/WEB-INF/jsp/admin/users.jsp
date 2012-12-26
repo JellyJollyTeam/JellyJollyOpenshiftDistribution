@@ -3,8 +3,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="head.jsp"%>
 <h2>所有用户</h2>
-<form action="#" method="POST">
-    </p>
+<form action="<c:url value="/admin/user" />" method="POST">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="hidden" name="redirect" value="/admin/users" />
     <input type="submit" value="删除" style="
         width:80px;
         border:none;
@@ -28,7 +29,7 @@
             </tr>
             <c:forEach var="user" items="${adminUserList}">
             <tr>
-                <td style="padding-top: 2px; padding-left: 10px" height="60px"><input type="checkbox" name="choice"></td>
+                <td style="padding-top: 2px; padding-left: 10px" height="60px"><input type="checkbox" name="userIds" value="${user.userId}"></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="#"><c:out value="${user.displayName}" /></a></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="#"><c:out value="${user.username}" /></a></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><c:out value="${user.email}" /></td>
