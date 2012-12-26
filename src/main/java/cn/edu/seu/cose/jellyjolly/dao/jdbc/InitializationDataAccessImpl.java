@@ -22,14 +22,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
-class InitializationDataAccessImpl extends AbstractDataAccess
+public class InitializationDataAccessImpl extends AbstractDataAccess
         implements InitializationDataAccess {
+
+    private static final Logger logger = Logger.getLogger(
+            "InitializationDataAccessImpl");
 
     public InitializationDataAccessImpl(DataSource dataSource) {
         super(dataSource);
@@ -39,7 +45,7 @@ class InitializationDataAccessImpl extends AbstractDataAccess
         Connection connection = newConnection();
         try {
             Statement stmt = connection.createStatement();
-            stmt.addBatch("SELECT 1 FROM jj_blog_info");
+            stmt.executeQuery("SELECT * FROM jellyjolly_schema.jj_blog_info");
             stmt.executeBatch();
             return true;
         } catch (SQLException ex) {
@@ -320,6 +326,7 @@ class InitializationDataAccessImpl extends AbstractDataAccess
         ps1.setString(2, subtitle);
         ps1.executeUpdate();
 
+        Date now = new Date();
         PreparedStatement ps2 = connection.prepareStatement(
                 "INSERT INTO jj_users(user_name, user_pass, user_email,  "
                 + "display_name, register_time) "
@@ -328,6 +335,7 @@ class InitializationDataAccessImpl extends AbstractDataAccess
         ps2.setString(2, password);
         ps2.setString(3, email);
         ps2.setString(4, displayName);
+        ps2.setDate(5, new java.sql.Date(now.getTime()));
         ps2.executeUpdate();
     }
 }

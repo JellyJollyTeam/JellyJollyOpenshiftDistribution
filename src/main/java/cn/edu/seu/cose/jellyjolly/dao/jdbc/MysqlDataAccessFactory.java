@@ -73,8 +73,4 @@ public class MysqlDataAccessFactory implements DataAccessFactory {
     public BlogPageDataAccess getBlogPageDataAccess() {
         return new BlogPageDataAccessImpl(dataSource);
     }
-
-    public InitializationDataAccess getInitializationDataAccess() {
-        return new InitializationDataAccessImpl(dataSource);
-    }
 }
