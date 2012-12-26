@@ -76,7 +76,7 @@ public class BlogPostController {
             @RequestParam String content, HttpServletRequest request)
             throws DataAccessException {
         boolean createNewCategory = (newCategoryName != null) &&
-                (!"".equals(newCategoryName));
+                (!"".trim().equals(newCategoryName));
         int categoryIdToBePost = createNewCategory
                 ? categoryDataAccess.createNewCategory(newCategoryName)
                 .getCategoryId()
@@ -111,9 +111,16 @@ public class BlogPostController {
 
     @RequestMapping(value = "/admin/post/{postId}", method = RequestMethod.PUT)
     public String changePost(@PathVariable long postId,
+            @RequestParam String newCategoryName,
             @RequestParam String title, @RequestParam String content,
             @RequestParam int categoryId) throws DataAccessException {
-        blogPostDataAccess.updatePostCategory(postId, categoryId);
+        boolean createNewCategory = (newCategoryName != null ||
+                !"".trim().equals(newCategoryName));
+        int categoryIdToBePost = createNewCategory
+                ? categoryDataAccess.createNewCategory(newCategoryName)
+                .getCategoryId()
+                : categoryId;
+        blogPostDataAccess.updatePostCategory(postId, categoryIdToBePost);
         blogPostDataAccess.updatePostContent(postId, content);
         blogPostDataAccess.updatePostTitle(postId, title);
         return "redirect:/post/" + postId;

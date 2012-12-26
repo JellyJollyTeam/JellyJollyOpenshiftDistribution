@@ -60,8 +60,8 @@
                         </c:choose>
                     </c:otherwise>
                 </c:choose>
-                <option id="newCategory" value="-1">+ 新建分类</option>
             </c:forEach>
+            <option id="newCategory" value="-1">+ 新建分类</option>
         </select>
         <span hidden="true" id="newCategorySpan">
             <input type="text" name="newCategoryName" id="newCategoryInput" />
