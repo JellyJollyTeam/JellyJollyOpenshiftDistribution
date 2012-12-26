@@ -4,12 +4,50 @@
     <groupId>cn.edu.seu.cose.jellyjolly</groupId>
     <artifactId>jellyjolly-openshift-dist</artifactId>
     <packaging>war</packaging>
-    <version>1.0</version>
+    <version>1.0.BETA1</version>
     <name>Jelly Jolly Openshift Distribution</name>
     <organization>
         <name>College of Software Engineering, Southeast University</name>
         <url>http://cose.seu.edu.cn/</url>
     </organization>
+    <developers>
+        <developer>
+            <id>71110307</id>
+            <name>Yi Ren</name>
+            <email>408601830@qq.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110314</id>
+            <name>Chang Zou</name>
+            <email>criminal_z@163.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110320</id>
+            <name>Chunhua Shao</name>
+            <email>forever.fantasy27@gmail.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110321</id>
+            <name>Wenhao Ji</name>
+            <email>predator.ray@gmail.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110322</id>
+            <name>Xinwei Yan</name>
+            <email>yan4uoo@gmail.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+        <developer>
+            <id>71110325</id>
+            <name>Wang Xiang</name>
+            <email>xw269968315@gmail.com</email>
+            <organization>Colleage of Software Engineering, Southeast University</organization>
+        </developer>
+    </developers>
     <repositories>
         <repository>
             <id>eap</id>
