@@ -159,15 +159,16 @@ USE `jellyjolly_schema`;
 DELIMITER $$
 
 USE `jellyjolly_schema`$$
-DROP TRIGGER IF EXISTS `jellyjolly_schema`.`delete_user` $$
+DROP TRIGGER IF EXISTS `jellyjolly_schema`.`pre_delete_user` $$
 USE `jellyjolly_schema`$$
 
 
-CREATE TRIGGER delete_user
+CREATE TRIGGER pre_delete_user
 BEFORE DELETE
 ON jj_users
 FOR EACH ROW
 BEGIN
+	## at less on admin user
 	IF (SELECT COUNT(*) FROM jj_users) <= 1 THEN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There must be at less one admin user.';
 		ROLLBACK;
@@ -177,27 +178,25 @@ END
 $$
 
 
+USE `jellyjolly_schema`$$
+DROP TRIGGER IF EXISTS `jellyjolly_schema`.`post_delete_user` $$
+USE `jellyjolly_schema`$$
+
+
+CREATE TRIGGER post_delete_user
+AFTER DELETE
+ON jj_users
+FOR EACH ROW
+BEGIN
+	## delete the posts that belong to the user
+	DELETE FROM jj_blog_posts WHERE author_user_id=OLD.user_id;
+END
+$$
+
+
 DELIMITER ;
 
 DELIMITER $$
-
-USE `jellyjolly_schema`$$
-DROP TRIGGER IF EXISTS `jellyjolly_schema`.`delete_post` $$
-USE `jellyjolly_schema`$$
-
-
-CREATE TRIGGER delete_post
-AFTER DELETE
-ON jj_blog_posts
-FOR EACH ROW
-BEGIN
-	IF (SELECT COUNT(1) FROM jj_blog_posts WHERE category_id=OLD.category_id) <= 0 THEN
-		DELETE FROM jj_categories WHERE category_id=OLD.category_id;
-	END IF;
-END;
-
-$$
-
 
 USE `jellyjolly_schema`$$
 DROP TRIGGER IF EXISTS `jellyjolly_schema`.`update_post` $$
@@ -213,6 +212,27 @@ BEGIN
 		DELETE FROM jj_categories WHERE category_id=OLD.category_id;
 	END IF;
 END
+
+$$
+
+
+USE `jellyjolly_schema`$$
+DROP TRIGGER IF EXISTS `jellyjolly_schema`.`delete_post` $$
+USE `jellyjolly_schema`$$
+
+
+CREATE TRIGGER delete_post
+AFTER DELETE
+ON jj_blog_posts
+FOR EACH ROW
+BEGIN
+	## delete comments to the post
+	DELETE FROM jj_blog_comments WHERE blog_post_id=OLD.blog_post_id;
+	## delete the unused category
+	IF (SELECT COUNT(1) FROM jj_blog_posts WHERE category_id=OLD.category_id) <= 0 THEN
+		DELETE FROM jj_categories WHERE category_id=OLD.category_id;
+	END IF;
+END;
 
 $$
 

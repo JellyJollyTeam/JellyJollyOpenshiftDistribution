@@ -99,6 +99,25 @@ public class AdminUserController {
         return "admin/users";
     }
 
+    @RequestMapping(value = "/admin/user", method = RequestMethod.POST)
+    public String createNewAdminUser(@RequestParam String username,
+            @RequestParam String password, @RequestParam String confirmPassword,
+            @RequestParam String displayName, @RequestParam String email,
+            @RequestParam String homePage) throws DataAccessException {
+        if (!password.equals(confirmPassword)) {
+        return "redirect:/admin/users?err=1";
+        }
+        Date now = new Date();
+        if (homePage != null && !homePage.trim().equals("")) {
+            adminUserDataAccess.addNewUser(username, password, email, homePage,
+                    displayName, now);
+        } else {
+            adminUserDataAccess.addNewUser(username, password, email, displayName,
+                    now);
+        }
+        return "redirect:/admin/users";
+    }
+
     @RequestMapping(value = "/admin/user/{userId}", method = RequestMethod.PUT)
     public String editAdminUser(@PathVariable long userId,
             @RequestParam String username, @RequestParam String displayName,
