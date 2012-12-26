@@ -20,6 +20,7 @@ import cn.edu.seu.cose.jellyjolly.dao.CommentDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -65,11 +66,21 @@ public class CommentController {
         return "redirect:/post/" + postId;
     }
 
+    @RequestMapping(value = "/admin/comment",
+    method = RequestMethod.DELETE)
+    public String deleteComment(@RequestParam List<Long> commentIds,
+            @RequestParam String redirect) throws DataAccessException {
+        for (long commentId : commentIds) {
+            commentDataAccess.deleteCommentById(commentId);
+        }
+        return "redirect:" + redirect;
+    }
+
     @RequestMapping(value = "/admin/comment/{commentId}",
     method = RequestMethod.DELETE)
-    public String deleteComment(@PathVariable long commentId)
-            throws DataAccessException {
+    public String deleteComment(@PathVariable long commentId,
+            @RequestParam String redirect) throws DataAccessException {
         commentDataAccess.deleteCommentById(commentId);
-        return "redirect:/admin";
+        return "redirect:" + redirect;
     }
 }

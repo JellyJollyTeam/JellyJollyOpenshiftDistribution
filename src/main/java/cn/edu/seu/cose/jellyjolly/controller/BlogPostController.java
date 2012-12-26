@@ -92,9 +92,9 @@ public class BlogPostController {
 
     @RequestMapping(value = "/admin/post",
     method = RequestMethod.DELETE)
-    public String deletePost(@RequestParam List<Integer> postIds,
+    public String deletePost(@RequestParam List<Long> postIds,
             @RequestParam String redirect) throws DataAccessException {
-        for (int postId : postIds) {
+        for (long postId : postIds) {
             blogPostDataAccess.deletePost(postId);
         }
         return "redirect:" + redirect;
@@ -102,7 +102,7 @@ public class BlogPostController {
 
     @RequestMapping(value = "/admin/post/{postId}",
     method = RequestMethod.DELETE)
-    public String deletePost(@PathVariable int postId,
+    public String deletePost(@PathVariable long postId,
             @RequestParam String redirect) throws DataAccessException {
         blogPostDataAccess.deletePost(postId);
         return "redirect:" + redirect;

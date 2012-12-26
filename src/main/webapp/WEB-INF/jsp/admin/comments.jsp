@@ -4,7 +4,9 @@
 <%@taglib prefix="jj" uri="/WEB-INF/tlds/getPostTitle.tld" %>
 <%@include file="head.jsp"%>
 <h2>全部评论</h2>
-<form action="#" method="POST">
+<form action="<c:url value="/admin/comment" />" method="POST">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="hidden" name="redirect" value="/admin/comments" />
     <input type="submit" value="删除" style="
         width:80px;
         border:none;
@@ -27,7 +29,7 @@
             </tr>
             <c:forEach var="comment" items="${commentList}">
             <tr>
-                <td><input type="checkbox" name="choice"></td>
+                <td><input type="checkbox" name="commentIds" value="${comment.commentId}"></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px">
                     <a href="<c:url value="/post/${comment.postId}" />"><c:out value="${comment.content}" /></td>
                     <td><a href="<c:url value="/post/${comment.postId}" />"><jj:getPostTitle postId="${comment.postId}" /></a></td>
