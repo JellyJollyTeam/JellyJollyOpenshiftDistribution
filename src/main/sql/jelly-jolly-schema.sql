@@ -22,7 +22,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_users` (
   `last_login_time` DATETIME NULL ,
   PRIMARY KEY (`user_id`) ,
   UNIQUE INDEX `user_name_UNIQUE` (`user_name` ASC) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -34,7 +34,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_categories` (
   `category_id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   PRIMARY KEY (`category_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -51,7 +51,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_posts` (
   `post_content` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ,
   PRIMARY KEY (`blog_post_id`) ,
   FULLTEXT INDEX `kw_post` (`post_title` ASC, `post_content` ASC) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -65,7 +65,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_post_meta` (
   `meta_key` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   `meta_value` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ,
   PRIMARY KEY (`meta_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -79,7 +79,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_info` (
   `blog_subtitle` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ,
   `blog_url` VARCHAR(200) NULL ,
   PRIMARY KEY (`blog_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -98,7 +98,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_comments` (
   `comment_date` DATETIME NOT NULL ,
   `comment_content` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ,
   PRIMARY KEY (`comment_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -112,7 +112,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_links` (
   `link_image` VARCHAR(255) NULL ,
   `link_url` VARCHAR(200) NOT NULL ,
   PRIMARY KEY (`link_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -126,7 +126,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_user_meta` (
   `meta_key` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   `meta_value` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   PRIMARY KEY (`user_meta_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -139,7 +139,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_meta` (
   `meta_key` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   `meta_value` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ,
   PRIMARY KEY (`blog_meta_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -152,38 +152,18 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_pages` (
   `page_title` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   `page_content` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   PRIMARY KEY (`blog_page_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 USE `jellyjolly_schema`;
 
 DELIMITER $$
 
 USE `jellyjolly_schema`$$
-DROP TRIGGER IF EXISTS `jellyjolly_schema`.`pre_delete_user` $$
+DROP TRIGGER IF EXISTS `jellyjolly_schema`.`delete_user` $$
 USE `jellyjolly_schema`$$
 
 
-CREATE TRIGGER pre_delete_user
-BEFORE DELETE
-ON jj_users
-FOR EACH ROW
-BEGIN
-	## at less on admin user
-	IF (SELECT COUNT(*) FROM jj_users) <= 1 THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There must be at less one admin user.';
-		ROLLBACK;
-	END IF;
-END
-
-$$
-
-
-USE `jellyjolly_schema`$$
-DROP TRIGGER IF EXISTS `jellyjolly_schema`.`post_delete_user` $$
-USE `jellyjolly_schema`$$
-
-
-CREATE TRIGGER post_delete_user
+CREATE TRIGGER delete_user
 AFTER DELETE
 ON jj_users
 FOR EACH ROW
