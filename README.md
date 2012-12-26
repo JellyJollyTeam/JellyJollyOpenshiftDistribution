@@ -37,7 +37,7 @@ Goto
 
     http://<your-app-name>-<your-namespace>.rhcloud.com/install
 
-Fill the table on your website to make it work.
+Fill in the table on your website to make it work.
 
 That's it, you can now checkout your Jelly Jolly at:
 
