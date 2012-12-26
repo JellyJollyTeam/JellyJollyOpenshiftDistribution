@@ -30,8 +30,8 @@
             <c:forEach var="user" items="${adminUserList}">
             <tr>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><input type="checkbox" name="userIds" value="${user.userId}"></td>
-                <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="#"><c:out value="${user.displayName}" /></a></td>
-                <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="#"><c:out value="${user.username}" /></a></td>
+                <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="<c:url value="/admin/users/${user.userId}" />"><c:out value="${user.displayName}" /></a></td>
+                <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="<c:url value="/admin/users/${user.userId}" />"><c:out value="${user.username}" /></a></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><c:out value="${user.email}" /></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><c:out value="${user.homePageUrl}" /></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><fmt:formatDate value="${user.registerTime}" pattern="yyyy年MM月dd日" /></td>
