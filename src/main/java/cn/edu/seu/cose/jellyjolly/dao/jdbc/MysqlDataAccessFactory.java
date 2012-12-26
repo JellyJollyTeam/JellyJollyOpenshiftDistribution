@@ -23,6 +23,7 @@ import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.CategoryDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.CommentDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessFactory;
+import cn.edu.seu.cose.jellyjolly.dao.InitializationDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.LinkDataAccess;
 import javax.sql.DataSource;
 
@@ -71,5 +72,9 @@ public class MysqlDataAccessFactory implements DataAccessFactory {
     @Override
     public BlogPageDataAccess getBlogPageDataAccess() {
         return new BlogPageDataAccessImpl(dataSource);
+    }
+
+    public InitializationDataAccess getInitializationDataAccess() {
+        return new InitializationDataAccessImpl(dataSource);
     }
 }

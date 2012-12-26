@@ -20,21 +20,11 @@ package cn.edu.seu.cose.jellyjolly.dao;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public interface DataAccessFactory {
+public interface InitializationDataAccess {
 
-    BlogInfoDataAccess getBlogInfoDataAccess();
+    boolean installed() throws DataAccessException;
 
-    BlogPostDataAccess getBlogPostDataAccess();
-
-    CategoryDataAccess getCategoryDataAccess();
-
-    CommentDataAccess getCommentDataAccess();
-
-    LinkDataAccess getLinkDataAccess();
-
-    AdminUserDataAccess getAdminUserDataAccess();
-
-    BlogPageDataAccess getBlogPageDataAccess();
-
-    InitializationDataAccess getInitializationDataAccess();
+    void initialize(String username, String password, String displayName,
+            String email, String title, String subtitle)
+            throws DataAccessException;
 }

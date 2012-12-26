@@ -16,9 +16,12 @@
  */
 package cn.edu.seu.cose.jellyjolly.controller;
 
+import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
+import cn.edu.seu.cose.jellyjolly.dao.InitializationDataAccess;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -27,21 +30,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class InstallationController {
 
+    private InitializationDataAccess initializationDataAccess;
+
+    public InstallationController(
+            InitializationDataAccess initializationDataAccess) {
+        this.initializationDataAccess = initializationDataAccess;
+    }
+
     @RequestMapping(value = "/install", method = RequestMethod.GET)
-    public String install() {
-//        if (installed) {
-//            return "redirect:/";
-//        }
+    public String install() throws DataAccessException {
+        if (initializationDataAccess.installed()) {
+            return "redirect:/";
+        }
         return "install";
     }
 
     @RequestMapping(value = "/install", method = RequestMethod.POST)
-    public String install(String username, String password,
-            String confirmPassword, String title, String subtitle,
-            String email, String homePage) {
-//        if (installed) {
-//            return "redirect:/";
-//        }
-        return "install";
+    public String install(@RequestParam String username,
+            @RequestParam String password, @RequestParam String confirmPassword,
+            @RequestParam String title, @RequestParam String subtitle,
+            @RequestParam String email) throws DataAccessException {
+        if (initializationDataAccess.installed()) {
+            return "redirect:/";
+        }
+
+        if (!password.equals(confirmPassword)) {
+            return "redirect:/install?error=1";
+        }
+        initializationDataAccess.initialize(username, password, username, email,
+                title, subtitle);
+        return "redirect:/";
     }
 }

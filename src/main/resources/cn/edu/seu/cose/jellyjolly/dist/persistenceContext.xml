@@ -54,4 +54,8 @@ Jelly Jolly Openshift Distribution (dev branch)
           factory-bean="dataAccessFactory"
           factory-method="getLinkDataAccess"
           scope="singleton"/>
+    <bean name="initializationDataAccess"
+          factory-bean="dataAccessFactory"
+          factory-method="getInitializationDataAccess"
+          scope="singleton" />
 </beans>
