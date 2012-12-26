@@ -76,7 +76,7 @@ public class BlogPostController {
             @RequestParam String content, HttpServletRequest request)
             throws DataAccessException {
         boolean createNewCategory = (newCategoryName != null) &&
-                (!"".trim().equals(newCategoryName));
+                (!newCategoryName.trim().equals(""));
         int categoryIdToBePost = createNewCategory
                 ? categoryDataAccess.createNewCategory(newCategoryName)
                 .getCategoryId()
@@ -114,8 +114,8 @@ public class BlogPostController {
             @RequestParam String newCategoryName,
             @RequestParam String title, @RequestParam String content,
             @RequestParam int categoryId) throws DataAccessException {
-        boolean createNewCategory = (newCategoryName != null ||
-                !"".trim().equals(newCategoryName));
+        boolean createNewCategory = (newCategoryName != null &&
+                !newCategoryName.trim().equals(""));
         int categoryIdToBePost = createNewCategory
                 ? categoryDataAccess.createNewCategory(newCategoryName)
                 .getCategoryId()
