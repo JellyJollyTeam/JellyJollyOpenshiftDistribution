@@ -16,17 +16,17 @@
             <p><c:out value="${post.content}" escapeXml="false" /></p>
         </div>
     </div>
-    <div class="navigation">
-        <div class="alignleft">
-            <c:if test="${hasPrev}">
-                <a href="<c:url value="/posts/page/${pageNum - 1}" />">较新的</a>
-            </c:if>
-        </div>
-        <div class="alignright">
-            <c:if test="${hasNext}">
-                <a href="<c:url value="/posts/page/${pageNum + 1}" />">较早的</a>
-            </c:if>
-        </div>
-    </div>
 </c:forEach>
+<div class="navigation">
+    <div class="alignleft">
+        <c:if test="${hasPrev}">
+            <a href="<c:url value="/posts/page/${pageNum - 1}" />">较新的</a>
+        </c:if>
+    </div>
+    <div class="alignright">
+        <c:if test="${hasNext}">
+            <a href="<c:url value="/posts/page/${pageNum + 1}" />">较早的</a>
+        </c:if>
+    </div>
+</div>
 <%@include file="foot.jsp" %>

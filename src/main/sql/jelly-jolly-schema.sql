@@ -1,6 +1,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 DROP SCHEMA IF EXISTS `jellyjolly_schema` ;
 CREATE SCHEMA IF NOT EXISTS `jellyjolly_schema` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
@@ -22,7 +22,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_users` (
   `last_login_time` DATETIME NULL ,
   PRIMARY KEY (`user_id`) ,
   UNIQUE INDEX `user_name_UNIQUE` (`user_name` ASC) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -34,7 +34,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_categories` (
   `category_id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   PRIMARY KEY (`category_id`) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -51,7 +51,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_posts` (
   `post_content` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ,
   PRIMARY KEY (`blog_post_id`) ,
   FULLTEXT INDEX `kw_post` (`post_title` ASC, `post_content` ASC) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -65,7 +65,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_post_meta` (
   `meta_key` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   `meta_value` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ,
   PRIMARY KEY (`meta_id`) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -79,7 +79,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_info` (
   `blog_subtitle` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ,
   `blog_url` VARCHAR(200) NULL ,
   PRIMARY KEY (`blog_id`) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -98,7 +98,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_comments` (
   `comment_date` DATETIME NOT NULL ,
   `comment_content` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ,
   PRIMARY KEY (`comment_id`) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -112,7 +112,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_links` (
   `link_image` VARCHAR(255) NULL ,
   `link_url` VARCHAR(200) NOT NULL ,
   PRIMARY KEY (`link_id`) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -126,7 +126,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_user_meta` (
   `meta_key` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   `meta_value` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   PRIMARY KEY (`user_meta_id`) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -139,7 +139,7 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_meta` (
   `meta_key` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   `meta_value` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ,
   PRIMARY KEY (`blog_meta_id`) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -152,27 +152,94 @@ CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_pages` (
   `page_title` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   `page_content` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
   PRIMARY KEY (`blog_page_id`) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
+USE `jellyjolly_schema`;
+
+DELIMITER $$
+
+USE `jellyjolly_schema`$$
+DROP TRIGGER IF EXISTS `jellyjolly_schema`.`pre_delete_user` $$
+USE `jellyjolly_schema`$$
+
+
+CREATE TRIGGER pre_delete_user
+BEFORE DELETE
+ON jj_users
+FOR EACH ROW
+BEGIN
+	## at less on admin user
+	IF (SELECT COUNT(*) FROM jj_users) <= 1 THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There must be at less one admin user.';
+		ROLLBACK;
+	END IF;
+END
+
+$$
+
+
+USE `jellyjolly_schema`$$
+DROP TRIGGER IF EXISTS `jellyjolly_schema`.`post_delete_user` $$
+USE `jellyjolly_schema`$$
+
+
+CREATE TRIGGER post_delete_user
+AFTER DELETE
+ON jj_users
+FOR EACH ROW
+BEGIN
+	## delete the posts that belong to the user
+	DELETE FROM jj_blog_posts WHERE author_user_id=OLD.user_id;
+END
+$$
+
+
+DELIMITER ;
+
+DELIMITER $$
+
+USE `jellyjolly_schema`$$
+DROP TRIGGER IF EXISTS `jellyjolly_schema`.`update_post` $$
+USE `jellyjolly_schema`$$
+
+
+CREATE TRIGGER update_post
+AFTER UPDATE
+ON jj_blog_posts
+FOR EACH ROW
+BEGIN
+	IF (SELECT COUNT(1) FROM jj_blog_posts WHERE category_id=OLD.category_id) <= 0 THEN
+		DELETE FROM jj_categories WHERE category_id=OLD.category_id;
+	END IF;
+END
+
+$$
+
+
+USE `jellyjolly_schema`$$
+DROP TRIGGER IF EXISTS `jellyjolly_schema`.`delete_post` $$
+USE `jellyjolly_schema`$$
+
+
+CREATE TRIGGER delete_post
+AFTER DELETE
+ON jj_blog_posts
+FOR EACH ROW
+BEGIN
+	## delete comments to the post
+	DELETE FROM jj_blog_comments WHERE blog_post_id=OLD.blog_post_id;
+	## delete the unused category
+	IF (SELECT COUNT(1) FROM jj_blog_posts WHERE category_id=OLD.category_id) <= 0 THEN
+		DELETE FROM jj_categories WHERE category_id=OLD.category_id;
+	END IF;
+END;
+
+$$
+
+
+DELIMITER ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
--- -----------------------------------------------------
--- Data for table `jellyjolly_schema`.`jj_categories`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `jellyjolly_schema`;
-INSERT INTO `jellyjolly_schema`.`jj_categories` (`category_id`, `name`) VALUES (1, '默认');
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `jellyjolly_schema`.`jj_blog_info`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `jellyjolly_schema`;
-INSERT INTO `jellyjolly_schema`.`jj_blog_info` (`blog_id`, `blog_title`, `blog_subtitle`, `blog_url`) VALUES (1, '我的博客', '欢迎使用Jelly Jolly博客引擎', NULL);
-COMMIT;

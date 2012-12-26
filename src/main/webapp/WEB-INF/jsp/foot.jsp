@@ -11,6 +11,7 @@
                 <ul>
                     <li class="categories"><h4>分类</h4>
                         <ul>
+                            <li class="cat-item"><a href="<c:url value="/" />">所有</a></li>
                             <c:forEach items="${categoryList}" var="category">
                                 <li class="cat-item">
                                     <a href="<c:url value="/category/${category.categoryId}" />"><c:out value="${category.name}"/></a>

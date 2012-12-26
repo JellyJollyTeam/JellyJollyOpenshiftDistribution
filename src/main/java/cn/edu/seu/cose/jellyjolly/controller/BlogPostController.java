@@ -20,7 +20,6 @@ import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.CategoryDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
-import cn.edu.seu.cose.jellyjolly.dto.Category;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.util.Date;
 import java.util.List;
@@ -76,7 +75,7 @@ public class BlogPostController {
             @RequestParam String content, HttpServletRequest request)
             throws DataAccessException {
         boolean createNewCategory = (newCategoryName != null) &&
-                (!"".equals(newCategoryName));
+                (!newCategoryName.trim().equals(""));
         int categoryIdToBePost = createNewCategory
                 ? categoryDataAccess.createNewCategory(newCategoryName)
                 .getCategoryId()
@@ -93,9 +92,9 @@ public class BlogPostController {
 
     @RequestMapping(value = "/admin/post",
     method = RequestMethod.DELETE)
-    public String deletePost(@RequestParam List<Integer> postIds,
+    public String deletePost(@RequestParam List<Long> postIds,
             @RequestParam String redirect) throws DataAccessException {
-        for (int postId : postIds) {
+        for (long postId : postIds) {
             blogPostDataAccess.deletePost(postId);
         }
         return "redirect:" + redirect;
@@ -103,7 +102,7 @@ public class BlogPostController {
 
     @RequestMapping(value = "/admin/post/{postId}",
     method = RequestMethod.DELETE)
-    public String deletePost(@PathVariable int postId,
+    public String deletePost(@PathVariable long postId,
             @RequestParam String redirect) throws DataAccessException {
         blogPostDataAccess.deletePost(postId);
         return "redirect:" + redirect;
@@ -111,9 +110,16 @@ public class BlogPostController {
 
     @RequestMapping(value = "/admin/post/{postId}", method = RequestMethod.PUT)
     public String changePost(@PathVariable long postId,
+            @RequestParam String newCategoryName,
             @RequestParam String title, @RequestParam String content,
             @RequestParam int categoryId) throws DataAccessException {
-        blogPostDataAccess.updatePostCategory(postId, categoryId);
+        boolean createNewCategory = (newCategoryName != null &&
+                !newCategoryName.trim().equals(""));
+        int categoryIdToBePost = createNewCategory
+                ? categoryDataAccess.createNewCategory(newCategoryName)
+                .getCategoryId()
+                : categoryId;
+        blogPostDataAccess.updatePostCategory(postId, categoryIdToBePost);
         blogPostDataAccess.updatePostContent(postId, content);
         blogPostDataAccess.updatePostTitle(postId, title);
         return "redirect:/post/" + postId;

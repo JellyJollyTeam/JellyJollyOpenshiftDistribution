@@ -21,9 +21,12 @@ import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.AdminUser;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,5 +89,105 @@ public class AdminUserController {
         return (redirect == null)
                 ? "redirect:/"
                 : "redirect:" + redirect;
+    }
+
+    @RequestMapping(value = "/admin/user/{userId}", method = RequestMethod.GET)
+    public String getAdminUserById(@PathVariable long userId, Model model)
+            throws DataAccessException {
+        AdminUser adminUser = adminUserDataAccess.getUser(userId);
+        model.addAttribute("adminUser", adminUser);
+        return "admin/users";
+    }
+
+    @RequestMapping(value = "/admin/user", method = RequestMethod.POST)
+    public String createNewAdminUser(@RequestParam String username,
+            @RequestParam String password, @RequestParam String confirmPassword,
+            @RequestParam String displayName, @RequestParam String email,
+            @RequestParam String homePage) throws DataAccessException {
+        if (!password.equals(confirmPassword)) {
+        return "redirect:/admin/users?err=1";
+        }
+        Date now = new Date();
+        if (homePage != null && !homePage.trim().equals("")) {
+            adminUserDataAccess.addNewUser(username, password, email, homePage,
+                    displayName, now);
+        } else {
+            adminUserDataAccess.addNewUser(username, password, email, displayName,
+                    now);
+        }
+        return "redirect:/admin/users";
+    }
+
+    @RequestMapping(value = "/admin/user/{userId}", method = RequestMethod.PUT)
+    public String editAdminUser(@PathVariable long userId,
+            @RequestParam String username, @RequestParam String displayName,
+            @RequestParam String email, @RequestParam String homePage,
+            @RequestParam String redirect) throws DataAccessException {
+        AdminUser adminUserToBeUpdated = adminUserDataAccess.getUser(userId);
+        adminUserToBeUpdated.setUsername(username);
+        adminUserToBeUpdated.setDisplayName(displayName);
+        adminUserToBeUpdated.setEmail(email);
+        adminUserToBeUpdated.setHomePageUrl(homePage);
+        adminUserDataAccess.updateUser(adminUserToBeUpdated);
+        return "redirect:" + redirect;
+    }
+
+    @RequestMapping(value = "/admin/user/{userId}/password",
+            method = RequestMethod.PUT)
+    public String changePassword(@PathVariable long userId,
+            @RequestParam String oldPassword, @RequestParam String newPassword,
+            @RequestParam String confirmPassword,
+            @RequestParam String redirect) throws DataAccessException {
+        String username = adminUserDataAccess.getUser(userId).getUsername();
+
+        boolean confirmed = adminUserDataAccess.confirm(username, oldPassword);
+        if (!confirmed) {
+            return "redirect:" + redirect + "?err=1";
+        }
+
+        boolean same = newPassword.equals(confirmPassword);
+        if (!same) {
+            return "redirect:" + redirect + "?err=2";
+        }
+        adminUserDataAccess.changePassword(userId, newPassword);
+        return "redirect:" + redirect;
+    }
+
+    @RequestMapping(value = "/admin/user/{userId}",
+            method = RequestMethod.DELETE)
+    public String deleteAdminUser(@PathVariable long userId,
+            HttpServletRequest request) throws DataAccessException {
+        HttpSession currentSession = request.getSession();
+        UserAuthorization userAuth = (UserAuthorization) currentSession
+                .getAttribute(SESSION_ATTRI_AUTH);
+        long currentUserId = userAuth.getUser().getUserId();
+
+        boolean suicide = (currentUserId == userId);
+        if (suicide) {
+            return "redirect:/admin/users?err=1";
+        }
+
+        adminUserDataAccess.deleteUser(userId);
+        return "redirect:/admin/users";
+    }
+
+    @RequestMapping(value = "/admin/user",
+            method = RequestMethod.DELETE)
+    public String deleteAdminUser(@RequestParam List<Long> userIds,
+            @RequestParam String redirect,
+            HttpServletRequest request) throws DataAccessException {
+        HttpSession currentSession = request.getSession();
+        UserAuthorization userAuth = (UserAuthorization) currentSession
+                .getAttribute(SESSION_ATTRI_AUTH);
+        long currentUserId = userAuth.getUser().getUserId();
+
+        for (long userId : userIds) {
+            boolean suicide = (currentUserId == userId);
+            if (suicide) {
+                continue;
+            }
+            adminUserDataAccess.deleteUser(userId);
+        }
+        return "redirect:" + redirect;
     }
 }

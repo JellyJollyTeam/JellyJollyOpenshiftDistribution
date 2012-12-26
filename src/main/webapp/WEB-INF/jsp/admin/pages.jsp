@@ -2,7 +2,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="head.jsp"%>
 <h2>全部页面</h2>
-<form action="#" method="POST">
+<form action="<c:url value="/admin/page" />" method="POST">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="hidden" name="redirect" value="/admin/pages" />
     <input type="submit" value="删除" style="
         width:80px;
         border:none;
@@ -21,7 +23,7 @@
             </tr>
             <c:forEach var="page" items="${pageList}">
             <tr>
-                <td><input type="checkbox" name="choice"></td>
+                <td><input type="checkbox" name="pageIds" value="${page.blogPageId}"></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px">
                     <a href="<c:url value="/admin/pages/${page.blogPageId}/editor" />"><c:out value="${page.pageTitle}" /></td>
             </tr>

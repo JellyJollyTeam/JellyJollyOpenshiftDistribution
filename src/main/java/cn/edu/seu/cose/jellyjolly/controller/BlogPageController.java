@@ -19,6 +19,7 @@ package cn.edu.seu.cose.jellyjolly.controller;
 import cn.edu.seu.cose.jellyjolly.dao.BlogPageDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPage;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,6 +58,16 @@ public class BlogPageController {
             @RequestParam String content) throws DataAccessException {
         int pageId = blogPageDataAccess.addNewPage(title, content);
         return "redirect:/page/" + pageId;
+    }
+
+    @RequestMapping(value = "/admin/page",
+    method = RequestMethod.DELETE)
+    public String deletePage(@RequestParam List<Integer> pageIds,
+            @RequestParam String redirect) throws DataAccessException {
+        for (int pageId : pageIds) {
+            blogPageDataAccess.deletePage(pageId);
+        }
+        return "redirect:" + redirect;
     }
 
     @RequestMapping(value = "/admin/page/{pageId}",
