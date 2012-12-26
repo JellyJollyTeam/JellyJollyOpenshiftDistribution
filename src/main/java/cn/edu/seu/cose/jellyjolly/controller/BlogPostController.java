@@ -20,7 +20,6 @@ import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.CategoryDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
-import cn.edu.seu.cose.jellyjolly.dto.Category;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.util.Date;
 import java.util.List;
