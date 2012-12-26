@@ -21,6 +21,7 @@ import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dto.AdminUser;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -148,6 +149,25 @@ public class AdminUserController {
         }
 
         adminUserDataAccess.deleteUser(userId);
+        return "redirect:/admin/users";
+    }
+
+    @RequestMapping(value = "/admin/user",
+            method = RequestMethod.DELETE)
+    public String deleteAdminUser(@RequestParam List<Long> userIds,
+            HttpServletRequest request) throws DataAccessException {
+        HttpSession currentSession = request.getSession();
+        UserAuthorization userAuth = (UserAuthorization) currentSession
+                .getAttribute(SESSION_ATTRI_AUTH);
+        long currentUserId = userAuth.getUser().getUserId();
+
+        for (long userId : userIds) {
+            boolean suicide = (currentUserId == userId);
+            if (suicide) {
+                continue;
+            }
+            adminUserDataAccess.deleteUser(userId);
+        }
         return "redirect:/admin/users";
     }
 }
