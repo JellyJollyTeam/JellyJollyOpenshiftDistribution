@@ -63,8 +63,8 @@ class AdminUserDataAccessImpl
     private static final String STATEMENT_ADD_NEW_USER_WITHOUT_HOMEPAGE =
             "INSERT INTO jj_users(user_name, user_pass, user_email,  "
             + "display_name, register_time) VALUES (?, PASSWORD(?), ?, ?, ?);";
-    private static final String STATEMENT_UPDATE_USER =
-            "UPDATE jj_users SET user_name=?, user_pass=PASSWORD(?), "
+    private static final String STATEMENT_UPDATE_USER_EXCEPT_PASS =
+            "UPDATE jj_users SET user_name=?, "
             + "user_email=?, user_home_page_url=?, display_name=? "
             + "WHERE user_id=?;";
     private static final String STATEMENT_USERNAME_USED =
@@ -288,17 +288,16 @@ class AdminUserDataAccessImpl
     }
 
     @Override
-    public void updateUser(AdminUser user) throws DataAccessException {
+    public void updateUserExceptPassword(AdminUser user) throws DataAccessException {
         Connection connection = null;
         try {
             connection = newConnection();
             PreparedStatement ps = connection.prepareStatement(
-                    STATEMENT_UPDATE_USER);
+                    STATEMENT_UPDATE_USER_EXCEPT_PASS);
             ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getHomePageUrl());
-            ps.setString(5, user.getDisplayName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getHomePageUrl());
+            ps.setString(4, user.getDisplayName());
             ps.setLong(6, user.getUserId());
             ps.executeUpdate();
         } catch (SQLException ex) {

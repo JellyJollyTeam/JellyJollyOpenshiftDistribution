@@ -128,7 +128,7 @@ public class AdminUserController {
         adminUserToBeUpdated.setDisplayName(displayName);
         adminUserToBeUpdated.setEmail(email);
         adminUserToBeUpdated.setHomePageUrl(homePage);
-        adminUserDataAccess.updateUser(adminUserToBeUpdated);
+        adminUserDataAccess.updateUserExceptPassword(adminUserToBeUpdated);
         return "redirect:" + redirect;
     }
 

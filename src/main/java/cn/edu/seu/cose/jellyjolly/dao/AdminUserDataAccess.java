@@ -52,7 +52,7 @@ public interface AdminUserDataAccess {
     void addUserProperty(long userId, String key, String[] values)
             throws DataAccessException;
 
-    void updateUser(AdminUser user) throws DataAccessException;
+    void updateUserExceptPassword(AdminUser user) throws DataAccessException;
 
     boolean changeUserName(long userId, String username)
             throws DataAccessException;

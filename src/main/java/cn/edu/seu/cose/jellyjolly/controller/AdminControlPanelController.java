@@ -294,7 +294,7 @@ public class AdminControlPanelController {
                                     @RequestParam String displayName) throws DataAccessException {
         AdminUser userToBeUpdated = adminUserDataAccess.getUser(userId);
         userToBeUpdated.setDisplayName(displayName);
-        adminUserDataAccess.updateUser(userToBeUpdated);
+        adminUserDataAccess.updateUserExceptPassword(userToBeUpdated);
         return "redirect:/admin/admins" + userId;
     }
 
@@ -304,7 +304,7 @@ public class AdminControlPanelController {
                               @RequestParam String email) throws DataAccessException {
         AdminUser userToBeUpdated = adminUserDataAccess.getUser(userId);
         userToBeUpdated.setEmail(email);
-        adminUserDataAccess.updateUser(userToBeUpdated);
+        adminUserDataAccess.updateUserExceptPassword(userToBeUpdated);
         return "redirect:/admin/admins" + userId;
     }
 
@@ -314,7 +314,7 @@ public class AdminControlPanelController {
                                  @RequestParam String homePage) throws DataAccessException {
         AdminUser userToBeUpdated = adminUserDataAccess.getUser(userId);
         userToBeUpdated.setHomePageUrl(homePage);
-        adminUserDataAccess.updateUser(userToBeUpdated);
+        adminUserDataAccess.updateUserExceptPassword(userToBeUpdated);
         return "redirect:/admin/admins" + userId;
     }
 
