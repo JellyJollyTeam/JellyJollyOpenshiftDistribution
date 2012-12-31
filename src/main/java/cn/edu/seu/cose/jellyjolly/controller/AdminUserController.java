@@ -112,8 +112,8 @@ public class AdminUserController {
             adminUserDataAccess.addNewUser(username, password, email, homePage,
                     displayName, now);
         } else {
-            adminUserDataAccess.addNewUser(username, password, email, displayName,
-                    now);
+            adminUserDataAccess.addNewUser(username, password, email,
+                    displayName, now);
         }
         return "redirect:/admin/users";
     }
