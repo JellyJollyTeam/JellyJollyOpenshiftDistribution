@@ -1,0 +1,2 @@
+src/main/resources/cn/edu/seu/cose/jellyjolly/dist/*.xml merge=ours
+src/main/resources/cn/edu/seu/cose/jellyjolly/dist/*.properties merge=ours
