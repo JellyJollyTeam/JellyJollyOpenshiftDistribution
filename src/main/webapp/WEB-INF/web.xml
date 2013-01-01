@@ -49,10 +49,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.EncodingFilter</filter-class>
     </filter>
     <filter>
-        <filter-name>installed</filter-name>
-        <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.Installed</filter-class>
-    </filter>
-    <filter>
         <filter-name>authorityRequired</filter-name>
         <filter-class>cn.edu.seu.cose.jellyjolly.controller.filter.AuthorityRequired</filter-class>
     </filter>
