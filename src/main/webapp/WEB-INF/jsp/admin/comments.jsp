@@ -4,7 +4,7 @@
 <%@taglib prefix="jj" uri="/WEB-INF/tlds/getPostTitle.tld" %>
 <%@include file="head.jsp"%>
 <script type="text/javascript">
-    function confirm() {
+    function check() {
         var confirmed = window.confirm("确定删除？");
         if (confirmed) {
             document.getElementById('form').submit();
@@ -24,7 +24,7 @@
         color:#fff;
         font-size:12px;
         cursor:pointer;
-        padding:2px 0 3px;" onclick="confirm()" />
+        padding:2px 0 3px;" onclick="check()" />
     <table style="margin-top: 10px; margin-bottom: 10px;">
         <tbody>
             <tr>
@@ -62,7 +62,7 @@
         color:#fff;
         font-size:12px;
         cursor:pointer;
-        padding:2px 0 3px;" onclick="confirm()" />
+        padding:2px 0 3px;" onclick="check()" />
 </form>
 <div class="navigation">
     <div class="alignleft">

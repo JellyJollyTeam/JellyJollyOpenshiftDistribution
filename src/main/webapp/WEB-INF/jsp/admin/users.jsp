@@ -3,7 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="head.jsp"%>
 <script type="text/javascript">
-    function confirm() {
+    function check() {
         var confirmed = window.confirm("确定删除？");
         if (confirmed) {
             document.getElementById('form').submit();
@@ -14,7 +14,7 @@
 <form id="form" action="<c:url value="/admin/user" />" method="POST">
     <input type="hidden" name="_method" value="DELETE" />
     <input type="hidden" name="redirect" value="/admin/users" />
-    <input type="submit" value="删除" style="
+    <input type="button" value="删除" style="
         width:80px;
         border:none;
         background:#343434;
@@ -23,7 +23,7 @@
         color:#fff;
         font-size:12px;
         cursor:pointer;
-        padding:2px 0 3px;" onclick="confirm()" />
+        padding:2px 0 3px;" onclick="check()" />
     <table style="margin-top: 10px; margin-bottom: 10px;">
         <tbody>
             <tr>
@@ -48,7 +48,7 @@
             </c:forEach>
         </tbody>
     </table>
-    <input type="submit" value="删除" style="
+    <input type="button" value="删除" style="
         width:80px;
         border:none;
         background:#343434;
@@ -57,6 +57,6 @@
         color:#fff;
         font-size:12px;
         cursor:pointer;
-        padding:2px 0 3px;" onclick="confirm()" />
+        padding:2px 0 3px;" onclick="check()" />
 </form>
 <%@include file="foot.jsp" %>
