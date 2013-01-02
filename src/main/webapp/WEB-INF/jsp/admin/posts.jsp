@@ -2,8 +2,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="head.jsp"%>
+<script type="text/javascript">
+    function confirm() {
+        var confirmed = window.confirm("确定删除？");
+        if (confirmed) {
+            document.getElementById('form').submit();
+        }
+    }
+</script>
 <h2>全部文章</h2>
-<form action="<c:url value="/admin/post" />" method="POST">
+<form id="form" action="<c:url value="/admin/post" />" method="POST">
     <input type="hidden" name="_method" value="DELETE" />
     <input type="hidden" name="redirect" value="/admin/posts" />
     <p><span style="float: left; width: 40px;">分类</span>
@@ -22,7 +30,7 @@
         color:#fff;
         font-size:12px;
         cursor:pointer;
-        padding:2px 0 3px;" />
+        padding:2px 0 3px;" onclick="confirm()" />
     <table style="margin-top: 10px; margin-bottom: 10px;">
         <tbody>
             <tr>
@@ -53,7 +61,7 @@
         color:#fff;
         font-size:12px;
         cursor:pointer;
-        padding:2px 0 3px;" />
+        padding:2px 0 3px;" onclick="confirm()" />
 </form>
 <div class="navigation">
     <div class="alignleft">
