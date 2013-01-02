@@ -23,7 +23,7 @@ a {
 }
 
 a:hover {
-    color:#343434;
+    color:red;
 }
 
 h1 a, h2 a, h3 a, #sitename {
@@ -32,7 +32,7 @@ h1 a, h2 a, h3 a, #sitename {
 
 h1 a:hover, h2 a:hover, h3 a:hover, #sitename:hover {
     text-decoration:none;
-    color:#000;
+    color:red;
 }
 
 p {
