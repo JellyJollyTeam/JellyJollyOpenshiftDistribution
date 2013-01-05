@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </welcome-file-list>
     <error-page>
         <error-code>500</error-code>
-        <location>/static/500.html</location>
+        <location>/error</location>
     </error-page>
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
