@@ -3,6 +3,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <%@include file="head.jsp" %>
+<c:if test="${empty postList || fn:length(postList)==0}">
+    <p style="color: grey">没有结果额 ┑(￣。￣)┍</p>
+</c:if>
 <c:forEach items="${postList}" var="post" varStatus="varStatus">
     <div class="post-261 post type-post status-publish format-standard hentry category-general">
         <small class="caps"><fmt:formatDate pattern="yyyy年MM月dd日" value="${post.date}" /></small>
