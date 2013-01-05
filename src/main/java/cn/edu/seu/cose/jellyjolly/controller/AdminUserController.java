@@ -91,14 +91,6 @@ public class AdminUserController {
                 : "redirect:" + redirect;
     }
 
-    @RequestMapping(value = "/admin/user/{userId}", method = RequestMethod.GET)
-    public String getAdminUserById(@PathVariable long userId, Model model)
-            throws DataAccessException {
-        AdminUser adminUser = adminUserDataAccess.getUser(userId);
-        model.addAttribute("adminUser", adminUser);
-        return "admin/users";
-    }
-
     @RequestMapping(value = "/admin/user", method = RequestMethod.POST)
     public String createNewAdminUser(@RequestParam String username,
             @RequestParam String password, @RequestParam String confirmPassword,

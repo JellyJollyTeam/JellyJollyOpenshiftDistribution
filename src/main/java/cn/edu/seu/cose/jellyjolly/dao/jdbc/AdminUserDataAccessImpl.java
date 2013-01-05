@@ -298,7 +298,7 @@ class AdminUserDataAccessImpl
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getHomePageUrl());
             ps.setString(4, user.getDisplayName());
-            ps.setLong(6, user.getUserId());
+            ps.setLong(5, user.getUserId());
             ps.executeUpdate();
         } catch (SQLException ex) {
             throw new JdbcDataAccessException(ex);
