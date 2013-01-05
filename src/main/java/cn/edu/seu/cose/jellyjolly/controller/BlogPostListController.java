@@ -28,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -61,8 +62,9 @@ public class BlogPostListController {
         return getPostsByPage(1, model, request);
     }
 
-    @RequestMapping(value = "/posts/page/{page}", method = RequestMethod.GET)
-    public String getPostsByPage(@PathVariable long page, Model model,
+    @RequestMapping(value = "/posts", method = RequestMethod.GET,
+            params = "page")
+    public String getPostsByPage(@RequestParam long page, Model model,
             HttpServletRequest request) throws DataAccessException {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
@@ -72,17 +74,17 @@ public class BlogPostListController {
     }
 
     @RequestMapping(value = "/category/{categoryId}",
-    method = RequestMethod.GET)
+            method = RequestMethod.GET)
     public String getPostsByCategory(@PathVariable int categoryId,
             Model model, HttpServletRequest request)
             throws DataAccessException {
         return getPostsByCategory(categoryId, 1, model, request);
     }
 
-    @RequestMapping(value = "/category/{categoryId}/page/{page}",
-    method = RequestMethod.GET)
+    @RequestMapping(value = "/category/{categoryId}",
+            method = RequestMethod.GET, params = "page")
     public String getPostsByCategory(@PathVariable int categoryId,
-            @PathVariable long page, Model model, HttpServletRequest request)
+            @RequestParam long page, Model model, HttpServletRequest request)
             throws DataAccessException {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
@@ -93,17 +95,17 @@ public class BlogPostListController {
     }
 
     @RequestMapping(value = "/archive/{year}/{month}",
-    method = RequestMethod.GET)
+            method = RequestMethod.GET)
     public String getArchive(@PathVariable int year,
             @PathVariable int month, Model model, HttpServletRequest request)
             throws DataAccessException {
         return getArchive(year, month, 1, model, request);
     }
 
-    @RequestMapping(value = "/archive/{year}/{month}/page/{page}",
-    method = RequestMethod.GET)
+    @RequestMapping(value = "/archive/{year}/{month}",
+            method = RequestMethod.GET, params = "page")
     public String getArchive(@PathVariable int year,
-            @PathVariable int month, @PathVariable long page, Model model,
+            @PathVariable int month, @RequestParam long page, Model model,
             HttpServletRequest request) throws DataAccessException {
         long offset = getOffset(page);
         long limit = postNumberPerPage;
@@ -119,9 +121,9 @@ public class BlogPostListController {
         return search(keyword, 1, model, request);
     }
 
-    @RequestMapping(value = "/search/{keyword}/page/{page}",
-    method = RequestMethod.GET)
-    public String search(@PathVariable String keyword, @PathVariable long page,
+    @RequestMapping(value = "/search/{keyword}",
+            method = RequestMethod.GET, params = "page")
+    public String search(@PathVariable String keyword, @RequestParam long page,
             Model model, HttpServletRequest request)
             throws DataAccessException {
         long offset = getOffset(page);
@@ -163,7 +165,8 @@ public class BlogPostListController {
     private void truncatePosts(Collection<BlogPost> posts) {
         for (BlogPost post : posts) {
             String content = post.getContent();
-            String truncated = Utils.truncateHtml(content, postContentMaxLength);
+            String truncated = Utils.truncateHtml(content,
+                    postContentMaxLength);
             post.setContent(truncated);
         }
     }

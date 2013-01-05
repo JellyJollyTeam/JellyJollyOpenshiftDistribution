@@ -63,9 +63,9 @@ Jelly Jolly Openshift Distribution (master branch)
     <bean id="initDataSource"
           class="org.apache.commons.dbcp.BasicDataSource" scope="singleton">
         <property name="driverClassName" value="${dbcp.driverClassName}"/>
-        <property name="url" value="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/?useUnicode=true&amp;characterEncoding=UTF-8"/>
-        <property name="username" value="${OPENSHIFT_MYSQL_DB_USERNAME}"/>
-        <property name="password" value="${OPENSHIFT_MYSQL_DB_PASSWORD}"/>
+        <property name="url" value="${dbcp.init.url}"/>
+        <property name="username" value="${dbcp.username}"/>
+        <property name="password" value="${dbcp.password}"/>
         <property name="initialSize" value="1"/>
         <property name="maxActive" value="5"/>
         <property name="testOnBorrow" value="true"/>
