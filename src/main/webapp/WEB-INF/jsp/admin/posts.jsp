@@ -9,17 +9,27 @@
             document.getElementById('form').submit();
         }
     }
+    function changeCategory(categoryId) {
+        if (categoryId == -1) {
+            window.location.href = "<c:url value="/admin/posts" />";
+        } else {
+            window.location.href = "<c:url value="/admin/posts/category" />" + "/" + categoryId;
+        }
+    }
 </script>
 <h2>全部文章</h2>
 <form id="form" action="<c:url value="/admin/post" />" method="POST">
     <input type="hidden" name="_method" value="DELETE" />
     <input type="hidden" name="redirect" value="/admin/posts" />
-    <p><span style="float: left; width: 40px;">分类</span>
-    <select style="width: 100px;">
-        <c:forEach var="category" items="${categoryList}">
-            <option value="${category.categoryId}">${category.name}</option>
-        </c:forEach>
-    </select>
+    <p>
+        <span style="float: left; width: 40px;">分类</span>
+        <select style="width: 100px;" onchange="changeCategory(this.value)">
+            <option>选择分类</option>
+            <option value="-1">所有</option>
+            <c:forEach var="category" items="${categoryList}">
+                <option value="${category.categoryId}">${category.name}</option>
+            </c:forEach>
+        </select>
     </p>
     <input type="button" value="删除" style="
         width:80px;
@@ -66,12 +76,12 @@
 <div class="navigation">
     <div class="alignleft">
         <c:if test="${hasPrev}">
-            <a href="<c:url value="/admin/posts/page/${pageNum - 1}" />">较新的</a>
+            <a href="?page=${pageNum - 1}">较新的</a>
         </c:if>
     </div>
     <div class="alignright">
         <c:if test="${hasNext}">
-            <a href="<c:url value="/admin/posts/page/${pageNum + 1}" />">较早的</a>
+            <a href="?page=${pageNum + 1}">较早的</a>
         </c:if>
     </div>
 </div>
