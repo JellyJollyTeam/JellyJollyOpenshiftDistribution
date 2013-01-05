@@ -41,6 +41,9 @@
     <bean id="notFoundController" class="cn.edu.seu.cose.jellyjolly.controller.NotFoundController">
         <constructor-arg ref="frameBuilder" />
     </bean>
+    <bean id="forgetPasswordController" class="cn.edu.seu.cose.jellyjolly.controller.ForgetPasswordController">
+        <constructor-arg ref="adminUserDataAccess" />
+    </bean>
     <bean name="adminFrameBuilder" class="cn.edu.seu.cose.jellyjolly.controller.AdminFrameBuilder">
         <constructor-arg ref="blogInfoDataAccess" />
         <constructor-arg ref="blogPageDataAccess" />

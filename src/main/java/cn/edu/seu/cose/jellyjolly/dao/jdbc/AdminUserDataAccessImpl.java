@@ -54,6 +54,8 @@ class AdminUserDataAccessImpl
             + "AND user_pass=PASSWORD(?) LIMIT 1;";
     private static final String STATEMENT_GET_USER_BY_ID =
             "SELECT * FROM jj_users WHERE user_id=? LIMIT 1;";
+    private static final String STATEMENT_GET_USER_BY_USERNAME =
+            "SELECT * FROM jj_users WHERE user_name=? LIMIT 1;";
     private static final String STATEMENT_GET_ALL_USERS =
             "SELECT * FROM jj_users LIMIT 1024;";
     private static final String STATEMENT_ADD_NEW_USER =
@@ -143,6 +145,31 @@ class AdminUserDataAccessImpl
                     STATEMENT_GET_USER);
             ps.setString(1, username);
             ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                return null;
+            }
+
+            AdminUser user = getAdminUserByResultSet(rs);
+            adminUserMetaDataAccess.addUserProperties(user);
+            return user;
+        } catch (SQLException ex) {
+            throw new JdbcDataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public AdminUser getUserByUsername(String username)
+            throws DataAccessException {
+        Connection connection = null;
+        try {
+            connection = newConnection();
+            PreparedStatement ps = connection.prepareStatement(
+                    STATEMENT_GET_USER_BY_USERNAME);
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
             if (!rs.next()) {
