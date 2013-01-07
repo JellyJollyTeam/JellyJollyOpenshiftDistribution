@@ -1,9 +1,0 @@
-#!/bin/bash
-# This is a simple script and will be executed on your CI system if 
-# available.  Otherwise it will execute while your application is stopped
-# before the build step.  This script gets executed directly, so it
-# could be python, php, ruby, etc.
-mvn install:install-file -Dfile=../../jboss1/repo/jelly-jolly-1.0-SNAPSHOT.pom -DgroupId=cn.edu.seu.cose.jellyjolly -DartifactId=jelly-jolly -Dversion=1.0-SNAPSHOT -Dpackaging=pom
-mvn install:install-file -Dfile=../../jboss1/repo/jelly-jolly-persistence-api-1.0-SNAPSHOT.jar -DgroupId=cn.edu.seu.cose.jellyjolly -DartifactId=jelly-jolly-persistence-api -Dversion=1.0-SNAPSHOT -Dpackaging=jar
-mvn install:install-file -Dfile=../../jboss1/repo/jelly-jolly-core-1.0-SNAPSHOT.jar -DgroupId=cn.edu.seu.cose.jellyjolly -DartifactId=jelly-jolly-core -Dversion=1.0-SNAPSHOT -Dpackaging=jar
-mvn install:install-file -Dfile=../../jboss1/repo/jelly-jolly-mysql-impl-1.0-SNAPSHOT.jar -DgroupId=cn.edu.seu.cose.jellyjolly -DartifactId=jelly-jolly-mysql-impl -Dversion=1.0-SNAPSHOT -Dpackaging=jar
