@@ -4,7 +4,7 @@
     <groupId>cn.edu.seu.cose.jellyjolly</groupId>
     <artifactId>jellyjolly-openshift-dist</artifactId>
     <packaging>war</packaging>
-    <version>1.0.BETA1</version>
+    <version>1.0.BETA2-SNAPSHOT</version>
     <name>Jelly Jolly Openshift Distribution</name>
     <organization>
         <name>College of Software Engineering, Southeast University</name>
@@ -216,7 +216,7 @@
                         <include>**/*</include>
                     </includes>
                     <repositoryName>JellyJollyOpenshiftDistribution</repositoryName>      <!-- github repo name -->
-                    <repositoryOwner>predatorray</repositoryOwner>    <!-- github username  -->
+                    <repositoryOwner>JellyJollyTeam</repositoryOwner>    <!-- github username  -->
                 </configuration>
                 <executions>
                     <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
