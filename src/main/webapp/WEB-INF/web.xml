@@ -81,14 +81,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <servlet-name>dispatcherServlet</servlet-name>
     </filter-mapping>
     <servlet>
-        <servlet-name>restletServlet</servlet-name>
-        <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
-        <init-param>
-            <param-name>org.restlet.application</param-name>
-            <param-value>cn.edu.seu.cose.jellyjolly.rest.JellyJollyApplication</param-value>
-        </init-param>
-    </servlet>
-    <servlet>
         <servlet-name>rssServlet</servlet-name>
         <servlet-class>cn.edu.seu.cose.jellyjolly.rss.RssServlet</servlet-class>
     </servlet>
