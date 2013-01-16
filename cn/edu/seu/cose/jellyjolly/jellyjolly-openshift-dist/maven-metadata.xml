@@ -3,10 +3,9 @@
   <groupId>cn.edu.seu.cose.jellyjolly</groupId>
   <artifactId>jellyjolly-openshift-dist</artifactId>
   <versioning>
-    <release>1.0.BETA1</release>
     <versions>
-      <version>1.0.BETA1</version>
+      <version>1.0.BETA2-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20130107104851</lastUpdated>
+    <lastUpdated>20130116111657</lastUpdated>
   </versioning>
 </metadata>
