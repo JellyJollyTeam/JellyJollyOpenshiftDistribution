@@ -33,6 +33,8 @@ public interface AdminUserDataAccess {
     AdminUser getUserIfConfirmed(String username, String password)
             throws DataAccessException;
 
+    AdminUser getUserByUsername(String username) throws DataAccessException;
+
     AdminUser getUser(long userId) throws DataAccessException;
 
     List<AdminUser> getAllUsers() throws DataAccessException;

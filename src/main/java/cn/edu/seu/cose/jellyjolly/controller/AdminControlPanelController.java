@@ -109,14 +109,15 @@ public class AdminControlPanelController {
         return "redirect:/admin/settings";
     }
 
-    @RequestMapping(value = "/admin/posts", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/posts", method = RequestMethod.GET,
+            params = "!page")
     public String getPosts(Model model) throws DataAccessException {
         return getPosts(1, model);
     }
 
-    @RequestMapping(value = "/admin/posts/page/{page}",
-            method = RequestMethod.GET)
-    public String getPosts(@PathVariable long page, Model model)
+    @RequestMapping(value = "/admin/posts", method = RequestMethod.GET,
+            params = "page")
+    public String getPosts(@RequestParam long page, Model model)
             throws DataAccessException {
         long offset = getOffset(page);
         long limit = postPerPage;
@@ -126,6 +127,31 @@ public class AdminControlPanelController {
         model.addAttribute("categoryList", categoryList);
         addFrameModels(model);
         long maxPostNumber = blogPostDataAccess.getPostNumber();
+        buildPageCounterModel(page, maxPostNumber, postPerPage, model);
+        return "admin/posts";
+    }
+
+    @RequestMapping(value = "/admin/posts/category/{categoryId}",
+            method = RequestMethod.GET, params = "!page")
+    public String getPostsByCategory(@PathVariable int categoryId,
+            Model model) throws DataAccessException {
+        return getPosts(categoryId, 1, model);
+    }
+
+    @RequestMapping(value = "/admin/posts/category/{categoryId}",
+            method = RequestMethod.GET, params = "page")
+    public String getPosts(@PathVariable int categoryId,
+            @RequestParam int page, Model model)
+            throws DataAccessException {
+        long offset = getOffset(page);
+        long limit = postPerPage;
+        List<BlogPost> postList = blogPostDataAccess.getPostsByCategoryId(
+                categoryId, offset, limit);
+        List<Category> categoryList = categoryDataAccess.getAllCategories();
+        model.addAttribute("postList", postList);
+        model.addAttribute("categoryList", categoryList);
+        addFrameModels(model);
+        long maxPostNumber = blogPostDataAccess.getPostNumber(categoryId);
         buildPageCounterModel(page, maxPostNumber, postPerPage, model);
         return "admin/posts";
     }

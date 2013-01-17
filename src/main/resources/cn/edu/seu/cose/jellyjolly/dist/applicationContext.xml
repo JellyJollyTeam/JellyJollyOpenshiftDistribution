@@ -41,6 +41,9 @@
     <bean id="notFoundController" class="cn.edu.seu.cose.jellyjolly.controller.NotFoundController">
         <constructor-arg ref="frameBuilder" />
     </bean>
+    <bean id="forgetPasswordController" class="cn.edu.seu.cose.jellyjolly.controller.ForgetPasswordController">
+        <constructor-arg ref="adminUserDataAccess" />
+    </bean>
     <bean name="adminFrameBuilder" class="cn.edu.seu.cose.jellyjolly.controller.AdminFrameBuilder">
         <constructor-arg ref="blogInfoDataAccess" />
         <constructor-arg ref="blogPageDataAccess" />
@@ -55,7 +58,9 @@
         <constructor-arg ref="commentDataAccess" />
         <constructor-arg ref="linkDataAccess" />
     </bean>
-    <bean id="installationController" class="cn.edu.seu.cose.jellyjolly.controller.InstallationController">
-        <constructor-arg ref="initializationDataAccess" />
+    <bean id="rssController" class="cn.edu.seu.cose.jellyjolly.controller.RssController">
+        <constructor-arg ref="adminUserDataAccess" />
+        <constructor-arg ref="blogInfoDataAccess" />
+        <constructor-arg ref="blogPostDataAccess" />
     </bean>
 </beans>
