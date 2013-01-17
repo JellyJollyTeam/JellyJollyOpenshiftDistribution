@@ -237,6 +237,15 @@ public class AdminControlPanelController {
         return "admin/userEditor";
     }
 
+    @RequestMapping(value = "/admin/users/{userId}/password", method = RequestMethod.GET)
+    public String changePassword(@PathVariable long userId, Model model)
+            throws DataAccessException {
+        AdminUser adminUser = adminUserDataAccess.getUser(userId);
+        model.addAttribute("adminUser", adminUser);
+        addFrameModels(model);
+        return "admin/changePassword";
+    }
+
     @RequestMapping(value = "/admin/users/{userId}", method = RequestMethod.GET)
     public String editAdminUser(@PathVariable long userId, Model model)
             throws DataAccessException {

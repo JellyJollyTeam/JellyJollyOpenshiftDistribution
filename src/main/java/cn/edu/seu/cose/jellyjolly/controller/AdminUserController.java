@@ -130,16 +130,22 @@ public class AdminUserController {
             @RequestParam String oldPassword, @RequestParam String newPassword,
             @RequestParam String confirmPassword,
             @RequestParam String redirect) throws DataAccessException {
-        String username = adminUserDataAccess.getUser(userId).getUsername();
+        AdminUser adminUser = adminUserDataAccess.getUser(userId);
+        String username = adminUser.getUsername();
 
         boolean confirmed = adminUserDataAccess.confirm(username, oldPassword);
         if (!confirmed) {
-            return "redirect:" + redirect + "?err=1";
+            return "redirect:/admin/users/" + adminUser.getUserId() + "/password?err=1";
+        }
+        
+        boolean empty = newPassword.trim().equals("");
+        if (empty) {
+            return "redirect:/admin/users/" + adminUser.getUserId() + "/password?err=2";
         }
 
         boolean same = newPassword.equals(confirmPassword);
         if (!same) {
-            return "redirect:" + redirect + "?err=2";
+            return "redirect:/admin/users/" + adminUser.getUserId() + "/password?err=3";
         }
         adminUserDataAccess.changePassword(userId, newPassword);
         return "redirect:" + redirect;
