@@ -233,9 +233,9 @@
                 </executions>
                 <configuration>
                     <driver>com.mysql.jdbc.Driver</driver>
-                    <username>root</username>
-                    <password>root</password>
-                    <url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=UTF-8</url>
+                    <username>${env.OPENSHIFT_MYSQL_DB_USERNAME}</username>
+                    <password>${env.OPENSHIFT_MYSQL_DB_PASSWORD}</password>
+                    <url>jdbc:mysql://${env.OPENSHIFT_MYSQL_DB_HOST}:${env.OPENSHIFT_MYSQL_DB_PORT}/?useUnicode=true&amp;characterEncoding=UTF-8</url>
                     <autocommit>false</autocommit>
                     <delimiterType>row</delimiterType>
                     <srcFiles>
