@@ -225,7 +225,7 @@ BEGIN
 	## delete comments to the post
 	DELETE FROM jj_blog_comments WHERE blog_post_id=OLD.blog_post_id;
 	## delete the unused category
-	IF (SELECT COUNT(1) FROM jj_blog_posts WHERE category_id=OLD.category_id) <= 0 THEN
+	IF (SELECT COUNT(1) FROM jj_blog_posts WHERE category_id=OLD.category_id) <= 0 AND (SELECT COUNT(1) FROM jj_categories) > 0 THEN
 		DELETE FROM jj_categories WHERE category_id=OLD.category_id;
 	END IF;
 END
