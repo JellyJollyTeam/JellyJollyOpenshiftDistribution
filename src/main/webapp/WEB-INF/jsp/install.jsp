@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <script src="<c:url value="/static/jquery-1.8.1.min.css" />" />
+        <script src="<c:url value="/static/jquery-1.8.1.min.css" />"></script>
         <link rel="stylesheet" href="<c:url value="/static/style.css" />" type="text/css" media="screen" />
         <title>安装您的JellyJolly博客</title>
         <style type="text/css">
@@ -27,10 +27,10 @@
                 <h2>请您填写以下信息</h2>
                 <form action="<c:url value="/install" />" method="post" id="commentform">
                     <p>
-                        <label for="title" class="warning" style="float: left; width: 100px">博客标题 *</label><input type="text" name="title" style="width: 200px" />
+                        <label for="title" style="float: left; width: 100px">博客标题 *</label><input type="text" name="title" value="${blogInfo.blogTitle}" style="width: 200px" />
                     </p>
                     <p>
-                        <label for="subtitle" style="float: left; width: 100px">博客副标题 *</label><input type="text" name="subtitle" style="width: 200px" />
+                        <label for="subtitle" style="float: left; width: 100px">博客副标题 *</label><input type="text" name="subtitle" value="${blogInfo.blogSubTitle}" style="width: 200px" />
                     </p>
                     <p>
                         <label for="subtitle" style="float: left; width: 100px">您的登录用户名 *</label><input type="text" name="username" style="width: 200px" />
@@ -43,9 +43,11 @@
                     </p>
                     <p>
                         <label for="subtitle" style="float: left; width: 100px">登录密码 *</label><input type="password" name="password" style="width: 200px" />
+                        <c:if test="${param.err==1}">&nbsp;<span class="warning">密码不能为空</span></c:if>
                     </p>
                     <p>
                         <label for="subtitle" style="float: left; width: 100px">再次输入密码 *</label><input type="password" name="confirmPassword" style="width: 200px" />
+                        <c:if test="${param.err==2}">&nbsp;<span class="warning">密码不一致</span></c:if>
                     </p>
                     <p>
                         <input name="submit" type="submit" id="submit" tabindex="5" value="完成" />
