@@ -59,11 +59,8 @@
         <constructor-arg ref="linkDataAccess" />
     </bean>
     <bean id="rssController" class="cn.edu.seu.cose.jellyjolly.controller.RssController">
-        <cconstructor-arg ref="adminUserDataAccess" />
-        <cconstructor-arg ref="blogInfoDataAccess" />
-        <cconstructor-arg ref="blogPostDataAccess" />
-    </bean>
-    <bean id="installationController" class="cn.edu.seu.cose.jellyjolly.controller.InstallationController">
-        <constructor-arg ref="initializationDataAccess" />
+        <constructor-arg ref="adminUserDataAccess" />
+        <constructor-arg ref="blogInfoDataAccess" />
+        <constructor-arg ref="blogPostDataAccess" />
     </bean>
 </beans>

@@ -3,7 +3,7 @@
     Created on : 2013-1-5, 20:03:26
     Author     : rAy <predator.ray@gmail.com>
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" isErrorPage="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
@@ -26,9 +26,11 @@
             <div id="content">
                 <small class="caps">&nbsp;</small>
                 <h1 class="errortitle">500 - 出错了额 ╮(╯▽╰)╭ </h1>
-                <h3>可能是由于你还没有安装哦</h3>
-                <p><a href="../install">点击此处安装</a></p>
-                <p>或者<a href="https://github.com/JellyJollyTeam/JellyJollyOpenshiftDistribution">报告这个错误</a></p>
+                <h3>${exception.localizedMessage}</h3>
+                <c:forEach var="stackTrack" items="${exception.stackTrace}">
+                    <p><c:out value="${stackTrace}" /></p>
+                </c:forEach>
+                <p><a href="https://github.com/JellyJollyTeam/JellyJollyOpenshiftDistribution">报告这个错误</a></p>
             </div>
             <div class="clear"></div>
             <div id="footer">

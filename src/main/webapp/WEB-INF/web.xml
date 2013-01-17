@@ -80,17 +80,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <filter-name>hiddenHttpMethodFilter</filter-name>
         <servlet-name>dispatcherServlet</servlet-name>
     </filter-mapping>
-    <servlet>
-        <servlet-name>rssServlet</servlet-name>
-        <servlet-class>cn.edu.seu.cose.jellyjolly.rss.RssServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>restletServlet</servlet-name>
-        <url-pattern>/resource/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>rssServlet</servlet-name>
-        <url-pattern>/rss</url-pattern>
-    </servlet-mapping>
 </web-app>

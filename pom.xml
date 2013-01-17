@@ -211,6 +211,39 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>  
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.21</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>init-schema</id>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <username>root</username>
+                    <password>root</password>
+                    <url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=UTF-8</url>
+                    <autocommit>false</autocommit>
+                    <delimiterType>row</delimiterType>
+                    <srcFiles>
+                        <srcFile>src/main/sql/jellyjolly-schema.sql</srcFile>
+                        <srcFile>src/main/sql/jellyjolly-init.sql</srcFile>
+                    </srcFiles>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <distributionManagement>
