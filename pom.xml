@@ -4,7 +4,7 @@
     <groupId>cn.edu.seu.cose.jellyjolly</groupId>
     <artifactId>jellyjolly-openshift-dist</artifactId>
     <packaging>war</packaging>
-    <version>1.0.BETA2-SNAPSHOT</version>
+    <version>1.0.BETA2</version>
     <name>Jelly Jolly Openshift Distribution</name>
     <organization>
         <name>College of Software Engineering, Southeast University</name>
@@ -212,7 +212,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>  
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sql-maven-plugin</artifactId>
                 <version>1.5</version>
                 <dependencies>
