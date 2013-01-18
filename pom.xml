@@ -222,15 +222,6 @@
                         <version>5.1.21</version>
                     </dependency>
                 </dependencies>
-                <executions>
-                    <execution>
-                        <id>init-schema</id>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <phase>deploy</phase>
-                    </execution>
-                </executions>
                 <configuration>
                     <driver>com.mysql.jdbc.Driver</driver>
                     <username>${env.OPENSHIFT_MYSQL_DB_USERNAME}</username>
