@@ -19,14 +19,15 @@
     <p><label for="subtitle" style="float: left; width: 100px">邮箱 *</label><input type="text" name="email" value="<c:out value="${adminUser.email}" default="" />" style="width: 200px" /></p>
     <p><label for="subtitle" style="float: left; width: 100px">主页</label><input type="text" name="homePage" value="<c:out value="${adminUser.homePageUrl}" default="" />" style="width: 200px" /></p>
     <c:if test="${empty adminUser}">
-    <p><label for="title" style="float: left; width: 100px">密码 *</label><input type="password" name="password" style="width: 200px" /></p>
-    <p><label for="title" style="float: left; width: 100px">确认密码 *</label><input type="password" name="confirmPassword" style="width: 200px" /></p>
     </c:if>
     <c:choose>
         <c:when test="${empty adminUser}">
+            <p><label for="title" style="float: left; width: 100px">密码 *</label><input type="password" name="password" style="width: 200px" /></p>
+            <p><label for="title" style="float: left; width: 100px">确认密码 *</label><input type="password" name="confirmPassword" style="width: 200px" /></p>
             <p><input name="submit" type="submit" id="submit" tabindex="5" value="新建" /></p>
         </c:when>
         <c:otherwise>
+            <p><a href="<c:url value="/admin/users/${adminUser.userId}/password" />">修改密码</a></p>
             <p><input name="submit" type="submit" id="submit" tabindex="5" value="更新" /></p>
         </c:otherwise>
     </c:choose>

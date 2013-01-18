@@ -18,6 +18,10 @@
         <constructor-arg ref="categoryDataAccess" />
         <constructor-arg ref="linkDataAccess" />
     </bean>
+    <bean id="installationController" class="cn.edu.seu.cose.jellyjolly.controller.InstallationController">
+        <constructor-arg ref="adminUserDataAccess" />
+        <constructor-arg ref="blogInfoDataAccess" />
+    </bean>
     <bean id="errorController" class="cn.edu.seu.cose.jellyjolly.controller.ErrorController" />
     <bean id="adminUserController" class="cn.edu.seu.cose.jellyjolly.controller.AdminUserController">
         <constructor-arg ref="adminUserDataAccess" />

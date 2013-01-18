@@ -1,6 +1,5 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="head.jsp"%>
 <script type="text/javascript">
     function check() {
@@ -28,12 +27,11 @@
         <tbody>
             <tr>
                 <td width="1%">&nbsp;</td>
-                <td style="padding-top: 2px; padding-left: 10px" width="15%">显示名字</td>
+                <td style="padding-top: 2px; padding-left: 10px" width="17%">显示名字</td>
                 <td style="padding-top: 2px; padding-left: 10px" width="10%">用户名</td>
                 <td style="padding-top: 2px; padding-left: 10px" width="15%">邮箱</td>
-                <td style="padding-top: 2px; padding-left: 10px" width="17%">主页</td>
-                <td style="padding-top: 2px; padding-left: 10px" width="17%">注册时间</td>
-                <td style="padding-top: 2px; padding-left: 10px" width="17%">上次登录</td>
+                <td style="padding-top: 2px; padding-left: 10px" width="30%">主页</td>
+                <td style="padding-top: 2px; padding-left: 10px" width="12%">功能</td>
             </tr>
             <c:forEach var="user" items="${adminUserList}">
             <tr>
@@ -42,8 +40,9 @@
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><a href="<c:url value="/admin/users/${user.userId}" />"><c:out value="${user.username}" /></a></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><c:out value="${user.email}" /></td>
                 <td style="padding-top: 2px; padding-left: 10px" height="60px"><c:out value="${user.homePageUrl}" /></td>
-                <td style="padding-top: 2px; padding-left: 10px" height="60px"><fmt:formatDate value="${user.registerTime}" pattern="yyyy年MM月dd日" /></td>
-                <td style="padding-top: 2px; padding-left: 10px" height="60px"><fmt:formatDate value="${user.lastLoginTime}" pattern="yyyy年MM月dd日" /></td>
+                <td style="padding-top: 2px; padding-left: 10px" height="60px">
+                    <a href="<c:url value="/admin/users/${user.userId}/password" />">修改密码</a>
+                </td>
             </tr>
             </c:forEach>
         </tbody>
