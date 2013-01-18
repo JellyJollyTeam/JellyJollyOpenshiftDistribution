@@ -5,8 +5,6 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES'
 ;
 
-DROP SCHEMA IF EXISTS `jellyjolly_schema`
-;
 CREATE SCHEMA IF NOT EXISTS `jellyjolly_schema` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
 ;
 USE `jellyjolly_schema`
@@ -15,8 +13,6 @@ USE `jellyjolly_schema`
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_users` 
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_users` (
   `user_id` BIGINT NOT NULL AUTO_INCREMENT ,
@@ -36,8 +32,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_categories`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_categories`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_categories` (
   `category_id` INT NOT NULL AUTO_INCREMENT ,
@@ -50,8 +44,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_blog_posts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_blog_posts`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_posts` (
   `blog_post_id` BIGINT NOT NULL AUTO_INCREMENT ,
@@ -69,8 +61,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_blog_post_meta`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_blog_post_meta`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_post_meta` (
   `meta_id` INT NOT NULL AUTO_INCREMENT ,
@@ -85,8 +75,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_blog_info`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_blog_info`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_info` (
   `blog_id` INT NOT NULL AUTO_INCREMENT ,
@@ -101,8 +89,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_blog_comments`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_blog_comments`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_comments` (
   `comment_id` BIGINT NOT NULL AUTO_INCREMENT ,
@@ -122,8 +108,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_links`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_links`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_links` (
   `link_id` BIGINT NOT NULL AUTO_INCREMENT ,
@@ -138,8 +122,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_user_meta`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_user_meta`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_user_meta` (
   `user_meta_id` BIGINT NOT NULL AUTO_INCREMENT ,
@@ -154,8 +136,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_blog_meta`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_blog_meta`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_meta` (
   `blog_meta_id` BIGINT NOT NULL AUTO_INCREMENT ,
@@ -169,8 +149,6 @@ ENGINE = MyISAM
 -- -----------------------------------------------------
 -- Table `jellyjolly_schema`.`jj_blog_pages`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `jellyjolly_schema`.`jj_blog_pages`
-;
 
 CREATE  TABLE IF NOT EXISTS `jellyjolly_schema`.`jj_blog_pages` (
   `blog_page_id` INT NOT NULL AUTO_INCREMENT ,
@@ -181,8 +159,6 @@ ENGINE = MyISAM
 ;
 
 USE `jellyjolly_schema`
-;
-DROP TRIGGER IF EXISTS `jellyjolly_schema`.`delete_user`
 ;
 
 
@@ -197,10 +173,6 @@ END
 ;
 
 
-DROP TRIGGER IF EXISTS `jellyjolly_schema`.`update_post`
-;
-
-
 CREATE TRIGGER update_post
 AFTER UPDATE
 ON jj_blog_posts
@@ -210,10 +182,6 @@ BEGIN
 		DELETE FROM jj_categories WHERE category_id=OLD.category_id;
 	END IF;
 END
-;
-
-
-DROP TRIGGER IF EXISTS `jellyjolly_schema`.`delete_post`
 ;
 
 
