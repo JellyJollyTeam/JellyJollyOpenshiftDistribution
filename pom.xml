@@ -4,7 +4,7 @@
     <groupId>cn.edu.seu.cose.jellyjolly</groupId>
     <artifactId>jellyjolly-openshift-dist</artifactId>
     <packaging>war</packaging>
-    <version>1.0.BETA2-SNAPSHOT</version>
+    <version>1.0.BETA3-SNAPSHOT</version>
     <name>Jelly Jolly Openshift Distribution</name>
     <organization>
         <name>College of Software Engineering, Southeast University</name>
