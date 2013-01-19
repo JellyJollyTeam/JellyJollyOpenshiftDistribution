@@ -63,7 +63,30 @@
                 <c:url var="commentAction" value="/admin/comment" />
             </c:otherwise>
         </c:choose>
-        <form action="<c:out value="${commentAction}" />" method="post" id="commentform">
+        <script type="text/javascript">
+            function checkComment() {
+                var author = document.getElementById('author');
+                if (author.value == '') {
+                    alert('请输入姓名');
+                    author.focus();
+                    return false;
+                }
+                var email = document.getElementById('email');
+                if (email.value == '') {
+                    alert('请输入电子邮箱');
+                    email.focus();
+                    return false;
+                }
+                var comment = document.getElementById('comment');
+                if (comment.value == '') {
+                    alert('评论不能为空');
+                    comment.focus();
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        <form action="<c:out value="${commentAction}" />" method="post" id="commentform" onsubmit="return checkComment();">
             <input type="hidden" name="postId" value="${blogpost.postId}" />
             <c:choose>
                 <c:when test="${empty userAuth}">
@@ -79,7 +102,7 @@
                 </c:when>
                 <c:otherwise>
                     <img src="<jj:getGravatar email="${userAuth.user.email}" size="32" />" class="avatar avatar-32 photo" height="32" width="32" />
-                    <p><cite class="fn"><c:out value="${userAuth.user.displayName}"/></cite>已经登录 | <a href="<c:url value="/logout" />">登出</a></p>
+                    <p><cite class="fn"><c:out value="${userAuth.user.displayName}"/></cite>已经登录 | <a href="<c:url value="/logout?redirect=/post/${blogpost.postId}" />">登出</a></p>
                 </c:otherwise>
             </c:choose>
 
