@@ -56,8 +56,11 @@ public class RssBuilder {
         SyndEntry entry = new SyndEntryImpl();
 
         // author
-        String author = post.getAuthor().getDisplayName();
-        entry.setAuthor(author);
+        AdminUser author = post.getAuthor();
+        String authorName = (author == null)
+                ? "匿名"
+                : author.getDisplayName();
+        entry.setAuthor(authorName);
 
         // category
         String category = post.getCategory().getName();
