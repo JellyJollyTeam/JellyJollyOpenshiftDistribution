@@ -25,12 +25,6 @@
             newCategoryInput.focus();
             return false;
         }
-        var content = document.getElementById('editor1');
-        if (content.value == '') {
-            alert('正文不能为空');
-            content.focus();
-            return false;
-        }
         return true;
     }
 </script>

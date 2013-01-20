@@ -9,11 +9,22 @@
         <h2>编辑页面</h2>
     </c:otherwise>
 </c:choose>
-<form action="<c:url value="/admin/page" /><c:out value="/${blogpage.blogPageId}" default="" />" method="POST" id="commentform">
+<script type="text/javascript">
+    function checkPublishPage() {
+        var title = document.getElementById('title');
+        if (title.value == '') {
+            alert('请输入标题');
+            title.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<form action="<c:url value="/admin/page" /><c:out value="/${blogpage.blogPageId}" default="" />" method="POST" id="commentform" onsubmit="return checkPublishPage();">
     <c:if test="${!empty blogpage}">
         <input type="hidden" name="_method" value="PUT" />
     </c:if>
-    <p>标题<br /><input type="text" name="title" value="<c:out value="${blogpage.pageTitle}" default="" />" /></p>
+    <p>标题<br /><input type="text" id="title" name="title" value="<c:out value="${blogpage.pageTitle}" default="" />" /></p>
     <script src="<c:url value="/static/ckeditor/ckeditor.js" />"></script>
     <p>正文<br />
         <textarea name="content" id="editor1"><c:out value="${blogpage.pageContent}" default="" /></textarea>
