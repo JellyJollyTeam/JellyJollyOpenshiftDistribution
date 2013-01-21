@@ -5,9 +5,6 @@
 <%@include file="head.jsp" %>
     <div class="post" id="post-46">
         <small class="caps">&nbsp;</small>
-
-        <h1><c:out value="${blogpage.pageTitle}"/></h1>
-
         <div class="entry">
             <c:out value="${blogpage.pageContent}" escapeXml="false" />
         </div>
