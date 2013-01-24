@@ -18,7 +18,7 @@ package cn.edu.seu.cose.jellyjolly.controller;
 
 import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
-import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
+import cn.edu.seu.cose.jellyjolly.model.BlogPost;
 import cn.edu.seu.cose.jellyjolly.util.Utils;
 import java.util.Collection;
 import java.util.List;

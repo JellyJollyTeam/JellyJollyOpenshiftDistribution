@@ -15,42 +15,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cn.edu.seu.cose.jellyjolly.dto;
+package cn.edu.seu.cose.jellyjolly.model;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public class MonthArchive {
+public class BlogPageBar {
 
-    private int year;
+    private int blogPageId;
 
-    private int month;
+    private String pageTitle;
 
-    private long count;
-
-    public int getYear() {
-        return year;
+    public int getBlogPageId() {
+        return blogPageId;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setBlogPageId(int blogPageId) {
+        this.blogPageId = blogPageId;
     }
 
-    public int getMonth() {
-        return month;
+    public String getPageTitle() {
+        return pageTitle;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public long getCount() {
-        return count;
-    }
-
-    public void setCount(long count) {
-        this.count = count;
+    public void setPageTitle(String pageTitle) {
+        this.pageTitle = pageTitle;
     }
 
 }

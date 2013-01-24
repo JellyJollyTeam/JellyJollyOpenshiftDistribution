@@ -18,7 +18,7 @@ package cn.edu.seu.cose.jellyjolly.dao.jdbc;
 
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
 import cn.edu.seu.cose.jellyjolly.dao.LinkDataAccess;
-import cn.edu.seu.cose.jellyjolly.dto.Link;
+import cn.edu.seu.cose.jellyjolly.model.Link;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

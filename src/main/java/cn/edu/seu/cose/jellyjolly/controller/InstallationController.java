@@ -19,7 +19,7 @@ package cn.edu.seu.cose.jellyjolly.controller;
 import cn.edu.seu.cose.jellyjolly.dao.AdminUserDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.BlogInfoDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
-import cn.edu.seu.cose.jellyjolly.dto.BlogInfo;
+import cn.edu.seu.cose.jellyjolly.model.BlogInfo;
 import java.util.Date;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

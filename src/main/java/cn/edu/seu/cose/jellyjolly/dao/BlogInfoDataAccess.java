@@ -16,7 +16,7 @@
  */
 package cn.edu.seu.cose.jellyjolly.dao;
 
-import cn.edu.seu.cose.jellyjolly.dto.BlogInfo;
+import cn.edu.seu.cose.jellyjolly.model.BlogInfo;
 
 /**
  *

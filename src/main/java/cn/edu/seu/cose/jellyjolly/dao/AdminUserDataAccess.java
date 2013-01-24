@@ -16,7 +16,7 @@
  */
 package cn.edu.seu.cose.jellyjolly.dao;
 
-import cn.edu.seu.cose.jellyjolly.dto.AdminUser;
+import cn.edu.seu.cose.jellyjolly.model.AdminUser;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;

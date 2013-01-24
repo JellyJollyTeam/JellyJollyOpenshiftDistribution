@@ -17,7 +17,7 @@
 package cn.edu.seu.cose.jellyjolly.controller.tag;
 
 import cn.edu.seu.cose.jellyjolly.dao.BlogPostDataAccess;
-import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
+import cn.edu.seu.cose.jellyjolly.model.BlogPost;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.jsp.JspException;

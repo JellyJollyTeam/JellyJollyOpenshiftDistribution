@@ -18,7 +18,7 @@ package cn.edu.seu.cose.jellyjolly.controller;
 
 import cn.edu.seu.cose.jellyjolly.dao.AdminUserDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
-import cn.edu.seu.cose.jellyjolly.dto.AdminUser;
+import cn.edu.seu.cose.jellyjolly.model.AdminUser;
 import cn.edu.seu.cose.jellyjolly.model.session.UserAuthorization;
 import java.util.Date;
 import java.util.List;
@@ -137,7 +137,7 @@ public class AdminUserController {
         if (!confirmed) {
             return "redirect:/admin/users/" + adminUser.getUserId() + "/password?err=1";
         }
-        
+
         boolean empty = newPassword.trim().equals("");
         if (empty) {
             return "redirect:/admin/users/" + adminUser.getUserId() + "/password?err=2";

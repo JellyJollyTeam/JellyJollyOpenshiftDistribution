@@ -18,7 +18,7 @@ package cn.edu.seu.cose.jellyjolly.dao.jdbc;
 
 import cn.edu.seu.cose.jellyjolly.dao.CategoryDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
-import cn.edu.seu.cose.jellyjolly.dto.Category;
+import cn.edu.seu.cose.jellyjolly.model.Category;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -16,8 +16,8 @@
  */
 package cn.edu.seu.cose.jellyjolly.dao;
 
-import cn.edu.seu.cose.jellyjolly.dto.BlogPost;
-import cn.edu.seu.cose.jellyjolly.dto.MonthArchive;
+import cn.edu.seu.cose.jellyjolly.model.BlogPost;
+import cn.edu.seu.cose.jellyjolly.model.MonthArchive;
 import java.util.Date;
 import java.util.List;
 

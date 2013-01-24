@@ -16,7 +16,7 @@
  */
 package cn.edu.seu.cose.jellyjolly.dao;
 
-import cn.edu.seu.cose.jellyjolly.dto.Comment;
+import cn.edu.seu.cose.jellyjolly.model.Comment;
 import java.util.Date;
 import java.util.List;
 

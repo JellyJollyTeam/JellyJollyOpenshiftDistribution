@@ -16,8 +16,8 @@
  */
 package cn.edu.seu.cose.jellyjolly.dao;
 
-import cn.edu.seu.cose.jellyjolly.dto.BlogPage;
-import cn.edu.seu.cose.jellyjolly.dto.BlogPageBar;
+import cn.edu.seu.cose.jellyjolly.model.BlogPage;
+import cn.edu.seu.cose.jellyjolly.model.BlogPageBar;
 import java.util.List;
 
 /**

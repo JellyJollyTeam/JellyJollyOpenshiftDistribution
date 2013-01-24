@@ -17,7 +17,7 @@
 
 package cn.edu.seu.cose.jellyjolly.model.session;
 
-import cn.edu.seu.cose.jellyjolly.dto.AdminUser;
+import cn.edu.seu.cose.jellyjolly.model.AdminUser;
 
 /**
  *

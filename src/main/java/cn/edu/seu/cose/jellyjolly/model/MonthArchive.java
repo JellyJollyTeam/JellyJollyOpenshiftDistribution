@@ -15,52 +15,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cn.edu.seu.cose.jellyjolly.dto;
+package cn.edu.seu.cose.jellyjolly.model;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public class BlogStatistics {
+public class MonthArchive {
 
-    private long postCount;
+    private int year;
 
-    private int pageCount;
+    private int month;
 
-    private int categoryCount;
+    private long count;
 
-    private long commentCount;
-
-    public long getPostCount() {
-        return postCount;
+    public int getYear() {
+        return year;
     }
 
-    public void setPostCount(long postCount) {
-        this.postCount = postCount;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-    public int getPageCount() {
-        return pageCount;
+    public int getMonth() {
+        return month;
     }
 
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
+    public void setMonth(int month) {
+        this.month = month;
     }
 
-    public int getCategoryCount() {
-        return categoryCount;
+    public long getCount() {
+        return count;
     }
 
-    public void setCategoryCount(int categoryCount) {
-        this.categoryCount = categoryCount;
-    }
-
-    public long getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(long commentCount) {
-        this.commentCount = commentCount;
+    public void setCount(long count) {
+        this.count = count;
     }
 
 }

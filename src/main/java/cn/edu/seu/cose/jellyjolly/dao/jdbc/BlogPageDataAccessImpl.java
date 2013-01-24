@@ -18,8 +18,8 @@ package cn.edu.seu.cose.jellyjolly.dao.jdbc;
 
 import cn.edu.seu.cose.jellyjolly.dao.BlogPageDataAccess;
 import cn.edu.seu.cose.jellyjolly.dao.DataAccessException;
-import cn.edu.seu.cose.jellyjolly.dto.BlogPage;
-import cn.edu.seu.cose.jellyjolly.dto.BlogPageBar;
+import cn.edu.seu.cose.jellyjolly.model.BlogPage;
+import cn.edu.seu.cose.jellyjolly.model.BlogPageBar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

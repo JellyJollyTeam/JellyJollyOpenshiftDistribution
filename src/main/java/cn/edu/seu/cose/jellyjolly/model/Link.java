@@ -14,32 +14,52 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cn.edu.seu.cose.jellyjolly.dto;
+package cn.edu.seu.cose.jellyjolly.model;
 
 /**
  *
  * @author rAy
  */
-public class Category {
+public class Link {
 
-    private int categoryId;
+    private long linkId;
 
-    private String name;
+    private String title;
 
-    public int getCategoryId() {
-        return categoryId;
+    private String image;
+
+    private String url;
+
+    public long getLinkId() {
+        return linkId;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public String getTitle() {
+        return title;
     }
 
-    public String getName() {
-        return name;
+    public String getImage() {
+        return image;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setLinkId(long linkId) {
+        this.linkId = linkId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

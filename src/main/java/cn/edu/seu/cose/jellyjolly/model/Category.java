@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 rAy <predator.ray@gmail.com>
+ * Copyright (C) 2012 College of Software Engineering, Southeast University
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,33 +14,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package cn.edu.seu.cose.jellyjolly.dto;
+package cn.edu.seu.cose.jellyjolly.model;
 
 /**
  *
- * @author rAy <predator.ray@gmail.com>
+ * @author rAy
  */
-public class BlogPageBar {
+public class Category {
 
-    private int blogPageId;
+    private int categoryId;
 
-    private String pageTitle;
+    private String name;
 
-    public int getBlogPageId() {
-        return blogPageId;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setBlogPageId(int blogPageId) {
-        this.blogPageId = blogPageId;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public String getPageTitle() {
-        return pageTitle;
+    public String getName() {
+        return name;
     }
 
-    public void setPageTitle(String pageTitle) {
-        this.pageTitle = pageTitle;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

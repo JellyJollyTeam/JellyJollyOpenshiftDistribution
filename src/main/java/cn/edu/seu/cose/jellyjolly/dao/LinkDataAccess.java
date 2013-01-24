@@ -16,7 +16,7 @@
  */
 package cn.edu.seu.cose.jellyjolly.dao;
 
-import cn.edu.seu.cose.jellyjolly.dto.Link;
+import cn.edu.seu.cose.jellyjolly.model.Link;
 import java.util.List;
 
 /**
