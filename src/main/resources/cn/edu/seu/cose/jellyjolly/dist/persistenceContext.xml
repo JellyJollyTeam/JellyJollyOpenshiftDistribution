@@ -29,7 +29,7 @@ Jelly Jolly Openshift Distribution (dev branch)
         <property name="validationQuery" value="SELECT 1;"/>
     </bean>
     <bean name="dataAccessFactory"
-          class="cn.edu.seu.cose.jellyjolly.dao.jdbc.MysqlDataAccessFactory"
+          class="cn.edu.seu.cose.jellyjolly.dao.mysql.MysqlDataAccessFactory"
           scope="singleton">
         <constructor-arg ref="dataSource"/>
     </bean>
