@@ -9,11 +9,30 @@
         <h2>编辑文章</h2>
     </c:otherwise>
 </c:choose>
-<form action="<c:url value="/admin/post" /><c:out value="/${blogpost.postId}" default="" />" method="POST" id="commentform">
+<script type="text/javascript">
+    function checkPublishPost() {
+        var title = document.getElementById('title');
+        if (title.value == '') {
+            alert('请输入标题');
+            title.focus();
+            return false;
+        }
+        var newCategorySpan = document.getElementById('newCategorySpan');
+        var newCategoryInput = document.getElementById('newCategoryInput');
+        var createNew = (newCategorySpan.getAttribute('hidden') != 'hidden');
+        if (createNew && newCategoryInput.value == '') {
+            alert('请输入新分类名称');
+            newCategoryInput.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<form action="<c:url value="/admin/post" /><c:out value="/${blogpost.postId}" default="" />" method="POST" id="commentform" onsubmit="return checkPublishPost();">
     <c:if test="${!empty blogpost}">
         <input type="hidden" name="_method" value="PUT" />
     </c:if>
-    <p>标题<br /><input type="text" name="title" value="<c:out value="${blogpost.title}" default="" />" /></p>
+    <p>标题<br /><input type="text" id="title" name="title" value="<c:out value="${blogpost.title}" default="" />" /></p>
     <p>分类<br />
         <script type="text/javascript">
             function showNewCategoryInput() {

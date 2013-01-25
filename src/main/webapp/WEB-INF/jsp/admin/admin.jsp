@@ -21,9 +21,26 @@
     </c:forEach>
 </ul>
 <h3 style="margin-bottom: 10px;">快速发表</h3>
-<form action="<c:url value="/admin/post/simple" />" method="post" id="commentform">
+<script type="text/javascript">
+    function checkPublishPost() {
+        var title = document.getElementById('title');
+        if (title.value == '') {
+            alert('请输入标题');
+            title.focus();
+            return false;
+        }
+        var content = document.getElementById('comment');
+        if (content.value == '') {
+            alert('正文不能为空');
+            content.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<form action="<c:url value="/admin/post/simple" />" method="post" id="commentform" onsubmit="return checkPublishPost();">
     <input type="hidden" name="redirect" value="/" />
-    <p>标题<br /><input type="text" name="title" /></p>
+    <p>标题<br /><input type="text" id="title" name="title" /></p>
     <p>分类<br />
         <select name="categoryId" style="width: 100px;">
             <c:forEach var="category" items="${categoryList}">
