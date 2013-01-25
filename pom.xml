@@ -61,7 +61,7 @@
         </repository>
         <repository>
             <id>jellyjolly-mvn-repo</id>
-            <url>https://raw.github.com/JellyJollyTeam/Artifacts/mvn-repo/</url>
+            <url>https://raw.github.com/JellyJollyTeam/MvnRepo/master/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -195,13 +195,12 @@
                 <configuration>
                     <message>Maven artifacts for ${project.groupId} ${project.artifactId} ${project.version}</message>  <!-- git commit message -->
                     <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-                    <merge>true</merge>
-                    <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
+                    <outputDirectory>${project.build.directory}/master</outputDirectory> <!-- matches distribution management repository url above -->
+                    <branch>refs/heads/master</branch>                       <!-- remote branch name -->
                     <includes>
                         <include>**/*</include>
                     </includes>
-                    <repositoryName>Artifacts</repositoryName>      <!-- github repo name -->
+                    <repositoryName>MvnRepo</repositoryName>      <!-- github repo name -->
                     <repositoryOwner>JellyJollyTeam</repositoryOwner>    <!-- github username  -->
                 </configuration>
                 <executions>
