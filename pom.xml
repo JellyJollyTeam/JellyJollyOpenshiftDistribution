@@ -61,7 +61,7 @@
         </repository>
         <repository>
             <id>jellyjolly-mvn-repo</id>
-            <url>https://raw.github.com/JellyJollyTeam/MvnRepo/master/</url>
+            <url>https://raw.github.com/JellyJollyTeam/Artifacts/mvn-repo/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
