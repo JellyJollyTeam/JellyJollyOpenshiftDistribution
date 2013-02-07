@@ -6,3 +6,5 @@ cd $APP_NAME
 git remote add upstream -m master git://github.com/JellyJollyTeam/JellyJollyOpenshiftDistribution.git
 git pull -s recursive -X theirs -f upstream master
 git push origin master
+echo 'FINISH!'
+exit 0
