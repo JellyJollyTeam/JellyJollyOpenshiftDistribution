@@ -1,9 +1,10 @@
 Jelly Jolly Openshift 发布版
 ===========================
 
-Jelly Jolly是一个开源的博客引擎。这个发布版运行于Openshift的PAAS平台之上。
+Jelly Jolly是一个开源的博客引擎。这个发布版运行于[Openshift](http://openshift.redhat.com/)的PAAS平台之上。
 以下是部署并运行Jelly Jolly的步骤，并且假设您已安装并正确配置rhc（Openshift命令行工具）。
-如果您还没有配置Openshift的命令行工具，请访问https://openshift.redhat.com/community/get-started，
+如果您还没有配置Openshift的命令行工具，请访问https://openshift.redhat.com/community/get-started
+，
 并选择COMMAND LINE栏目，根据Openshift提供的步骤进行安装。
 安装过程将需要5至10分钟，其中可能需要您多次输入Openshift的密码。
 如果希望使用脚本自动执行，并且您的操作系统是Unix或其衍生（如Linux），请下载资料库中的install.sh运行。
