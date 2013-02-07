@@ -14,7 +14,7 @@ You have to name you jellyjolly application first, such as jellyjolly or blog.
 Add a mysql cartridge to your application
 -----------------------------------------
 
-    rhc app cartridge add -c mysql-5.1 -a <your-app-name>
+    rhc cartridge add -c mysql-5.1 -a <your-app-name>
 
 Download the source code of Jelly Jolly from Github and push it to the openshift repo
 -------------------------------------------------------------------------------------
@@ -33,12 +33,12 @@ It is needed to remove the source code if you want to deploy it again.
 
 Install the Jelly Jolly
 -----------------------
-Goto
+Go to
 
     http://<your-app-name>-<your-namespace>.rhcloud.com/install
 
 Fill in the table on your website to make it work.
 
-That's it, you can now checkout your Jelly Jolly at:
+That's it, now you can checkout your Jelly Jolly at:
 
     http://<your-app-name>-<your-namespace>.rhcloud.com
