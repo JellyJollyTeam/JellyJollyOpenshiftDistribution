@@ -28,32 +28,59 @@
         </ul>
       </header>
       <section>
-        <h3>Welcome to GitHub Pages.</h3>
+        <h3>JellyJolly</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>是一个开源（GPL V3）的、Java编写的、运行在Tomcat服务器上的博客引擎。</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h3>Openshift发布版</h3>
+
+<p>运行在由红帽（Redhat）提供的PAAS平台Openshift之上，通过rhc命令行接口部署。</p>
+
+<h3>部署JellyJolly到我的Openshift上</h3>
+
+<p>详见项目主页的<a href="https://github.com/JellyJollyTeam/JellyJollyOpenshiftDistribution/blob/master/README.md">说明文件</a></p>
+
+<h3>获取JellyJolly项目源码</h3>
+
+<p>整个项目由若干子项目构成，包括：</p>
+
+<ul>
+<li>
+<a href="https://github.com/JellyJollyTeam/JellyJollyModel">JellyJolly Model</a>，数据模型</li>
+<li>
+<a href="https://github.com/JellyJollyTeam/JellyJollyPersistenceAPI">JellyJolly Persistence API</a>，数据持久化接口</li>
+<li>
+<a href="https://github.com/JellyJollyTeam/JellyJollyPluginAPI">JellyJolly Plugin API</a>，插件接口（尚未完成）</li>
+<li>
+<a href="https://github.com/JellyJollyTeam/JellyJollyCore">JellyJolly Core</a>，博客引擎核心</li>
+<li>
+<a href="https://github.com/JellyJollyTeam/JellyJollyPersistenceMysqlImpl">JellyJolly Persistence Mysql Implementation</a>，数据持久的MySQL参考实现</li>
+<li>
+<a href="https://github.com/JellyJollyTeam/JellyJollyOpenshiftDistribution">JellyJolly Openshift Distribution</a>，Openshift发布版</li>
+</ul><p>通过访问各子项目主页，根据页内所示git仓库地址，来单独获取某个子项目源码
+例如，可以通过</p>
+
+<pre><code>git clone https://github.com/JellyJollyTeam/JellyJollyOpenshiftDistribution.git
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>获取Openshift发布版的源码。
+当然无需获取所有的子项目来构建整个项目，JellyJolly使用Maven构建工具，可以通过</p>
 
-<h3>Designer Templates</h3>
+<pre><code>mvn clean install
+</code></pre>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>来解决其它并未下载源码的子项目所依赖的工件。</p>
 
-<h3>Rather Drive Stick?</h3>
+<h3>定制自己的JellyJolly发布版</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>JellyJolly不仅仅运行在Openshift平台上。她可以运行在您配置的Tomcat + MySQL服务器上。
+您无需为了定制去学习开发相关的知识。当然，了解一些Java、数据库或者Web开发的相关知识都会帮助您更好地定制自己的发布版。</p>
 
-<h3>Authors and Contributors</h3>
+<h4>MySQL数据库定制</h4>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<h4>界面定制</h4>
 
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<h4>持久层定制（使用其它数据库产品）</h4>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/JellyJollyTeam">JellyJollyTeam</a></p>
