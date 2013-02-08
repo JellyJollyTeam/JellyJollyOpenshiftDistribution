@@ -102,7 +102,21 @@
 &lt;/bean&gt;
 </code></pre>
 
-<p>把OPENSHIFT_MYSQL_DB_HOST修改为您数据库的地址；把OPENSHIFT_MYSQL_DB_PORT修改为您数据库的端口；把OPENSHIFT_MYSQL_DB_USERNAME、OPENSHIFT_MYSQL_DB_PASSWORD分别修改为您的数据库账户的用户名及密码。</p>
+<p>把${OPENSHIFT_MYSQL_DB_HOST}修改为您数据库的地址；把${OPENSHIFT_MYSQL_DB_PORT}修改为您数据库的端口；把${OPENSHIFT_MYSQL_DB_USERNAME}、${OPENSHIFT_MYSQL_DB_PASSWORD}分别修改为您的数据库账户的用户名及密码。
+如：</p>
+
+<pre><code>&lt;bean id="dataSource"
+      class="org.apache.commons.dbcp.BasicDataSource" scope="singleton"&gt;
+&lt;property name="driverClassName" value="${dbcp.driverClassName}"/&gt;
+&lt;property name="url" value="jdbc:mysql://127.0.0.1:3306/jellyjolly_schema?useUnicode=true&amp;amp;characterEncoding=UTF-8"/&gt;
+&lt;property name="username" value="root"/&gt;
+&lt;property name="password" value="root"/&gt;
+&lt;property name="initialSize" value="${dbcp.initialSize}"/&gt;
+&lt;property name="maxActive" value="${dbcp.maxActive}"/&gt;
+&lt;property name="testOnBorrow" value="true"/&gt;
+&lt;property name="validationQuery" value="SELECT 1;"/&gt;
+&lt;/bean&gt;
+</code></pre>
 </li>
 <li>
 <p>修改数据库连接池配置（可选）
