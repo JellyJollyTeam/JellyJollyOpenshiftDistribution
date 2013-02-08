@@ -78,7 +78,62 @@
 
 <h4>MySQL数据库定制</h4>
 
-<h4>界面定制</h4>
+<p>您所需要做的是克隆<a href="https://github.com/JellyJollyTeam/JellyJollyOpenshiftDistribution">Openshift发布版</a>，并更改其中的配置文件，以适应非Openshift的运行环境。以下为详细步骤：
+1. 克隆Openshift发布版</p>
+
+<pre><code>git clone https://github.com/JellyJollyTeam/JellyJollyOpenshiftDistribution.git
+</code></pre>
+
+<ol>
+<li>
+<p>修改数据库链接参数
+修改项目目录下src/main/resources/persistenceContext.xml中的如下节点，</p>
+
+<pre><code>&lt;bean id="dataSource"
+      class="org.apache.commons.dbcp.BasicDataSource" scope="singleton"&gt;
+&lt;property name="driverClassName" value="${dbcp.driverClassName}"/&gt;
+&lt;property name="url" value="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/jellyjolly_schema?useUnicode=true&amp;amp;characterEncoding=UTF-8"/&gt;
+&lt;property name="username" value="${OPENSHIFT_MYSQL_DB_USERNAME}"/&gt;
+&lt;property name="password" value="${OPENSHIFT_MYSQL_DB_PASSWORD}"/&gt;
+&lt;property name="initialSize" value="${dbcp.initialSize}"/&gt;
+&lt;property name="maxActive" value="${dbcp.maxActive}"/&gt;
+&lt;property name="testOnBorrow" value="true"/&gt;
+&lt;property name="validationQuery" value="SELECT 1;"/&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p>把OPENSHIFT_MYSQL_DB_HOST修改为您数据库的地址；把OPENSHIFT_MYSQL_DB_PORT修改为您数据库的端口；把OPENSHIFT_MYSQL_DB_USERNAME、OPENSHIFT_MYSQL_DB_PASSWORD分别修改为您的数据库账户的用户名及密码。</p>
+</li>
+<li>
+<p>修改数据库连接池配置（可选）
+修改项目目录下src/main/resources/dbcp.properties，</p>
+
+<pre><code>dbcp.driverClassName=com.mysql.jdbc.Driver
+dbcp.initialSize=3
+dbcp.maxActive=10
+</code></pre>
+
+<p>以上三项分别对应，数据库连接驱动类、连接池初始大小、连接池最多活动的连接数。</p>
+</li>
+<li>
+<p>打包并部署至您的Tomcat服务器
+运行Maven指令，打包war</p>
+
+<pre><code>mvn package
+</code></pre>
+
+<p>或借助IDE打包。移动war至Tomcat的webapps目录下，或者使用manager部署。</p>
+</li>
+<li>
+<p>导入SQL Schema
+运行Maven指令，导入SQL文件</p>
+
+<pre><code>mvn sql:execute
+</code></pre>
+</li>
+<li><p>完成最后的步骤
+打开浏览器，访问JellyJolly对应的部署目录下的/install路径，填写基本信息完成，即完成了应用的安装。</p></li>
+</ol><h4>界面定制</h4>
 
 <h4>持久层定制（使用其它数据库产品）</h4>
       </section>
