@@ -10,7 +10,8 @@
     }
 </script>
 <h2>全部链接</h2>
-<form action="#" method="POST">
+<form action="<c:url value="/admin/link" />" method="POST">
+    <input type="hidden" name="_method" value="DELETE" />
     <input type="button" value="删除" style="
         width:80px;
         border:none;
@@ -30,9 +31,9 @@
             </tr>
             <c:forEach var="link" items="${linkList}">
             <tr>
-                <td><input type="checkbox" name="choice"></td>
+                <td><input type="checkbox" name="linkIds"></td>
                 <td style="padding-top: 2px; padding-left: 10px" width="30%" height="60px">
-                    ${link.title}</td>
+                    <a href="<c:url value="/admin/links/${link.linkId}" />">${link.title}</a></td>
                 <td style="padding-top: 2px; padding-left: 10px" width="30%" height="60px">
                     <a href="${link.url}">${link.url}</a></td>
             </tr>
