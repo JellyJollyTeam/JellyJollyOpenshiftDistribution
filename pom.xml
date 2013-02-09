@@ -7,8 +7,8 @@
     <version>1.0.BETA3-SNAPSHOT</version>
     <name>Jelly Jolly Openshift Distribution</name>
     <organization>
-        <name>College of Software Engineering, Southeast University</name>
-        <url>http://cose.seu.edu.cn/</url>
+        <name>Jelly Jolly Team</name>
+        <url>https://github.com/JellyJollyTeam</url>
     </organization>
     <developers>
         <developer>
