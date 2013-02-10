@@ -15,13 +15,17 @@
         background-image: url("<c:url value="/static/images/kindajean.png" />");
     }
     #loading {
-        margin-top: 30px;
+        padding: 20px;
         text-align: center;
     }
     #loading p {
         color: #666666;
         font-size: 10px;
         margin-top: 5px;
+    }
+    #ending {
+        padding: 20px;
+        text-align: center;
     }
     #content {
         padding: 100px 0;
@@ -61,11 +65,11 @@
               <li class="active">
                   <a href="<c:url value="/" />">主页</a>
               </li>
-            <c:forEach items="${pageList}" var="page" >
+              <c:forEach items="${pageList}" var="page" >
               <li class="">
                 <a href="<c:url value="/page/${page.blogPageId}" />">${page.pageTitle}</a>
               </li>
-            </c:forEach>
+              </c:forEach>
             </ul>
           </div>
         </div>
@@ -80,6 +84,13 @@
       <div class="span3">
         <ul class="nav nav-list">
           <li class="nav-header">分类</li>
+          <li>
+              <a href="#">分类A</a>
+              <ul class="nav nav-list">
+                  <li><a href="#">分类A1</a></li>
+                  <li><a href="#">分类A2</a></li>
+              </ul>
+          </li>
           <c:forEach items="${categoryList}" var="category">
           <li>
               <a href="<c:url value="/category/${category.categoryId}" />"><c:out value="${category.name}"/></a>
@@ -106,11 +117,26 @@
         </ul>
       </div> <!-- END OF SPAN 3 -->
       <div class="span9">
-          <div class="container">
+          <div class="row">
+              <div class="span3 offset6">
+                  <form class="form-search">
+                    <div class="input-append">
+                      <input class="span2" id="appendedInputButton" type="text">
+                      <button class="btn" type="button">搜索</button>
+                    </div>
+                  </form>
+              </div>
+          </div> <!-- END OF SEARCH BAR -->
+          <div class="row">
+              <!-- THE FIRST SPAN -->
               <div class="span3">
                   <div class="thumbnail">
                       <img src="<c:url value="/static/images/holder_300x200.png" />" />
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis eleifend blandit. In hac habitasse platea dictumst. Suspendisse vel mi dolor.</p>
+                      <a class="btn btn-link" href="#">详情</a>
+                  </div>
+                  <div class="thumbnail">
+                      <p>Duis massa nunc, pellentesque quis pellentesque vel, tincidunt in tortor.</p>
                       <a class="btn btn-link" href="#">详情</a>
                   </div>
                   <div class="thumbnail">
@@ -119,6 +145,7 @@
                       <a class="btn btn-link" href="#">详情</a>
                   </div>
               </div>
+              <!-- THE SECOND SPAN -->
               <div class="span3">
                   <div class="thumbnail">
                       <img src="<c:url value="/static/images/holder_300x200.png" />" />
@@ -130,7 +157,12 @@
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis eleifend blandit. In hac habitasse platea dictumst. Suspendisse vel mi dolor.</p>
                       <a class="btn btn-link" href="#">详情</a>
                   </div>
+                  <div class="thumbnail">
+                      <p>没有更多的结果。</p>
+                      <p><a class="icon-arrow-up" /><a href="#">回到顶部</a></p>
+                  </div>
               </div>
+              <!-- THE THIRD SPAN -->
               <div class="span3">
                   <div class="thumbnail">
                       <img src="<c:url value="/static/images/holder_300x200.png" />" />
@@ -142,12 +174,12 @@
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis eleifend blandit. In hac habitasse platea dictumst. Suspendisse vel mi dolor.</p>
                       <a class="btn btn-link" href="#">详情</a>
                   </div>
-              </div>
-          </div>
-          <div class="span9" id="loading">
-              <img src="<c:url value="/static/images/loading.gif" />" />
-              <p>载入中…</p>
-          </div>
+                  <div class="thumbnail" id="loading">
+                      <img src="<c:url value="/static/images/loading.gif" />" />
+                      <p>载入中…</p>
+                  </div>
+              </div> <!-- END OF THIRD SPAN -->
+          </div> <!-- END OF THUMBNAILS -->
       </div> <!-- END OF SPAN 9 -->
     </div> <!-- END OF Docs nav (row) -->
 
