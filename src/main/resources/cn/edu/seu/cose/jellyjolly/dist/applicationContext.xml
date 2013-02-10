@@ -14,7 +14,7 @@
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="prefix" value="/WEB-INF/jsp/bootstrap/" />
         <property name="suffix" value=".jsp" />
     </bean>
     <bean id="frameBuilder" class="cn.edu.seu.cose.jellyjolly.controller.FrameBuilder">
