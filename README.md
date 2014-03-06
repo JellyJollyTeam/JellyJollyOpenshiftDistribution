@@ -45,3 +45,7 @@ Jelly Jolly是一个开源的博客引擎。这个发布版运行于[Openshift](
 根据提示，完成相关配置
 
     http://<应用的名字>-<您的命名空间>.rhcloud.com
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/JellyJollyTeam/jellyjollyopenshiftdistribution/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
